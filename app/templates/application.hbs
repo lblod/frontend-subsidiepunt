@@ -1,0 +1,97 @@
+{{page-title this.appTitle}}
+
+<AuApp>
+  <GlobalSystemNotification />
+  <AuMainHeader
+    @brandLink={{unless
+      this.session.isAuthenticated
+      "https://www.vlaanderen.be/nl"
+    }}
+    @homeRoute="index"
+    @appTitle={{this.appTitle}}
+  >
+    <li class="au-c-list-horizontal__item">
+      <AuLinkExternal
+        href="https://abb-vlaanderen.gitbook.io/handleiding-loket/veelgestelde-vragen"
+        @skin="secondary"
+      >
+        <AuIcon @icon="question-circle" @alignment="left" />
+        Help
+      </AuLinkExternal>
+    </li>
+    <li class="au-c-list-horizontal__item">
+      {{#if this.session.isAuthenticated}}
+        <AuDropdown
+          @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.groupClassification.label}} {{this.currentSession.group.naam}}"
+          @buttonLabel="Account settings"
+          @alignment="right"
+          role="menu"
+        >
+          <AuLink @route="auth.switch" @icon="switch" role="menuitem">
+            Wissel van bestuurseenheid
+          </AuLink>
+
+          <AuLink @route="auth.logout" @icon="logout" role="menuitem">
+            Afmelden
+          </AuLink>
+        </AuDropdown>
+      {{else}}
+        <LoginButton @isCompact={{true}} />
+      {{/if}}
+    </li>
+  </AuMainHeader>
+
+  {{#if this.session.isAuthenticated}}
+    <AuMainContainer as |main|>
+      {{#if this.isIndex}}
+        <main.sidebar>
+          <div class="au-c-sidebar">
+            <div class="au-c-sidebar__content">
+              <Shared::MainMenu />
+            </div>
+            <div class="au-c-sidebar__footer">
+              <AuLinkExternal
+                href="https://abb-vlaanderen.gitbook.io/handleiding-loket/"
+                @skin="secondary"
+              >
+                <AuIcon @icon="documents" @alignment="left" />
+                Bekijk handleiding
+              </AuLinkExternal>
+            </div>
+          </div>
+        </main.sidebar>
+      {{/if}}
+      <main.content>
+        <AuBodyContainer>
+          {{#unless this.isIndex}}
+            <AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
+              <Group>
+                <ul class="au-c-list-horizontal au-c-list-horizontal--small">
+                  <li class="au-c-list-horizontal__item">
+                    <AuLink @route="index">
+                      <AuIcon @icon="arrow-left" @alignment="left" />
+                      Overzicht modules
+                    </AuLink>
+                  </li>
+                  <li class="au-c-list-horizontal__item">
+                    <Shared::CompactMenu />
+                  </li>
+                  <Shared::BreadCrumb />
+                </ul>
+              </Group>
+            </AuToolbar>
+          {{/unless}}
+          <AuBodyContainer id="content">
+            {{outlet}}
+          </AuBodyContainer>
+        </AuBodyContainer>
+      </main.content>
+    </AuMainContainer>
+  {{else}}
+    {{outlet}}
+  {{/if}}
+</AuApp>
+
+<AuModalContainer />
+<EpmModalContainer />
+<AuToaster />
