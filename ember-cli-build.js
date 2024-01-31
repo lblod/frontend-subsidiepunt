@@ -25,15 +25,16 @@ module.exports = function (defaults) {
   let app = new EmberApp(defaults, customBuildConfig);
 
   // Uncomment this if you want a "classic build"
-  // return app.toTree();
+  return app.toTree();
 
-  const { Webpack } = require('@embroider/webpack');
-  return require('@embroider/compat').compatBuild(app, Webpack, {
-    staticAddonTestSupportTrees: true,
-    staticAddonTrees: true,
-    staticHelpers: true,
-    staticModifiers: true,
-    staticComponents: true,
-    // splitAtRoutes: ['route.name'], // can also be a RegExp
-  });
+  // Uncomment this if you want tests
+  // const { Webpack } = require('@embroider/webpack');
+  // return require('@embroider/compat').compatBuild(app, Webpack, {
+  //   staticAddonTestSupportTrees: true,
+  //   staticAddonTrees: true,
+  //   staticHelpers: true,
+  //   staticModifiers: true,
+  //   staticComponents: true,
+  //   // splitAtRoutes: ['route.name'], // can also be a RegExp
+  // });
 };
