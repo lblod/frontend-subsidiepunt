@@ -35,10 +35,7 @@ module.exports = function (environment) {
       // 'feature-name': '{{FEATURE_ENV_VAR_NAME}}',
     },
     lpdcUrl: '{{LPDC_URL}}',
-    worshipDecisionsDatabaseUrl: '{{WORSHIP_DECISIONS_DATABASE_URL}}',
-    worshipOrganisationsDatabaseUrl: '{{WORSHIP_ORGANISATIONS_DATABASE_URL}}',
     verenigingenUrl: '{{VERENIGINGEN_URL}}',
-    contactUrl: '{{CONTACT_URL}}',
     'ember-plausible': {
       enabled: false,
     },
