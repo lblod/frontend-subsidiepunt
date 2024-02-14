@@ -1,6 +1,6 @@
-# frontend-loket
+# frontend-subsidie-loket
 
-Frontend of the loket application
+Frontend of the subsidie loket application
 
 ## Environment variables
 
