@@ -80,15 +80,6 @@ Router.map(function () {
     });
   });
 
-  this.route('personeelsbeheer', function () {
-    this.route('personeelsaantallen', function () {
-      this.route('latest', { path: '/:dataset_id/latest' });
-      this.route('periodes', { path: '/:dataset_id/periodes' }, function () {
-        this.route('edit', { path: '/:period_id' });
-      });
-    });
-  });
-
   this.route('subsidy', function () {
     this.route('applications', function () {
       this.route('available-subsidies');
