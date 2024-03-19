@@ -45,13 +45,6 @@ Router.map(function () {
     });
   });
 
-  this.route('supervision', function () {
-    this.route('submissions', function () {
-      this.route('new');
-      this.route('edit', { path: '/:id' });
-    });
-  });
-
   this.route('toezicht', function () {
     this.route('inzendingen', function () {
       this.route('new');
