@@ -127,22 +127,4 @@ Router.map(function () {
     this.route('new');
     this.route('new-person');
   });
-
-  this.route(
-    'worship-ministers-management',
-    { path: 'bedienarenbeheer' },
-    function () {
-      this.route('new', { path: '/nieuw' });
-      this.route('new-person', { path: '/nieuw-bedienaar' });
-
-      this.route(
-        'minister',
-        { path: '/bedienaar/:worshipMinisterId' },
-        function () {
-          this.route('details', { path: '/bekijk' });
-          this.route('edit', { path: '/bewerk' });
-        }
-      );
-    }
-  );
 });
