@@ -41,15 +41,6 @@ Router.map(function () {
     });
   });
 
-  this.route('berichtencentrum', function () {
-    this.route('berichten', function () {
-      this.route('conversatie', { path: '/:id' }, function () {});
-      if (macroCondition(getOwnConfig().controle)) {
-        this.route('new');
-      }
-    });
-  });
-
   this.route('subsidy', function () {
     this.route('applications', function () {
       this.route('available-subsidies');
