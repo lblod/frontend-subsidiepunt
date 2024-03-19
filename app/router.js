@@ -1,6 +1,6 @@
 import EmberRouter from '@ember/routing/router';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
-import config from 'frontend-loket/config/environment';
+import config from 'frontend-subsidie-loket/config/environment';
 
 export default class Router extends EmberRouter {
   location = config.locationType;

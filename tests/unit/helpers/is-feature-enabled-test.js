@@ -1,5 +1,5 @@
-import config from 'frontend-loket/config/environment';
-import isFeatureEnabled from 'frontend-loket/helpers/is-feature-enabled';
+import config from 'frontend-subsidie-loket/config/environment';
+import isFeatureEnabled from 'frontend-subsidie-loket/helpers/is-feature-enabled';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | is-feature-enabled', function () {

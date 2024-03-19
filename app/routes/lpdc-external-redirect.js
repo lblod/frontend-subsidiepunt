@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import config from 'frontend-loket/config/environment';
+import config from 'frontend-subsidie-loket/config/environment';
 import { inject as service } from '@ember/service';
 
 export default class LpdcExternalRedirectRoute extends Route {

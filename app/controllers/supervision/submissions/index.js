@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { CONCEPT_STATUS } from 'frontend-loket/models/submission-document-status';
+import { CONCEPT_STATUS } from 'frontend-subsidie-loket/models/submission-document-status';
 
 export default class SupervisionSubmissionsIndexController extends Controller {
   @service router;

@@ -7,9 +7,9 @@ import {
   createPrimaryContactPoint,
   createSecondaryContactPoint,
   isValidPrimaryContact,
-} from 'frontend-loket/models/contact-punt';
-import { validateFunctie } from 'frontend-loket/models/minister';
-import { combineFullAddress, isValidAdres } from 'frontend-loket/models/adres';
+} from 'frontend-subsidie-loket/models/contact-punt';
+import { validateFunctie } from 'frontend-subsidie-loket/models/minister';
+import { combineFullAddress, isValidAdres } from 'frontend-subsidie-loket/models/adres';
 export default class WorshipMinistersManagementNewController extends Controller {
   @service router;
   @service store;

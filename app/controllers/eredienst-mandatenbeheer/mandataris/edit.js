@@ -8,13 +8,13 @@ import {
   createSecondaryContactPoint,
   findPrimaryContactPoint,
   isValidPrimaryContact,
-} from 'frontend-loket/models/contact-punt';
+} from 'frontend-subsidie-loket/models/contact-punt';
 import {
   setMandate,
   warnOnMandateExceededTimePeriode,
-} from 'frontend-loket/utils/eredienst-mandatenbeheer';
-import { validateMandaat } from 'frontend-loket/models/worship-mandatee';
-import { combineFullAddress, isValidAdres } from 'frontend-loket/models/adres';
+} from 'frontend-subsidie-loket/utils/eredienst-mandatenbeheer';
+import { validateMandaat } from 'frontend-subsidie-loket/models/worship-mandatee';
+import { combineFullAddress, isValidAdres } from 'frontend-subsidie-loket/models/adres';
 
 export default class EredienstMandatenbeheerMandatarisEditController extends Controller {
   @service currentSession;
