@@ -1,4 +1,4 @@
-import config from 'frontend-loket/config/environment';
+import config from 'frontend-subsidie-loket/config/environment';
 
 export default function lpdcUrl() {
   return config.lpdcUrl;

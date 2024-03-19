@@ -1,4 +1,4 @@
-# frontend-loket
+# frontend-subsidie-loket
 
 Frontend of the loket application
 
