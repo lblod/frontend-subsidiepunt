@@ -63,17 +63,6 @@ Router.map(function () {
     });
   });
 
-  this.route(
-    'lpdc-external-redirect',
-    { path: '/producten-en-dienstencatalogus' },
-    function () {
-      // We need the child routes since `/producten-en-dienstencatalogus/*` won't match the case without a subpath
-      // By using an index and named route with a path we work around that issue. The lpdc-external-redirect route
-      // then retrieves the needed data from the transition object.
-      this.route('with-path', { path: '/*path' });
-    }
-  );
-
   this.route('route-not-found', {
     path: '/*wildcard',
   });
