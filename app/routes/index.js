@@ -5,8 +5,7 @@ export default class IndexRoute extends Route {
   @service session;
   @service router;
 
-  async beforeModel(transition) {
-    this.session.requireAuthentication(transition, 'login');
+  beforeModel(transition) {
     this.router.transitionTo('subsidy.applications');
   }
 }
