@@ -2,21 +2,21 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { registerFormFields } from '@lblod/ember-submission-form-fields';
 
-import ApplicationFormTableEditComponent from 'frontend-subsidie-loket/components/rdf-form-fields/application-form-table/edit';
-import ApplicationFormTableShowComponent from 'frontend-subsidie-loket/components/rdf-form-fields/application-form-table/show';
-import ClimateSubsidyCostsTableComponent from 'frontend-subsidie-loket/components/rdf-form-fields/climate-subsidy-costs-table';
-import EInclusionMaxValidatorComponent from 'frontend-subsidie-loket/components/rdf-form-fields/e-inclusion-max-validator';
-import EngagementTableEditComponent from 'frontend-subsidie-loket/components/rdf-form-fields/engagement-table/edit';
-import EngagementTableShowComponent from 'frontend-subsidie-loket/components/rdf-form-fields/engagement-table/show';
-import EstimatedCostEditComponent from 'frontend-subsidie-loket/components/rdf-form-fields/estimated-cost-table/edit';
-import EstimatedCostShowComponent from 'frontend-subsidie-loket/components/rdf-form-fields/estimated-cost-table/show';
-import ObjectiveTableEditComponent from 'frontend-subsidie-loket/components/rdf-form-fields/objective-table/edit';
-import ObjectiveTableShowComponent from 'frontend-subsidie-loket/components/rdf-form-fields/objective-table/show';
-import PlanLivingTogetherTableEditComponent from 'frontend-subsidie-loket/components/rdf-form-fields/plan-living-together-table/edit';
-import PlanLivingTogetherTableShowComponent from 'frontend-subsidie-loket/components/rdf-form-fields/plan-living-together-table/show';
-import AccountabilityTableEditComponent from 'frontend-subsidie-loket/components/rdf-form-fields/accountability-table/edit';
-import AccountabilityTableShowComponent from 'frontend-subsidie-loket/components/rdf-form-fields/accountability-table/show';
-import FinancingTotalsComponent from 'frontend-subsidie-loket/components/rdf-form-fields/urban-renewal/financing-totals';
+import ApplicationFormTableEditComponent from 'frontend-loket/components/rdf-form-fields/application-form-table/edit';
+import ApplicationFormTableShowComponent from 'frontend-loket/components/rdf-form-fields/application-form-table/show';
+import ClimateSubsidyCostsTableComponent from 'frontend-loket/components/rdf-form-fields/climate-subsidy-costs-table';
+import EInclusionMaxValidatorComponent from 'frontend-loket/components/rdf-form-fields/e-inclusion-max-validator';
+import EngagementTableEditComponent from 'frontend-loket/components/rdf-form-fields/engagement-table/edit';
+import EngagementTableShowComponent from 'frontend-loket/components/rdf-form-fields/engagement-table/show';
+import EstimatedCostEditComponent from 'frontend-loket/components/rdf-form-fields/estimated-cost-table/edit';
+import EstimatedCostShowComponent from 'frontend-loket/components/rdf-form-fields/estimated-cost-table/show';
+import ObjectiveTableEditComponent from 'frontend-loket/components/rdf-form-fields/objective-table/edit';
+import ObjectiveTableShowComponent from 'frontend-loket/components/rdf-form-fields/objective-table/show';
+import PlanLivingTogetherTableEditComponent from 'frontend-loket/components/rdf-form-fields/plan-living-together-table/edit';
+import PlanLivingTogetherTableShowComponent from 'frontend-loket/components/rdf-form-fields/plan-living-together-table/show';
+import AccountabilityTableEditComponent from 'frontend-loket/components/rdf-form-fields/accountability-table/edit';
+import AccountabilityTableShowComponent from 'frontend-loket/components/rdf-form-fields/accountability-table/show';
+import FinancingTotalsComponent from 'frontend-loket/components/rdf-form-fields/urban-renewal/financing-totals';
 
 export default class SubsidyApplicationsEditRoute extends Route {
   @service store;
