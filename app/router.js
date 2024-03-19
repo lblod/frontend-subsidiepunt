@@ -27,13 +27,6 @@ Router.map(function () {
     this.route('toegankelijkheidsverklaring');
   });
 
-  this.route('bbcdr', function () {
-    this.route('rapporten', function () {
-      this.route('new');
-      this.route('edit', { path: '/:id' });
-    });
-  });
-
   this.route('toezicht', function () {
     this.route('inzendingen', function () {
       this.route('new');
