@@ -1,5 +1,5 @@
 import { init as initSentry } from '@sentry/ember';
-import config from 'frontend-subsidie-loket/config/environment';
+import config from 'frontend-subsidiepunt/config/environment';
 
 export const SHOULD_ENABLE_SENTRY = config.sentry.dsn !== '{{SENTRY_DSN}}';
 
