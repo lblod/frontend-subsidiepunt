@@ -1,4 +1,4 @@
-<div class="au-c-body-container au-c-body-container--scroll">
+<div id="subsidyParent" class="au-c-body-container au-c-body-container--scroll">
 
   <div
     class="au-o-box {{if (or this.saveConcept.isRunning this.submit.isRunning) 'au-c-form--disabled'}}"
@@ -53,6 +53,7 @@
       {{! DEFAULT CRUD CASE }}
       {{#if this.canSubmit}}
         <AuButton
+          class="hide-on-print"
           @disabled={{if
             (or
               this.saveConcept.isRunning
@@ -66,6 +67,7 @@
         >Verstuur naar de Vlaamse overheid
         </AuButton>
         <AuButton
+          class="hide-on-print"
           @disabled={{if
             (or
               this.saveConcept.isRunning
@@ -138,6 +140,7 @@
                 </AuContent>
               </AuAlert>
               <AuButton
+                class="hide-on-print"
                 @disabled={{if
                   (or
                     this.saveConcept.isRunning

@@ -1,0 +1,69 @@
+@media print {
+  // Fixes the overflow during printing
+  #subsidyParent {
+    width: auto;
+    height: auto;
+    overflow: visible;
+    flex-direction: column-reverse; // avoid table collapsing with next element
+  }
+  .au-c-app {
+    // overflow: visible;
+    height: auto;
+  }
+
+  .hide-on-print {
+    display: none;
+  }
+
+  // Hides the 'download bestand' button
+  .au-c-link[download] {
+    display: none;
+  }
+
+  // Show the title fully
+  .au-c-main-header__title--link {
+    overflow: visible;
+  }
+  // Hides the title href
+  .au-c-main-header__title--link:after {
+    content: none !important;
+  }
+
+  // show the logged in user fully
+  .au-c-dropdown__name[data-test-dropdown-title] {
+    max-width: fit-content;
+  }
+
+  .au-c-list-navigation__link:after {
+    content: none !important;
+  }
+
+  .subsidySteps {
+    flex-wrap: nowrap;
+  }
+
+  // Fix the inivisble radio buttons
+  .au-c-control__input {
+    position: relative;
+    opacity: 1;
+    z-index: 0;
+  }
+  .au-c-control__indicator {
+    display: none;
+  }
+
+  // change the blue color to gray on print
+  .au-c-button--icon-only {
+    border-color: var(--au-gray-300) !important;
+  }
+
+  // Hide all hrefs
+  a[href]:after {
+    content: none !important;
+  }
+
+  // Hides the headers and footers information
+  // @page {
+  //    margin: 3rem;
+  // }
+}

@@ -32,4 +32,7 @@
 @import "@appuniversum/ember-appuniversum/styles/a-utilities";
 
 // TEMPORARY HACKS AND QUICKFIXES
-@import 'shame';
+@import "shame";
+
+// used to print-to-pdf subsidies
+@import "print";
