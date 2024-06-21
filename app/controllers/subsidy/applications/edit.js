@@ -28,6 +28,10 @@ export default class SubsidyApplicationsEditController extends Controller {
   get canDelete() {
     return this.model.consumption.get('status.isConcept');
   }
+  @action
+  exportSubsidyAsPDF() {
+    window.print();
+  }
 
   @task
   *delete() {
