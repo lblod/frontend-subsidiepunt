@@ -10,7 +10,7 @@
     @homeRoute="index"
     @appTitle={{this.appTitle}}
   >
-    <li class="au-c-list-horizontal__item">
+    <li class="au-c-list-horizontal__item hide-on-print">
       <AuLinkExternal
         href="https://abb-vlaanderen.gitbook.io/handleiding-loket/veelgestelde-vragen"
         @skin="secondary"
@@ -43,33 +43,19 @@
 
   {{#if this.session.isAuthenticated}}
     <AuMainContainer as |main|>
-      {{#if this.isIndex}}
-        <main.sidebar>
-          <div class="au-c-sidebar">
-            <div class="au-c-sidebar__content">
-              <Shared::MainMenu />
-            </div>
-            <div class="au-c-sidebar__footer">
-              <AuLinkExternal
-                href="https://abb-vlaanderen.gitbook.io/handleiding-loket/"
-                @skin="secondary"
-              >
-                <AuIcon @icon="documents" @alignment="left" />
-                Bekijk handleiding
-              </AuLinkExternal>
-            </div>
-          </div>
-        </main.sidebar>
-      {{/if}}
       <main.content>
         <AuBodyContainer>
           {{#unless this.isIndex}}
             <AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
               <Group>
-                <ul class="au-c-list-horizontal au-c-list-horizontal--small">
-                  <li class="au-c-list-horizontal__item">
-                    <Shared::CompactMenu />
-                  </li>
+                <ul class="au-c-list-horizontal au-c-list-horizontal--small hide-on-print">
+                  {{#unless (eq this.router.currentRouteName "subsidy.applications.index")}}
+                    <li class="au-c-list-horizontal__item">
+                      <AuLink @route="subsidy.applications" @icon="arrow-left">
+                        Subsidiebeheer
+                      </AuLink>
+                    </li>
+                  {{/unless}}
                   <Shared::BreadCrumb />
                 </ul>
               </Group>
