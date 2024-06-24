@@ -8,7 +8,10 @@ export default class ApplicationController extends Controller {
 
   appTitle = 'Subsidie loket';
 
-  get isIndex() {
-    return this.router.currentRouteName === 'index';
+  get isIndexOrLoading() {
+    return (
+      this.router.currentRouteName === 'subsidy.applications.index' ||
+      this.router.currentRouteName === 'subsidy.applications.index_loading'
+    );
   }
 }
