@@ -45,24 +45,24 @@
     <AuMainContainer as |main|>
       <main.content>
         <AuBodyContainer>
-          <AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
-            <Group>
-              <ul
-                class="au-c-list-horizontal au-c-list-horizontal--small hide-on-print"
-              >
-                {{#unless
-                  (eq this.router.currentRouteName "subsidy.applications.index")
-                }}
+          {{#unless
+            (eq this.router.currentRouteName "subsidy.applications.index")
+          }}
+            <AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
+              <Group>
+                <ul
+                  class="au-c-list-horizontal au-c-list-horizontal--small hide-on-print"
+                >
                   <li class="au-c-list-horizontal__item">
                     <AuLink @route="subsidy.applications" @icon="arrow-left">
                       Terug naar overzicht
                     </AuLink>
                   </li>
-                {{/unless}}
-                <Shared::BreadCrumb />
-              </ul>
-            </Group>
-          </AuToolbar>
+                  <Shared::BreadCrumb />
+                </ul>
+              </Group>
+            </AuToolbar>
+          {{/unless}}
           <AuBodyContainer id="content">
             {{outlet}}
           </AuBodyContainer>
