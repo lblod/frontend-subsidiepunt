@@ -25,7 +25,7 @@
         @icon="download"
         @iconAlignment="left"
         role="menu"
-        class="hide-on-print"
+        class="au-u-hide-on-print"
       >
         <AuButton @skin="link" role="menuitem" {{on "click" this.exportSubsidyAsPDF}}>
           Download huidige stap (PDF)
@@ -42,7 +42,7 @@
           @alert="true"
           @icon="bin"
           @iconAlignment="left"
-          class="hide-on-print"
+          class="au-u-hide-on-print"
           {{on "click" (perform this.delete)}}
         >
           Aanvraag verwijderen
