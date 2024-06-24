@@ -5,6 +5,7 @@
         @options={{this.options}}
         @selected={{this._duplicatedMandataris}}
         @onChange={{action "select"}}
+        {{!template-lint-disable no-action}}
         as |mandataris|>
   {{mandataris.bekleedt.bestuursfunctie.label}}, {{moment-format mandataris.start 'DD-MM-YYYY'}} - {{moment-format mandataris.einde 'DD-MM-YYYY'}} ({{mandataris.status.label}})
 </PowerSelect>

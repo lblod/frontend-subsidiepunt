@@ -16,7 +16,8 @@ export default class BerichtModel extends Model {
   //  → see vendor-data-distribution-service
   //It needs the `creator` prop to make the data transactionaly available
   //to the Vendor API. All the data needs to exist at that point.
-  @attr({ defaultValue: 'https://github.com/lblod/frontend-subsidiepunt' }) creator;
+  @attr({ defaultValue: 'https://github.com/lblod/frontend-subsidiepunt' })
+  creator;
 
   @belongsTo('bestuurseenheid', {
     async: false,
