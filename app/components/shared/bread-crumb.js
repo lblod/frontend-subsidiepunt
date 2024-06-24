@@ -43,7 +43,7 @@ export default class SharedBreadCrumbComponent extends Component {
         { label: 'Subsidiebeheer', link: 'subsidy.applications' },
         { label: 'Bekijk subsidieaanvraag' },
       ],
-    }
+    },
   ];
 
   get crumbsForRoute() {
