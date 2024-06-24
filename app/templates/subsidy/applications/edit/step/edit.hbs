@@ -17,7 +17,7 @@
     />
   </div>
 
-  <AuToolbar @size="large" as |Group|>
+  <AuToolbar class="hide-on-print" @size="large" as |Group|>
     {{#if (and this.forceShowErrors (not this.isValidForm))}}
       <Group class="au-c-toolbar__group--row">
         <AuAlert
@@ -53,7 +53,6 @@
       {{! DEFAULT CRUD CASE }}
       {{#if this.canSubmit}}
         <AuButton
-          class="hide-on-print"
           @disabled={{if
             (or
               this.saveConcept.isRunning
@@ -67,7 +66,6 @@
         >Verstuur naar de Vlaamse overheid
         </AuButton>
         <AuButton
-          class="hide-on-print"
           @disabled={{if
             (or
               this.saveConcept.isRunning
@@ -140,7 +138,6 @@
                 </AuContent>
               </AuAlert>
               <AuButton
-                class="hide-on-print"
                 @disabled={{if
                   (or
                     this.saveConcept.isRunning
