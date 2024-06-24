@@ -7,4 +7,11 @@ export default class ApplicationController extends Controller {
   @service() router;
 
   appTitle = 'Subsidie loket';
+
+  get isIndexOrLoading() {
+    return (
+      this.router.currentRouteName === 'subsidy.applications.index' ||
+      this.router.currentRouteName === 'subsidy.applications.index_loading'
+    );
+  }
 }

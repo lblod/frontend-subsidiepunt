@@ -45,9 +45,7 @@
     <AuMainContainer as |main|>
       <main.content>
         <AuBodyContainer>
-          {{#unless
-            (eq this.router.currentRouteName "subsidy.applications.index")
-          }}
+          {{#unless this.isIndexOrLoading}}
             <AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
               <Group>
                 <ul
