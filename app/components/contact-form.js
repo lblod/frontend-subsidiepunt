@@ -8,7 +8,7 @@ export default class ContactFormComponent extends Component {
     {
       label: 'Een vraag of probleem over de applicatie',
       subject: 'Vraag of probleem',
-    }
+    },
   ];
 
   get canSend() {
