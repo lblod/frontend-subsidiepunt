@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { literal, NamedNode } from 'rdflib';
 import { v4 as uuidv4 } from 'uuid';
-import commasToDecimalPointsFix from 'frontend-subsidiepunt/helpers/subsidies/subsidies-decimal-point';
+import commasToDecimalPointsFix from 'frontend-subsidiepunt/utils/subsidies-decimal-point';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
 
 const bicycleInfrastructureUri =
