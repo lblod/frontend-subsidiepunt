@@ -1,4 +1,4 @@
-import config from 'frontend-subsidie-loket/config/environment';
+import config from 'frontend-subsidiepunt/config/environment';
 
 export default function worshipDecisionsDatabaseUrl() {
   return config.worshipDecisionsDatabaseUrl;

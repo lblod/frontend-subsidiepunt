@@ -24,7 +24,7 @@ export default class SharedPersoonPersoonSearchResultComponent extends Component
     // The indentation is intentional, otherwise the email would display white space in the front
     // TODO: look for some de-indent solution since we could use it in other places as well
     let message = encodeURIComponent(`\
-Beste Loket team,
+Beste SubsidiePunt team,
 
 Ik zie foutieve data bij/wens een ander probleem te melden:
 Bestuur: ${administrativeUnitName}
