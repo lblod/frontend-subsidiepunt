@@ -23,12 +23,6 @@ export default class SubsidyMeasureConsumptionModel extends Model {
   })
   lastModifier;
 
-  @belongsTo('subsidy-request', {
-    async: true,
-    inverse: 'subsidyMeasureConsumption',
-  })
-  subsidyRequest;
-
   @belongsTo('subsidy-measure-offer', {
     async: true,
     inverse: null,
