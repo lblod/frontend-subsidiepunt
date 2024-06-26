@@ -1,11 +1,11 @@
 {
-  "name": "frontend-subsidie-loket",
+  "name": "frontend-subsidiepunt",
   "version": "0.0.4",
   "private": true,
-  "description": "Frontend of loket",
+  "description": "Frontend of subsidiepunt",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lblod/frontend-subsidie-loket.git"
+    "url": "git+https://github.com/lblod/frontend-subsidiepunt.git"
   },
   "license": "MIT",
   "author": "redpencil.io",

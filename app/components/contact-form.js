@@ -19,7 +19,7 @@ export default class ContactFormComponent extends Component {
     if (this.canSend) {
       let subject = this.selected.subject || this.selected.label;
 
-      return `mailto:LoketLokaalBestuur@vlaanderen.be?subject=${subject} - Subsidie loket`;
+      return `mailto:LoketLokaalBestuur@vlaanderen.be?subject=${subject} - SubsidiePunt`;
     } else {
       return '';
     }

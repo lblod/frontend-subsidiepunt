@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ENV from 'frontend-subsidie-loket/config/environment';
+import ENV from 'frontend-subsidiepunt/config/environment';
 
 export default class AuthSwitchRoute extends Route {
   @service router;

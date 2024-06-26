@@ -1,8 +1,8 @@
 import Service, { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { setContext, setUser } from '@sentry/ember';
-import config from 'frontend-subsidie-loket/config/environment';
-import { SHOULD_ENABLE_SENTRY } from 'frontend-subsidie-loket/utils/sentry';
+import config from 'frontend-subsidiepunt/config/environment';
+import { SHOULD_ENABLE_SENTRY } from 'frontend-subsidiepunt/utils/sentry';
 
 const MODULE = {
   SUPERVISION: 'LoketLB-toezichtGebruiker',
