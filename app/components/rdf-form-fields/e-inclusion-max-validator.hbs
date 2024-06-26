@@ -11,11 +11,12 @@
 </AuHelpText>
 <AuInput
   @error={{this.hasErrors}}
-  @value={{this.value}}
   @disabled={{@show}}
-  @type="number"
+  type="number"
+  value={{this.value}}
   id={{this.inputId}}
   lang="nl-BE"
+  {{on "input" (event-value (fn (mut this.value)))}}
   {{on "change" this.validate}}
 />
 
