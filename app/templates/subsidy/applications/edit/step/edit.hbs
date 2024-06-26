@@ -17,7 +17,7 @@
     />
   </div>
 
-  <AuToolbar class="au-u-hide-on-print" @size="large" as |Group|>
+  <AuToolbar class="invisible-on-print" @size="large" as |Group|>
     {{#if (and this.forceShowErrors (not this.isValidForm))}}
       <Group class="au-c-toolbar__group--row">
         <AuAlert
