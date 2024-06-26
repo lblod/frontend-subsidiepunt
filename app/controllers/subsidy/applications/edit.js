@@ -31,7 +31,37 @@ export default class SubsidyApplicationsEditController extends Controller {
   }
   @action
   exportSubsidyAsPDF() {
+    this.prepareTextareasForPrinting();
+
     window.print();
+  }
+
+  prepareTextareasForPrinting(){
+    // Remove any previously created print divs
+    const existingPrintDivs = document.querySelectorAll(
+      '.textarea, .display-on-print'
+    );
+    existingPrintDivs.forEach(div => div.remove());
+
+    // Store original textareas
+    const textareas = document.querySelectorAll('textarea');
+
+    // Replace textareas with divs
+    textareas.forEach((textarea, index) => {
+      const div = document.createElement('div');
+      div.textContent = textarea.value;
+      div.style.whiteSpace = 'pre-wrap';
+      div.style.border = '1px solid #ccc';
+      div.style.padding = '5px';
+      div.style.minHeight = `${textarea.offsetHeight}px`;
+      div.classList.add('display-on-print');
+      div.classList.add('textarea', 'display-on-print');
+
+      textarea.classList.add('au-u-hide-on-print');
+      textarea.parentNode.insertBefore(div, textarea);
+    });
+  }
+
   }
 
   @task

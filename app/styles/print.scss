@@ -14,6 +14,10 @@
     visibility: hidden;
   }
 
+  .display-on-print{
+    display: block !important;
+  }
+
 
   // Hides the 'download bestand' button
   .au-c-link[download] {
@@ -89,4 +93,9 @@
   // @page {
   //    margin: 3rem;
   // }
+}
+
+// Hide by default, display when printing
+.display-on-print{
+  display: none;
 }
