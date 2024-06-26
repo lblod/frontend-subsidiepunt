@@ -14,7 +14,6 @@
       {{!template-lint-disable no-inline-styles}}
       {{on "input" (event-value (fn (mut this.description)))}}
       {{on "blur" this.update}}
-      {{auto-focus}}
     />
     {{#each this.descriptionErrors as |error|}}
       <AuHelpText @error={{true}}>{{error.message}}</AuHelpText>
