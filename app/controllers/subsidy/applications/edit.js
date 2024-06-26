@@ -7,6 +7,11 @@ import { action } from '@ember/object';
 export default class SubsidyApplicationsEditController extends Controller {
   @service router;
 
+  constructor(){
+    super(...arguments);
+    window.addEventListener('beforeprint', this.prepareTextareasForPrinting);
+  }
+
   get reeksHasStartOrEnd() {
     return (
       this.consumption.get(
@@ -31,8 +36,6 @@ export default class SubsidyApplicationsEditController extends Controller {
   }
   @action
   exportSubsidyAsPDF() {
-    this.prepareTextareasForPrinting();
-
     window.print();
   }
 
