@@ -7,7 +7,7 @@ import { action } from '@ember/object';
 export default class SubsidyApplicationsEditController extends Controller {
   @service router;
 
-  constructor(){
+  constructor() {
     super(...arguments);
     window.addEventListener('beforeprint', this.prepareTextareasForPrinting);
   }
@@ -39,18 +39,18 @@ export default class SubsidyApplicationsEditController extends Controller {
     window.print();
   }
 
-  prepareTextareasForPrinting(){
+  prepareTextareasForPrinting() {
     // Remove any previously created print divs
     const existingPrintDivs = document.querySelectorAll(
       '.textarea, .display-on-print'
     );
-    existingPrintDivs.forEach(div => div.remove());
+    existingPrintDivs.forEach((div) => div.remove());
 
     // Store original textareas
     const textareas = document.querySelectorAll('textarea');
 
     // Replace textareas with divs
-    textareas.forEach((textarea, index) => {
+    textareas.forEach((textarea) => {
       const div = document.createElement('div');
       div.textContent = textarea.value;
       div.style.whiteSpace = 'pre-wrap';
