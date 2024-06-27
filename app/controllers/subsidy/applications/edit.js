@@ -65,7 +65,6 @@ export default class SubsidyApplicationsEditController extends Controller {
     });
   }
 
-  }
 
   @task
   *delete() {
