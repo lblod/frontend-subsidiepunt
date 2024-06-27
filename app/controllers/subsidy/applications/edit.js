@@ -64,6 +64,10 @@ export default class SubsidyApplicationsEditController extends Controller {
       textarea.parentNode.insertBefore(div, textarea);
     });
   }
+  @action
+  async downloadBijlagen() {
+    // TODO:
+  }
 
   @task
   *delete() {
