@@ -38,8 +38,17 @@ export default class SubsidyApplicationsEditController extends Controller {
     return this.model.consumption.get('status.isConcept');
   }
   @action
-  exportSubsidyAsPDF() {
+  async exportSubsidyAsPDF() {
+    const previousDocumentTitle = document.title;
+    const filename = `${await this.createFilename()}.pdf`;
+
+    document.title = filename;
+
     window.print();
+    window.addEventListener(
+      'afterprint',
+      (document.title = previousDocumentTitle)
+    );
   }
 
   prepareTextareasForPrinting() {
@@ -80,18 +89,7 @@ export default class SubsidyApplicationsEditController extends Controller {
     }));
   }
 
-  @action
-  async downloadBijlagen() {
-    await this.collectDownloadLinks();
-    if (this.downloadLinks.length === 0) return;
-
-    const zip = new JSZip();
-    for (let link of this.downloadLinks) {
-      const response = await fetch(link.url);
-      const blob = await response.blob();
-      zip.file(link.filename, blob);
-    }
-
+  async createFilename() {
     // Get the subsidy name and selected step name so the zip download can look like '<subsidy name> - <subsidy step name>.zip'
     const currentStepID = this.router.currentRoute.parent.params.step_id;
     const currentStep = await this.store.findRecord(
@@ -107,7 +105,23 @@ export default class SubsidyApplicationsEditController extends Controller {
       'subsidyMeasureOffer.title'
     );
 
-    const filename = `${currentSubsidyName} - stap ${currentProceduralStepName}.zip`;
+    const filename = `${currentSubsidyName} - stap ${currentProceduralStepName}`;
+    return filename;
+  }
+
+  @action
+  async downloadBijlagen() {
+    await this.collectDownloadLinks();
+    if (this.downloadLinks.length === 0) return;
+
+    const zip = new JSZip();
+    for (let link of this.downloadLinks) {
+      const response = await fetch(link.url);
+      const blob = await response.blob();
+      zip.file(link.filename, blob);
+    }
+
+    const filename = `${await this.createFilename()}.zip`;
 
     const content = await zip.generateAsync({ type: 'blob' });
     saveAs(content, filename);
