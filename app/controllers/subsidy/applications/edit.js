@@ -3,9 +3,12 @@ import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import fetch from 'fetch';
 import { action } from '@ember/object';
+import { saveAs } from 'file-saver';
+import JSZip from 'jszip';
 
 export default class SubsidyApplicationsEditController extends Controller {
   @service router;
+  @service() store;
 
   constructor() {
     super(...arguments);
@@ -64,9 +67,50 @@ export default class SubsidyApplicationsEditController extends Controller {
       textarea.parentNode.insertBefore(div, textarea);
     });
   }
+
+  @action
+  async collectDownloadLinks() {
+    // Get all attachments based on the data-test-file-card-download attribute
+    let elements = document.querySelectorAll(
+      '[data-test-file-card-download=""]'
+    );
+    this.downloadLinks = Array.from(elements).map((link) => ({
+      url: link.href,
+      filename: link.getAttribute('download'),
+    }));
+  }
+
   @action
   async downloadBijlagen() {
-    // TODO:
+    await this.collectDownloadLinks();
+    if (this.downloadLinks.length === 0) return;
+
+    const zip = new JSZip();
+    for (let link of this.downloadLinks) {
+      const response = await fetch(link.url);
+      const blob = await response.blob();
+      zip.file(link.filename, blob);
+    }
+
+    // Get the subsidy name and selected step name so the zip download can look like '<subsidy name> - <subsidy step name>.zip'
+    const currentStepID = this.router.currentRoute.parent.params.step_id;
+    const currentStep = await this.store.findRecord(
+      'subsidy-application-flow-step',
+      currentStepID,
+      {
+        include: 'subsidy-procedural-step',
+      }
+    );
+    const currentProceduralStep = await currentStep.subsidyProceduralStep;
+    const currentProceduralStepName = currentProceduralStep.description;
+    const currentSubsidyName = this.consumption.get(
+      'subsidyMeasureOffer.title'
+    );
+
+    const filename = `${currentSubsidyName} - stap ${currentProceduralStepName}.zip`;
+
+    const content = await zip.generateAsync({ type: 'blob' });
+    saveAs(content, filename);
   }
 
   @task
