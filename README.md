@@ -10,11 +10,6 @@ The [ember-proxy-service](https://github.com/mu-semtech/ember-proxy-service#conf
 
 | Name                                       | Description                                                                             |
 | ------------------------------------------ | --------------------------------------------------------------------------------------- |
-| `EMBER_LPDC_URL`                           | Link to the LPDC application                                                            |
-| `EMBER_WORSHIP_DECISIONS_DATABASE_URL`     | Link to the worship decisions database                                                  |
-| `EMBER_WORSHIP_ORGANISATIONS_DATABASE_URL` | Link to the worship organisations database                                              |
-| `EMBER_VERENIGINGEN_URL`                   | Link to the verenigingen app                                                            |
-| `EMBER_CONTACT_URL`                        | Link to the contact app                                                                 |
 | `EMBER_GLOBAL_SYSTEM_NOTIFICATION`         | This can be used to display a message at the top of the application. HTML is supported. |
 
 ### ACM/IDM

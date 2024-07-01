@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
-import { STATUS } from '../../models/subsidy-measure-consumption-status';
+import { STATUS } from '../models/subsidy-measure-consumption-status';
 
-export default class SubsidiesConsumptionStatusPill extends Component {
+export default class ConsumptionStatusPill extends Component {
   get consumption() {
     return this.args.consumption;
   }
