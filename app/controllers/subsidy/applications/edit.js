@@ -4,7 +4,7 @@ import { task } from 'ember-concurrency';
 import fetch from 'fetch';
 import { action } from '@ember/object';
 import { saveAs } from 'file-saver';
-import JSZip from 'jszip';
+import { downloadZip } from 'client-zip';
 
 export default class SubsidyApplicationsEditController extends Controller {
   @service router;
@@ -96,7 +96,7 @@ export default class SubsidyApplicationsEditController extends Controller {
     );
     this.downloadLinks = Array.from(elements).map((link) => ({
       url: link.href,
-      filename: link.getAttribute('download'),
+      name: link.getAttribute('download'),
     }));
   }
 
@@ -124,17 +124,20 @@ export default class SubsidyApplicationsEditController extends Controller {
     await this.collectDownloadLinks();
     if (this.downloadLinks.length === 0) return;
 
-    const zip = new JSZip();
-    for (let link of this.downloadLinks) {
-      const response = await fetch(link.url);
-      const blob = await response.blob();
-      zip.file(link.filename, blob);
-    }
+    const files = await Promise.all(
+      this.downloadLinks.map(async (link) => {
+        const response = await fetch(link.url);
+        return {
+          name: link.name,
+          input: await response.blob(),
+        };
+      })
+    );
 
     const filename = `${await this.createFilename()}.zip`;
 
-    const content = await zip.generateAsync({ type: 'blob' });
-    saveAs(content, filename);
+    const blob = await downloadZip(files).blob();
+    saveAs(blob, filename);
   }
 
   @task
