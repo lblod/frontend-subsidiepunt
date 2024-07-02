@@ -34,7 +34,7 @@
   }
 
   // show the logged in user fully
-  .au-c-dropdown__name[data-test-dropdown-title] {
+  .logged-in-user button span{
     max-width: fit-content;
   }
 
