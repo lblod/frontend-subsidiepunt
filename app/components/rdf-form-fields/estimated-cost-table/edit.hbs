@@ -39,8 +39,8 @@
           </AuLabel>
           <AuInput
             @width="block"
-            @value={{entry.cost.value}}
-            @type="number"
+            value={{entry.cost.value}}
+            type="number"
             id="costs-{{index}}"
             step="any"
             class={{if entry.cost.errors "au-c-input--error"}}
@@ -56,8 +56,8 @@
           </AuLabel>
           <AuInput
             @width="block"
-            @value={{entry.share.value}}
-            @type="number"
+            value={{entry.share.value}}
+            type="number"
             id="share-{{index}}"
             step="any"
             class={{if entry.share.errors "au-c-input--error"}}

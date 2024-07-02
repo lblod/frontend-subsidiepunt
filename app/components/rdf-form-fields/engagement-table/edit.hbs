@@ -33,8 +33,8 @@
           </AuLabel>
           <AuInput
             @width="block"
-            @value={{entry.existingStaff.value}}
-            @type="number"
+            type="number"
+            value={{entry.existingStaff.value}}
             id="existing-staff-{{index}}"
             class={{if entry.existingStaff.errors "au-c-input--error"}}
             {{on "change" (fn this.updateExistingStaffValue entry)}}
@@ -52,8 +52,8 @@
           </AuLabel>
           <AuInput
             @width="block"
-            @value={{entry.additionalStaff.value}}
-            @type="number"
+            value={{entry.additionalStaff.value}}
+            type="number"
             id="additional-staff-{{index}}"
             class={{if entry.additionalStaff.errors "au-c-input--error"}}
             {{on "change" (fn this.updateAdditionalStaffValue entry)}}
@@ -68,8 +68,8 @@
           </AuLabel>
           <AuInput
             @width="block"
-            @value={{entry.volunteers.value}}
-            @type="number"
+            value={{entry.volunteers.value}}
+            type="number"
             id="volunteers-{{index}}"
             class={{if entry.volunteers.errors "au-c-input--error"}}
             {{on "change" (fn this.updateVolunteersValue entry)}}
