@@ -42,6 +42,7 @@ export default class SubsidyApplicationsEditController extends Controller {
     const previousDocumentTitle = document.title;
     const filename = `${await this.createFilename()}.pdf`;
 
+    // Update the page title temporarily to the subsidy step, so when the user prints to pdf it will have the subsidy step as filename
     document.title = filename;
 
     window.print();
