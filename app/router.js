@@ -18,8 +18,6 @@ Router.map(function () {
     this.route('switch');
   });
 
-  this.route('contact');
-
   this.route('legaal', function () {
     this.route('disclaimer');
     this.route('cookieverklaring');

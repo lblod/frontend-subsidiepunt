@@ -19,7 +19,7 @@ import {
 } from './base-table';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
 
-import commasToDecimalPointsFix from '../../../helpers/subsidies/subsidies-decimal-point';
+import commasToDecimalPointsFix from 'frontend-subsidiepunt/utils/subsidies-decimal-point';
 
 const defaultRows = [
   {
