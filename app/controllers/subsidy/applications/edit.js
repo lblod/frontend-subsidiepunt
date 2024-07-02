@@ -10,13 +10,6 @@ export default class SubsidyApplicationsEditController extends Controller {
   @service router;
   @service() store;
 
-  constructor() {
-    super(...arguments);
-    window.addEventListener('beforeprint', this.prepareTextareasForPrinting, {
-      once: true,
-    });
-  }
-
   get reeksHasStartOrEnd() {
     return (
       this.consumption.get(
@@ -46,6 +39,7 @@ export default class SubsidyApplicationsEditController extends Controller {
 
   @action
   async exportSubsidyAsPDF() {
+    await this.prepareTextareasForPrinting();
     const previousDocumentTitle = document.title;
     const filename = `${await this.createFilename()}.pdf`;
 
@@ -62,7 +56,7 @@ export default class SubsidyApplicationsEditController extends Controller {
     window.print();
   }
 
-  prepareTextareasForPrinting() {
+  async prepareTextareasForPrinting() {
     // Remove any previously created print divs
     const existingPrintDivs = document.querySelectorAll(
       '.textarea, .display-on-print'
