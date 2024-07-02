@@ -3,8 +3,8 @@ import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import fetch from 'fetch';
 import { action } from '@ember/object';
-import { saveAs } from 'file-saver';
 import { downloadZip } from 'client-zip';
+import { triggerZipDownload } from 'frontend-subsidiepunt/utils/download';
 
 export default class SubsidyApplicationsEditController extends Controller {
   @service router;
@@ -137,7 +137,7 @@ export default class SubsidyApplicationsEditController extends Controller {
     const filename = `${await this.createFilename()}.zip`;
 
     const blob = await downloadZip(files).blob();
-    saveAs(blob, filename);
+    triggerZipDownload(blob, filename);
   }
 
   @task
