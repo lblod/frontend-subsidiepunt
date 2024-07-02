@@ -112,9 +112,8 @@ export default class SubsidyApplicationsEditController extends Controller {
     );
     const currentProceduralStep = await currentStep.subsidyProceduralStep;
     const currentProceduralStepName = currentProceduralStep.description;
-    const currentSubsidyName = this.consumption.get(
-      'subsidyMeasureOffer.title'
-    );
+    const currentSubsidy = await this.consumption.subsidyMeasureOffer;
+    const currentSubsidyName = currentSubsidy.title;
 
     const filename = `${currentSubsidyName} - stap ${currentProceduralStepName}`;
     return filename;
