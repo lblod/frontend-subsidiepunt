@@ -12,7 +12,9 @@ export default class SubsidyApplicationsEditController extends Controller {
 
   constructor() {
     super(...arguments);
-    window.addEventListener('beforeprint', this.prepareTextareasForPrinting);
+    window.addEventListener('beforeprint', this.prepareTextareasForPrinting, {
+      once: true,
+    });
   }
 
   get reeksHasStartOrEnd() {
@@ -50,11 +52,14 @@ export default class SubsidyApplicationsEditController extends Controller {
     // Update the page title temporarily to the subsidy step, so when the user prints to pdf it will have the subsidy step as filename
     document.title = filename;
 
-    window.print();
     window.addEventListener(
       'afterprint',
-      (document.title = previousDocumentTitle)
+      () => {
+        document.title = previousDocumentTitle;
+      },
+      { once: true }
     );
+    window.print();
   }
 
   prepareTextareasForPrinting() {
