@@ -37,6 +37,11 @@ export default class SubsidyApplicationsEditController extends Controller {
   get canDelete() {
     return this.model.consumption.get('status.isConcept');
   }
+
+  get canDownload() {
+    return !this.model.consumption.get('status.isConcept');
+  }
+
   @action
   async exportSubsidyAsPDF() {
     const previousDocumentTitle = document.title;

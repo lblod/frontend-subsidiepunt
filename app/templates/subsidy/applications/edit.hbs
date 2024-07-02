@@ -17,23 +17,25 @@
   </Group>
   <Group class="au-c-toolbar__group--col">
     <AuButtonGroup>
-      <AuDropdown
-        @title="Bestanden Downloaden"
-        @buttonLabel="Account settings"
-        @alignment="right"
-        @skin="secondary"
-        @icon="download"
-        @iconAlignment="left"
-        role="menu"
-        class="au-u-hide-on-print"
-      >
-        <AuButton @skin="link" role="menuitem" {{on "click" this.exportSubsidyAsPDF}}>
-          Download huidige stap (PDF)
-        </AuButton>
-        <AuButton @skin="link" role="menuitem" {{on "click" this.downloadBijlagen}}>
-          Alle bijlagen downloaden in .zip
-        </AuButton>
-      </AuDropdown>
+      {{#if this.canDownload}}
+        <AuDropdown
+          @title="Bestanden Downloaden"
+          @buttonLabel="Account settings"
+          @alignment="right"
+          @skin="secondary"
+          @icon="download"
+          @iconAlignment="left"
+          role="menu"
+          class="au-u-hide-on-print"
+        >
+          <AuButton @skin="link" role="menuitem" {{on "click" this.exportSubsidyAsPDF}}>
+            Download huidige stap (PDF)
+          </AuButton>
+          <AuButton @skin="link" role="menuitem" {{on "click" this.downloadBijlagen}}>
+            Alle bijlagen downloaden in .zip
+          </AuButton>
+        </AuDropdown>
+      {{/if}}
       {{#if this.canDelete}}
         <AuButton
           @disabled={{not this.consumption.isStable}}
