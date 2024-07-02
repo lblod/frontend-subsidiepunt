@@ -12,10 +12,11 @@
     <AuInput
       @disabled={{@disabled}}
       @width="block"
-      @value={{this.costPerUnit}}
       @error={{if this.costPerUnitErrors true false}}
-      @type="number"
+      value={{this.costPerUnit}}
+      type="number"
       lang="nl-BE"
+      {{on "input" (event-value (fn (mut this.costPerUnit)))}}
       {{on "blur" this.update}}
     />
     per klimaattafel
@@ -28,10 +29,11 @@
     <AuInput
       @disabled={{@disabled}}
       @width="block"
-      @value={{this.toRealiseUnits}}
       @error={{if this.toRealiseUnitsErrors true false}}
-      @type="number"
+      value={{this.toRealiseUnits}}
+      type="number"
       lang="nl-BE"
+      {{on "input" (event-value (fn (mut this.toRealiseUnits)))}}
       {{on "blur" this.update}}
     />
     {{#each this.toRealiseUnitsErrors as |error|}}

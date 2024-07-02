@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Helper | with-value', function (hooks) {
+module('Integration | Helper | event-value', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it calls the handler with the event value', async function (assert) {
@@ -12,7 +12,7 @@ module('Integration | Helper | with-value', function (hooks) {
     };
 
     await render(hbs`
-      <input {{on "change" (with-value this.handler)}} />
+      <input {{on "change" (event-value this.handler)}} />
     `);
 
     await fillIn('input', 'foo');
@@ -21,7 +21,7 @@ module('Integration | Helper | with-value', function (hooks) {
 
   test('it works with fn + mut', async function (assert) {
     await render(hbs`
-      <input {{on "change" (with-value (fn (mut this.value)))}} />
+      <input {{on "change" (event-value (fn (mut this.value)))}} />
     `);
 
     assert.strictEqual(this.value, undefined);
