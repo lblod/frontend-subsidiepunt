@@ -57,7 +57,7 @@ export default class SubsidyApplicationsEditController extends Controller {
   async prepareTextareasForPrinting() {
     // Remove any previously created print divs
     const existingPrintDivs = document.querySelectorAll(
-      '.textarea, .display-on-print'
+      '.textarea.display-on-print'
     );
     existingPrintDivs.forEach((div) => div.remove());
 
