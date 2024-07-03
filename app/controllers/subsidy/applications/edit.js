@@ -5,10 +5,12 @@ import fetch from 'fetch';
 import { action } from '@ember/object';
 import { downloadZip } from 'client-zip';
 import { triggerZipDownload } from 'frontend-subsidiepunt/utils/download';
+import { tracked } from '@glimmer/tracking';
 
 export default class SubsidyApplicationsEditController extends Controller {
   @service router;
   @service() store;
+  @tracked downloadLinks;
 
   get reeksHasStartOrEnd() {
     return (
