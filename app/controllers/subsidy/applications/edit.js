@@ -72,7 +72,6 @@ export default class SubsidyApplicationsEditController extends Controller {
       div.style.border = '1px solid #ccc';
       div.style.padding = '5px';
       div.style.minHeight = `${textarea.offsetHeight}px`;
-      div.classList.add('display-on-print');
       div.classList.add('textarea', 'display-on-print');
 
       textarea.classList.add('au-u-hide-on-print');
