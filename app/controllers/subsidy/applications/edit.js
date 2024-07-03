@@ -35,10 +35,6 @@ export default class SubsidyApplicationsEditController extends Controller {
     return this.model.consumption.get('status.isConcept');
   }
 
-  get canDownload() {
-    return !this.model.consumption.get('status.isConcept');
-  }
-
   @action
   async exportSubsidyAsPDF() {
     await this.prepareTextareasForPrinting();
