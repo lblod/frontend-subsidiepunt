@@ -11,6 +11,7 @@ export default class SubsidyApplicationsEditController extends Controller {
   @service router;
   @service() store;
   @tracked downloadLinks;
+  @tracked stepIsSubmitted;
 
   get reeksHasStartOrEnd() {
     return (
@@ -101,6 +102,22 @@ export default class SubsidyApplicationsEditController extends Controller {
         include: 'subsidy-procedural-step',
       }
     );
+
+    // Check if the current step has been submitted
+    const activeSubsidyStep = await this.consumption
+      .activeSubsidyApplicationFlowStep;
+    const activeSubsidyStepOrder = activeSubsidyStep.order;
+    const currentStepOrder = currentStep.order;
+
+    if (
+      activeSubsidyStepOrder === undefined ||
+      activeSubsidyStepOrder > currentStepOrder
+    ) {
+      this.stepIsSubmitted = true;
+    } else {
+      this.stepIsSubmitted = false;
+    }
+
     const currentProceduralStep = await currentStep.subsidyProceduralStep;
     const currentProceduralStepName = currentProceduralStep.description;
     const currentSubsidy = await this.consumption.subsidyMeasureOffer;
