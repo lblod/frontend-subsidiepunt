@@ -90,6 +90,9 @@ export default class SubsidyApplicationsEditController extends Controller {
       url: link.href,
       name: link.getAttribute('download'),
     }));
+
+    // Run this here to set the stepIsSubmitted to the correct value
+    await this.createFilename();
   }
 
   async createFilename() {
