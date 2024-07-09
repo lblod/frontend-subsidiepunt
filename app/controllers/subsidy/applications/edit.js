@@ -109,7 +109,7 @@ export default class SubsidyApplicationsEditController extends Controller {
     // Check if the current step has been submitted
     const activeSubsidyStep = await this.consumption
       .activeSubsidyApplicationFlowStep;
-    const activeSubsidyStepOrder = activeSubsidyStep.order;
+    const activeSubsidyStepOrder = activeSubsidyStep?.order;
     const currentStepOrder = currentStep.order;
 
     if (
