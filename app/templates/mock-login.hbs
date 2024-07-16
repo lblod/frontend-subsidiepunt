@@ -7,9 +7,9 @@
 
       <div class="au-o-region-large">
         <div class="au-o-layout">
-          <AuHeading @skin="4">Kies een bestuurseenheid om mee in te loggen.</AuHeading>
+          <AuHeading @skin="4">Kies een organisatie om mee in te loggen.</AuHeading>
           <p class="au-u-margin-top-small au-u-margin-bottom">
-            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} oninput={{perform this.updateSearch value='target.value'}} aria-label="Kies een bestuurseenheid om mee in te loggen">
+            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} oninput={{perform this.updateSearch value='target.value'}} aria-label="Kies een organisatie om mee in te loggen">
           </p>
           <MockLogin as |login|>
             {{#if this.queryStore.isRunning}}
@@ -27,8 +27,8 @@
                     <AuHr/>
                     <p>
                       <span class="au-c-info-text">Alternatieve naam:</span>
-                      {{#each account.gebruiker.bestuurseenheden as |bestuurseenheid|}}
-                        {{#each bestuurseenheid.alternatieveNaam as |alternatieveNaam|}}
+                      {{#each account.gebruiker.organizations as |organization|}}
+                        {{#each organization.alternatieveNaam as |alternatieveNaam|}}
                           <AuPill>{{alternatieveNaam}}</AuPill>
                         {{/each}}
                       {{/each}}
