@@ -11,7 +11,11 @@ export default class OrganizationModel extends Model {
   })
   classificatie;
 
-  @hasMany('participation') participations;
+  @hasMany('participation', {
+    async: true,
+    polymorphic: true,
+    inverse: 'participatingOrganization',
+  }) participations;
 
   @hasMany('identifier', {
     inverse: null,
