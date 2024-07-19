@@ -1,9 +1,10 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import { attr, belongsTo } from '@ember-data/model';
 import OrganizationModel from './organization';
 
 export default class Bestuurseenheid extends OrganizationModel  {
-  @attr uri;
-  @attr naam;
+  // Already defined in OrganizationModel
+  // @attr uri;
+  // @attr naam;
   @attr alternatieveNaam;
   @attr mailAdres;
   @attr wilMailOntvangen;

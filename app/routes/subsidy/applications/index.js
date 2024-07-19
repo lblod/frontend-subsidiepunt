@@ -14,7 +14,8 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
 
   mergeQueryOptions() {
     let groupId = this.currentSession.group.id;
-    return {
+    console.log('groupId', groupId);
+    const res =  {
       include: [
         'status',
         'subsidy-measure-offer',
@@ -26,12 +27,14 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
       ].join(','),
       filter: {
         participations: {
-          'participating-bestuurseenheid': {
+          'participating-organization': {
             id: groupId,
           },
           ':exact:role': ROLES.APPLICANT,
         },
       },
     };
+    console.log('res', res);
+    return res;
   }
 }

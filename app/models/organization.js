@@ -1,14 +1,17 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
 export default class OrganizationModel extends Model {
-  @attr name;
+  @attr naam;
+  @attr uri;
 
   @belongsTo('organization-classification-code', {
     inverse: null,
     async: true,
     polymorphic: true,
   })
-  classification;
+  classificatie;
+
+  @hasMany('participation') participations;
 
   @hasMany('identifier', {
     inverse: null,
