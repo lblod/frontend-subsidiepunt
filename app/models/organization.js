@@ -8,7 +8,7 @@ export default class OrganizationModel extends Model {
     async: true,
     polymorphic: true,
   })
-  classification;
+  classificatie;
 
   @hasMany('identifier', {
     inverse: null,
