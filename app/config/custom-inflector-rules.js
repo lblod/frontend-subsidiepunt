@@ -38,6 +38,7 @@ inflector.irregular(
   'submission-document-statuses'
 );
 inflector.irregular('participation', 'participations');
+inflector.irregular('organization', 'organizations');
 inflector.irregular('period-of-time', 'periods-of-time');
 inflector.irregular(
   'subsidy-measure-consumption',
