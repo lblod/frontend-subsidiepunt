@@ -14,8 +14,7 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
 
   mergeQueryOptions() {
     let groupId = this.currentSession.group.id;
-    console.log('groupId', groupId);
-    const res =  {
+    return {
       include: [
         'status',
         'subsidy-measure-offer',
@@ -34,7 +33,5 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
         },
       },
     };
-    console.log('res', res);
-    return res;
   }
 }
