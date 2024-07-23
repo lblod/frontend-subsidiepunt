@@ -11,18 +11,19 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
   @service currentSession;
   @service store;
   @service router;
+  static ECONOMISCHE_ACTOR =
+    'http://data.lblod.info/id/concept/c6157470-9fb3-4e8d-a9b7-8737dbfa3642'; //economische actor uuid
 
   modelName = 'subsidy-measure-consumption';
 
   beforeModel() {
-    console.log('role', this.currentSession.groupClassification.label);
-    // TODO: change to economische actoren, once implemented
     if (
       isFeatureEnabled('verenigingenUnderConstruction') &&
-      this.currentSession.groupClassification.label === 'Gemeente'
+      this.currentSession.groupClassification.uri ===
+        this.constructor.ECONOMISCHE_ACTOR
     ) {
       this.router.replaceWith('under-construction');
-    };
+    }
   }
 
   mergeQueryOptions() {
