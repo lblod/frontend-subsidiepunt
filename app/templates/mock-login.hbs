@@ -2,14 +2,14 @@
   <div class="au-c-main-container__content au-c-main-container__content--scroll">
     <main id="content">
       <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is lokaal bestuur">
-        <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
+        <img sizes="50vw" src="/assets/images/header-1600.jpg" srcset="/assets/images/header-320.jpg 320w, /assets/images/header-1024.jpg 1024w, /assets/images/header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
       </AuContentHeader>
 
       <div class="au-o-region-large">
         <div class="au-o-layout">
-          <AuHeading @skin="4">Kies een bestuurseenheid om mee in te loggen.</AuHeading>
+          <AuHeading @skin="4">Kies een organisatie om mee in te loggen.</AuHeading>
           <p class="au-u-margin-top-small au-u-margin-bottom">
-            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} oninput={{perform this.updateSearch value='target.value'}} aria-label="Kies een bestuurseenheid om mee in te loggen">
+            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} oninput={{perform this.updateSearch value='target.value'}} aria-label="Kies een organisatie om mee in te loggen">
           </p>
           <MockLogin as |login|>
             {{#if this.queryStore.isRunning}}
@@ -27,8 +27,8 @@
                     <AuHr/>
                     <p>
                       <span class="au-c-info-text">Alternatieve naam:</span>
-                      {{#each account.gebruiker.bestuurseenheden as |bestuurseenheid|}}
-                        {{#each bestuurseenheid.alternatieveNaam as |alternatieveNaam|}}
+                      {{#each account.gebruiker.organizations as |organization|}}
+                        {{#each organization.alternatieveNaam as |alternatieveNaam|}}
                           <AuPill>{{alternatieveNaam}}</AuPill>
                         {{/each}}
                       {{/each}}

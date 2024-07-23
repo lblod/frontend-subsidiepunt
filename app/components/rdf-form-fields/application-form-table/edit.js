@@ -6,7 +6,12 @@ import { literal, NamedNode } from 'rdflib';
 import { v4 as uuidv4 } from 'uuid';
 import { next } from '@ember/runloop';
 import { guidFor } from '@ember/object/internals';
-import { LBLOD_SUBSIDIE, MU, RDF, XSD } from 'frontend-subsidie-loket/rdf/namespaces';
+import {
+  LBLOD_SUBSIDIE,
+  MU,
+  RDF,
+  XSD,
+} from 'frontend-subsidiepunt/rdf/namespaces';
 
 const applicationFormTableBaseUri =
   'http://data.lblod.info/application-form-tables';
@@ -475,7 +480,11 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
   }
 
   @action
-  updateActorNameValue(entry) {
+  updateActorNameValue(entry, event) {
+    if (event) {
+      entry.actorName.value = event.target.value;
+    }
+
     entry.actorName.errors = [];
     this.updateFieldValueTriple(entry, 'actorName');
     if (this.isEmpty(entry.actorName.value)) {
@@ -488,7 +497,11 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
   }
 
   @action
-  updateNumberChildrenForFullDayValue(entry) {
+  updateNumberChildrenForFullDayValue(entry, event) {
+    if (event) {
+      entry.numberChildrenForFullDay.value = event.target.value;
+    }
+
     entry.numberChildrenForFullDay.errors = [];
     const parsedValue = parseInt(entry.numberChildrenForFullDay.value);
     entry.numberChildrenForFullDay.value = !isNaN(parsedValue)
@@ -513,7 +526,11 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
   }
 
   @action
-  updateNumberChildrenForHalfDayValue(entry) {
+  updateNumberChildrenForHalfDayValue(entry, event) {
+    if (event) {
+      entry.numberChildrenForHalfDay.value = event.target.value;
+    }
+
     entry.numberChildrenForHalfDay.errors = [];
     const parsedValue = parseInt(entry.numberChildrenForHalfDay.value);
     entry.numberChildrenForHalfDay.value = !isNaN(parsedValue)
@@ -538,7 +555,11 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
   }
 
   @action
-  updateNumberChildrenPerInfrastructureValue(entry) {
+  updateNumberChildrenPerInfrastructureValue(entry, event) {
+    if (event) {
+      entry.numberChildrenPerInfrastructure.value = event.target.value;
+    }
+
     entry.numberChildrenPerInfrastructure.errors = [];
     const parsedValue = parseInt(entry.numberChildrenPerInfrastructure.value);
     entry.numberChildrenPerInfrastructure.value = !isNaN(parsedValue)

@@ -2,8 +2,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
-import { ROLES } from 'frontend-subsidie-loket/models/participation';
-import isFeatureEnabled from 'frontend-subsidie-loket/helpers/is-feature-enabled';
+import isFeatureEnabled from 'frontend-subsidiepunt/helpers/is-feature-enabled';
+import { ROLES } from 'frontend-subsidiepunt/models/participation';
 
 export default class SubsidyApplicationsIndexRoute extends Route.extend(
   DataTableRouteMixin

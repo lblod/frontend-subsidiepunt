@@ -1,7 +1,6 @@
 import EmberRouter from '@ember/routing/router';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
-import config from 'frontend-subsidie-loket/config/environment';
-import isFeatureEnabled from 'frontend-subsidie-loket/helpers/is-feature-enabled';
+import config from 'frontend-subsidiepunt/config/environment';
+import isFeatureEnabled from 'frontend-subsidiepunt/helpers/is-feature-enabled';
 
 export default class Router extends EmberRouter {
   location = config.locationType;
@@ -19,8 +18,6 @@ Router.map(function () {
     this.route('logout');
     this.route('switch');
   });
-
-  this.route('contact');
 
   if (isFeatureEnabled('verenigingenUnderConstruction')) {
     this.route('under-construction');

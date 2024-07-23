@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   const ENV = {
-    modulePrefix: 'frontend-subsidie-loket',
+    modulePrefix: 'frontend-subsidiepunt',
     environment,
     rootURL: '/',
     locationType: 'history',
@@ -25,7 +25,8 @@ module.exports = function (environment) {
     },
     acmidm: {
       clientId: '{{ACMIDM_CLIENT_ID}}',
-      scope: 'openid vo rrn profile wettelijkevertegenwoordiger abb_subsidiepunt',
+      scope:
+        'openid vo rrn profile wettelijkevertegenwoordiger abb_subsidiepunt',
       authUrl: '{{ACMIDM_AUTH_URL}}',
       logoutUrl: '{{ACMIDM_LOGOUT_URL}}',
       authRedirectUrl: '{{ACMIDM_AUTH_REDIRECT_URL}}',
@@ -35,11 +36,6 @@ module.exports = function (environment) {
       // 'feature-name': '{{FEATURE_ENV_VAR_NAME}}',
       verenigingenUnderConstruction: '{{VERENIGINGEN_UNDER_CONSTRUCTION}}',
     },
-    lpdcUrl: '{{LPDC_URL}}',
-    worshipDecisionsDatabaseUrl: '{{WORSHIP_DECISIONS_DATABASE_URL}}',
-    worshipOrganisationsDatabaseUrl: '{{WORSHIP_ORGANISATIONS_DATABASE_URL}}',
-    verenigingenUrl: '{{VERENIGINGEN_URL}}',
-    contactUrl: '{{CONTACT_URL}}',
     'ember-plausible': {
       enabled: false,
     },

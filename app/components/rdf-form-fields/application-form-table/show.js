@@ -2,7 +2,7 @@ import InputFieldComponent from '@lblod/ember-submission-form-fields/components/
 import { tracked } from '@glimmer/tracking';
 import { triplesForPath } from '@lblod/submission-form-helpers';
 import { NamedNode } from 'rdflib';
-import { LBLOD_SUBSIDIE } from 'frontend-subsidie-loket/rdf/namespaces';
+import { LBLOD_SUBSIDIE } from 'frontend-subsidiepunt/rdf/namespaces';
 
 const extBaseUri = 'http://mu.semte.ch/vocabularies/ext/';
 
@@ -74,7 +74,7 @@ class ApplicationFormEntry {
 
 export default class RdfFormFieldsApplicationFormTableShowComponent extends InputFieldComponent {
   @tracked applicationFormTableSubject = null;
-  @tracked entries = [];
+  @tracked entries;
 
   constructor() {
     super(...arguments);
@@ -101,6 +101,7 @@ export default class RdfFormFieldsApplicationFormTableShowComponent extends Inpu
   loadProvidedValue() {
     const matches = triplesForPath(this.storeOptions);
     const triples = matches.triples;
+    const entries = [];
 
     if (triples.length) {
       this.applicationFormTableSubject = triples[0].object; // assuming only one per form
@@ -125,7 +126,7 @@ export default class RdfFormFieldsApplicationFormTableShowComponent extends Inpu
 
           const parsedEntry = this.parseEntryProperties(entryProperties);
 
-          this.entries.pushObject(
+          entries.pushObject(
             new ApplicationFormEntry({
               applicationFormEntrySubject: entry.object,
               actorName: parsedEntry.actorName,
@@ -138,6 +139,8 @@ export default class RdfFormFieldsApplicationFormTableShowComponent extends Inpu
           );
         }
       }
+
+      this.entries = entries;
 
       const { store, sourceNode, sourceGraph } = this.storeOptions;
       const predicate = LBLOD_SUBSIDIE('usedParentalContribution');

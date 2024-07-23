@@ -1,20 +1,15 @@
-# frontend-subsidie-loket
+# frontend-subsidiepunt
 
-Frontend of the loket application
+Frontend of the subsidiepunt application
 
 ## Environment variables
 
-The [ember-proxy-service](https://github.com/mu-semtech/ember-proxy-service#configure-environment-variables-in-the-frontends-container) docker image (which we use to host the frontend) supports configuring environment variables. The following options are available for the loket image.
+The [ember-proxy-service](https://github.com/mu-semtech/ember-proxy-service#configure-environment-variables-in-the-frontends-container) docker image (which we use to host the frontend) supports configuring environment variables. The following options are available.
 
 ### General
 
 | Name                                       | Description                                                                             |
 | ------------------------------------------ | --------------------------------------------------------------------------------------- |
-| `EMBER_LPDC_URL`                           | Link to the LPDC application                                                            |
-| `EMBER_WORSHIP_DECISIONS_DATABASE_URL`     | Link to the worship decisions database                                                  |
-| `EMBER_WORSHIP_ORGANISATIONS_DATABASE_URL` | Link to the worship organisations database                                              |
-| `EMBER_VERENIGINGEN_URL`                   | Link to the verenigingen app                                                            |
-| `EMBER_CONTACT_URL`                        | Link to the contact app                                                                 |
 | `EMBER_GLOBAL_SYSTEM_NOTIFICATION`         | This can be used to display a message at the top of the application. HTML is supported. |
 | `VERENIGINGEN_UNDER_CONSTRUCTION`          | Toggle the under construction redirect for verenigingen                                 |
 
