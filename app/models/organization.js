@@ -1,8 +1,13 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
 export default class OrganizationModel extends Model {
-  @attr naam;
   @attr uri;
+  @attr naam;
+  @attr alternatieveNaam;
+  @attr mailAdres;
+  @attr wilMailOntvangen;
+  @attr isTrialUser;
+  @attr viewOnlyModules;
 
   @belongsTo('organization-classification-code', {
     inverse: null,
