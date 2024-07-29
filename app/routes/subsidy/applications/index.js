@@ -26,7 +26,7 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
       ].join(','),
       filter: {
         participations: {
-          'participating-bestuurseenheid': {
+          'participating-organization': {
             id: groupId,
           },
           ':exact:role': ROLES.APPLICANT,

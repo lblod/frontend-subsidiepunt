@@ -50,7 +50,7 @@ export default class SubsidyApplicationsNewRoute extends Route {
 
     let participation = this.store.createRecord('participation', {
       role: ROLES.APPLICANT,
-      participatingBestuurseenheid: organisation,
+      participatingOrganization: organisation,
     });
 
     await participation.save();

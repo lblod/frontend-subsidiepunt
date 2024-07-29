@@ -40,7 +40,7 @@ export default class SubsidyApplicationsEditRoute extends Route {
           'subsidy-application-forms',
           'subsidy-application-flow.defined-steps.subsidy-procedural-step',
           'subsidy-application-flow.subsidy-measure-offer-series.period',
-          'participations.participating-bestuurseenheid',
+          'participations.participating-organization',
           'last-modifier',
         ].join(','),
         reload: true,
