@@ -49,16 +49,18 @@
           {{#unless this.isIndexOrLoading}}
             <AuToolbar class="au-u-hide-on-print" @size="medium" @skin="tint" @border="bottom" as |Group|>
               <Group>
-                <ul
-                  class="au-c-list-horizontal au-c-list-horizontal--small"
-                >
-                  <li class="au-c-list-horizontal__item">
-                    <AuLink @route="subsidy.applications" @icon="arrow-left">
-                      Terug naar overzicht
-                    </AuLink>
-                  </li>
-                  <BreadCrumb />
-                </ul>
+                <nav aria-label="Breadcrumb">
+                  <ol
+                    class="au-c-list-horizontal au-c-list-horizontal--small"
+                  >
+                    <li class="au-c-list-horizontal__item">
+                      <AuLink @route="subsidy.applications" @icon="arrow-left">
+                        Terug naar overzicht
+                      </AuLink>
+                    </li>
+                    <BreadCrumb />
+                  </ol>
+                </nav>
               </Group>
             </AuToolbar>
           {{/unless}}
