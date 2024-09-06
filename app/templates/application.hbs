@@ -10,17 +10,19 @@
     @homeRoute="index"
     @appTitle={{this.appTitle}}
   >
-    <li class="au-c-list-horizontal__item au-u-hide-on-print">
-      <AuLinkExternal
-        href="https://abb-vlaanderen.gitbook.io/handleiding-loket/veelgestelde-vragen"
-        @skin="secondary"
-      >
-        <AuIcon @icon="question-circle" @alignment="left" />
-        Help
-      </AuLinkExternal>
-    </li>
-    <li class="au-c-list-horizontal__item">
-      {{#if this.session.isAuthenticated}}
+    <ul class="au-c-list-horizontal">
+      <li class="au-c-list-horizontal__item au-u-hide-on-print">
+        <AuLinkExternal
+          href="https://abb-vlaanderen.gitbook.io/handleiding-loket/veelgestelde-vragen"
+          @skin="secondary"
+          @icon="question-circle"
+        >
+          Help
+        </AuLinkExternal>
+      </li>
+      <li class="au-c-list-horizontal__item">
+        {{#if this.session.isAuthenticated}}
+        {{! template-lint-disable require-context-role }}
         <AuDropdown
           @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.groupClassification.label}} {{this.currentSession.group.naam}}"
           @buttonLabel="Account settings"
@@ -35,10 +37,12 @@
             Afmelden
           </AuLink>
         </AuDropdown>
+        {{! template-lint-enable require-context-role }}
       {{else}}
         <LoginButton @isCompact={{true}} />
-      {{/if}}
-    </li>
+        {{/if}}
+      </li>
+    </ul>
   </AuMainHeader>
 
   {{#if this.session.isAuthenticated}}
