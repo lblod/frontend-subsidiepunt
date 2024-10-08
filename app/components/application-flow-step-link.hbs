@@ -1,0 +1,25 @@
+<AuLink
+  @route="subsidy.applications.edit.step"
+  @model={{@currentStep.id}}
+  @active={{this.isFutureStep}}
+  class="au-c-list-navigation__link"
+  style="flex-direction: column; align-items: start;"
+  {{!template-lint-disable no-inline-styles}}
+> 
+  <div class="au-u-flex au-u-flex--spaced-tiny">
+    <AuBadge @skin={{this.badgeSkin}} @icon={{this.icon}} @size="small"/>
+    <div class={{if this.isFutureStep "au-u-regular au-u-muted"}}> {{@currentStep.subsidyProceduralStep.description}} </div>
+  </div>
+ 
+  <AuHelpText
+    @skin="secondary"
+    @size="small"
+    style="margin: 0; line-height:normal"
+    {{!template-lint-disable no-inline-styles}}
+  >Instuurbaar tot
+    {{moment-format
+      @currentStep.subsidyProceduralStep.period.end
+      "DD MMMM YYYY"
+    }}</AuHelpText>
+</AuLink>
+
