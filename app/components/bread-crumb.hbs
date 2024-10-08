@@ -1,7 +1,7 @@
 {{#each this.crumbsForRoute as |crumb|}}
-  <li class="au-c-list-horizontal__item" role="menu">
-    <strong role="menuitem">
+  <li class="au-c-list-horizontal__item">
+    <AuLink @route={{this.currentRoute}} @active="true" aria-current="page">
       {{crumb.label}}
-    </strong>
+    </AuLink>
   </li>
 {{/each}}

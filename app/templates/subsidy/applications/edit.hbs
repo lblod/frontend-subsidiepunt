@@ -17,6 +17,7 @@
   </Group>
   <Group class="au-c-toolbar__group--col">
     <AuButtonGroup>
+      {{! template-lint-disable require-context-role }}
       <AuDropdown
         @title="Bestanden Downloaden"
         @buttonLabel="Account settings"
@@ -24,7 +25,6 @@
         @skin="secondary"
         @icon="download"
         @iconAlignment="left"
-        role="menu"
         class="au-u-hide-on-print"
         {{on "click" this.collectDownloadLinks}}
       >
@@ -35,6 +35,7 @@
           Alle bijlagen downloaden in .zip
         </AuButton>
       </AuDropdown>
+      {{! template-lint-enable require-context-role }}
       {{#if this.canDelete}}
         <AuButton
           @disabled={{not this.consumption.isStable}}

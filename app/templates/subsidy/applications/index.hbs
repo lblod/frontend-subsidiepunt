@@ -40,7 +40,7 @@
       <AuDataTableThSortable @field="status.label" @currentSorting={{this.sort}} @label="Status"/>
       <th class="au-u-visible-small-up">Gewijzigd door</th>
       <AuDataTableThSortable @field="modified" @currentSorting={{this.sort}} @label="Laatst bewerkt"/>
-      <th></th>
+      <th aria-hidden="true"></th>
     </c.header>
 
     <c.body as |consumption|>
