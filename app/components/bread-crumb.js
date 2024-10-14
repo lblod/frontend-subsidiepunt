@@ -4,6 +4,10 @@ import { inject as service } from '@ember/service';
 export default class BreadCrumbComponent extends Component {
   @service router;
 
+  get currentRoute() {
+    return this.router.currentRouteName;
+  }
+
   bread = [
     {
       route: 'subsidy.applications.index',
