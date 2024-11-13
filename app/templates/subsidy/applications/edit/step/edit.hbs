@@ -5,13 +5,16 @@
   >
   {{!-- If it's both a previous step and not submitted => skipped step --}}
     {{#if (and this.isPreviousStep (not this.submitted)) }}
-      <div class="au-o-box au-o-box--small">
-        <div class="au-c-alert au-c-alert--warning">
-          <div class="au-c-alert__content">
-            <p>Deze stap werd overgeslagen en is niet ingediend.</p>
-          </div>
-        </div>
-      </div>
+      <AuAlert
+        @title="Deze stap is automatisch overgeslagen."
+        @skin="info"
+        @icon="redo"
+        @closable={{false}}
+      >
+        <p> Dit kan komen door een verlopen indieningsdatum, een nieuwere versie, of een andere reden. U hoeft zich geen zorgen te maken: deze stap is niet verwerkt. 
+          <br>Denkt u dat dit onterecht is en wilt u de stap alsnog indienen? Neem dan contact op via <a href="mailto:LoketLokaalBestuur@vlaanderen.be"
+                      class="au-c-link">LoketLokaalBestuur@vlaanderen.be</a>.</p>
+      </AuAlert>
     {{/if}}
     <RdfForm
       @groupClass="au-o-grid__item"

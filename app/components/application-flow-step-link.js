@@ -40,7 +40,6 @@ export default class ApplicationFlowStepLinkComponent extends Component {
 
   // A step is skipped when it's a previous step and the form is not submitted
   get isStepSkipped() {
-    console.log('this.', this.isPreviousStep, this.isFormSubmitted);
     return this.isPreviousStep && !this.isFormSubmitted;
   }
 
@@ -74,7 +73,7 @@ export default class ApplicationFlowStepLinkComponent extends Component {
     if (this.isActiveStep) {
       return 'three-dots';
     } else if (this.isStepSkipped) {
-      return 'x';
+      return 'redo';
     } else if (this.isPreviousStep || this.isSubmitted) {
       return 'check';
     } else {
