@@ -13,7 +13,6 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
   modelName = 'subsidy-measure-consumption';
 
   mergeQueryOptions() {
-    let groupId = this.currentSession.group.id;
     return {
       include: [
         'status',
@@ -23,15 +22,7 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
         'active-subsidy-application-flow-step.subsidy-procedural-step.period',
         'participations',
         'last-modifier',
-      ].join(','),
-      filter: {
-        participations: {
-          'participating-organization': {
-            id: groupId,
-          },
-          ':exact:role': ROLES.APPLICANT,
-        },
-      },
+      ].join(',')
     };
   }
 }
