@@ -1,9 +1,6 @@
 <div id="subsidyParent" class="au-c-body-container au-c-body-container--scroll">
-
-  <div
-    class="au-o-box {{if (or this.saveConcept.isRunning this.submit.isRunning) 'au-c-form--disabled'}}"
-  >
-  {{!-- If it's both a previous step and not submitted => skipped step --}}
+  <div class="au-o-box au-u-max-width-medium">
+{{!-- If it's both a previous step and not submitted => skipped step --}}
     {{#if (and this.isPreviousStep (not this.submitted)) }}
       <AuAlert
         @title="Deze stap is automatisch overgeslagen."
@@ -16,6 +13,11 @@
                       class="au-c-link">LoketLokaalBestuur@vlaanderen.be</a>.</p>
       </AuAlert>
     {{/if}}
+  </div>
+  <div
+    class="au-o-box {{if (or this.saveConcept.isRunning this.submit.isRunning) 'au-c-form--disabled'}}"
+  >
+  
     <RdfForm
       @groupClass="au-o-grid__item"
       @form={{this.form}}
