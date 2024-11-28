@@ -76,7 +76,8 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
   get isPreviousStep() {
     return (
       this.step.order <
-      this.consumption.belongsTo('activeSubsidyApplicationFlowStep').value().order
+      this.consumption.belongsTo('activeSubsidyApplicationFlowStep').value()
+        .order
     );
   }
 
