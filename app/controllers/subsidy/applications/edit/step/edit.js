@@ -73,6 +73,14 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     );
   }
 
+  get isPreviousStep() {
+    return (
+      this.step.order <
+      this.consumption.belongsTo('activeSubsidyApplicationFlowStep').value()
+        .order
+    );
+  }
+
   get canSubmit() {
     return (
       (!this.submitted && this.isActiveStep && this.isInSubmittablePeriod) ||
