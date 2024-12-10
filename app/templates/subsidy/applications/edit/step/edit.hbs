@@ -8,7 +8,7 @@
         @icon="redo"
         @closable={{false}}
       >
-        <p> Dit kan komen door een verlopen indieningsdatum, een nieuwere versie, of een andere reden. U hoeft zich geen zorgen te maken: deze stap is niet verwerkt. 
+        <p> Dit kan komen door een verlopen indieningsdatum, een nieuwere versie, of een andere reden. U hoeft zich geen zorgen te maken: deze stap is niet verwerkt.
           <br>Denkt u dat dit onterecht is en wilt u de stap alsnog indienen? Neem dan contact op via <a href="mailto:LoketLokaalBestuur@vlaanderen.be"
                       class="au-c-link">LoketLokaalBestuur@vlaanderen.be</a>.</p>
       </AuAlert>
@@ -17,7 +17,7 @@
   <div
     class="au-o-box {{if (or this.saveConcept.isRunning this.submit.isRunning) 'au-c-form--disabled'}}"
   >
-  
+
     <RdfForm
       @groupClass="au-o-grid__item"
       @form={{this.form}}
@@ -67,34 +67,36 @@
     <Group class="au-u-margin-top-small au-u-margin-bottom-small">
       {{! DEFAULT CRUD CASE }}
       {{#if this.canSubmit}}
-        <AuButton
-          @disabled={{if
-            (or
-              this.saveConcept.isRunning
-              this.submit.isRunning
-              this.delete.isRunning
-            )
-            "true"
-          }}
-          @loading={{if this.submit.isRunning "true"}}
-          {{on "click" (perform this.submit)}}
-        >Verstuur naar de Vlaamse overheid
-        </AuButton>
-        <AuButton
-          @disabled={{if
-            (or
-              this.saveConcept.isRunning
-              this.submit.isRunning
-              this.delete.isRunning
-            )
-            "true"
-          }}
-          @loading={{if this.saveConcept.isRunning "true"}}
-          @skin={{"secondary"}}
-          {{on "click" (perform this.saveConcept)}}
-        >
-          Bewaar als concept
-        </AuButton>
+        {{#if this.oldFusieAccountsCheck}}
+          <AuButton
+            @disabled={{if
+              (or
+                this.saveConcept.isRunning
+                this.submit.isRunning
+                this.delete.isRunning
+              )
+              "true"
+            }}
+            @loading={{if this.submit.isRunning "true"}}
+            {{on "click" (perform this.submit)}}
+          >Verstuur naar de Vlaamse overheid
+          </AuButton>
+          <AuButton
+            @disabled={{if
+              (or
+                this.saveConcept.isRunning
+                this.submit.isRunning
+                this.delete.isRunning
+              )
+              "true"
+            }}
+            @loading={{if this.saveConcept.isRunning "true"}}
+            @skin={{"secondary"}}
+            {{on "click" (perform this.saveConcept)}}
+          >
+            Bewaar als concept
+          </AuButton>
+        {{/if}}
       {{else}}
         {{! SENDING NOT POSSIBLE }}
         {{#if this.submitted}}

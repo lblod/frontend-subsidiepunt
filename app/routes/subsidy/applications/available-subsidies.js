@@ -2,12 +2,15 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
+import isOldFusieAccount from 'frontend-subsidiepunt/helpers/is-old-fusie-account';
 
 export default class SubsidyApplicationsAvailableSubsidiesRoute extends Route.extend(
   DataTableRouteMixin
 ) {
+  @service session;
   @service currentSession;
   @service store;
+  @service router;
 
   modelName = 'subsidy-measure-offer-series';
 
@@ -21,6 +24,16 @@ export default class SubsidyApplicationsAvailableSubsidiesRoute extends Route.ex
     size: { refreshModel: true },
     sort: { refreshModel: true },
   };
+
+  beforeModel() {
+    if (
+      isOldFusieAccount(
+        this.session.data.authenticated.relationships.group.data.id
+      )
+    ) {
+      this.router.replaceWith('subsidy.applications');
+    }
+  }
 
   mergeQueryOptions(params) {
     const query = {

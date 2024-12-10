@@ -9,9 +9,11 @@
   </Group>
   <Group>
     <div class="au-u-text-right">
+      {{#unless (is-old-fusie-account this.session.data.authenticated.relationships.group.data.id)}}
       <LinkTo @route="subsidy.applications.available-subsidies" class="au-c-button" type="button">Vraag nieuwe subsidie
         aan
       </LinkTo>
+      {{/unless}}
     </div>
   </Group>
 </AuToolbar>

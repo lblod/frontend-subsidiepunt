@@ -48,7 +48,7 @@ export default class SubsidyApplicationsEditRoute extends Route {
     );
 
     return {
-      consumption
+      consumption,
     };
   }
 

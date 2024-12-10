@@ -2,21 +2,12 @@
 
 <AuApp>
   <GlobalSystemNotification />
-  <AuMainHeader
-    @brandLink={{unless
-      this.session.isAuthenticated
-      "https://www.vlaanderen.be/nl"
-    }}
-    @homeRoute="index"
-    @appTitle={{this.appTitle}}
-  >
+  <AuMainHeader @brandLink={{unless this.session.isAuthenticated "https://www.vlaanderen.be/nl" }} @homeRoute="index"
+    @appTitle={{this.appTitle}}>
     <ul class="au-c-list-horizontal">
       <li class="au-c-list-horizontal__item au-u-hide-on-print">
-        <AuLinkExternal
-          href="https://abb-vlaanderen.gitbook.io/handleiding-loket/veelgestelde-vragen"
-          @skin="secondary"
-          @icon="question-circle"
-        >
+        <AuLinkExternal href="https://abb-vlaanderen.gitbook.io/handleiding-loket/veelgestelde-vragen" @skin="secondary"
+          @icon="question-circle">
           Help
         </AuLinkExternal>
       </li>
@@ -25,10 +16,7 @@
         {{! template-lint-disable require-context-role }}
         <AuDropdown
           @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.groupClassification.label}} {{this.currentSession.group.naam}}"
-          @buttonLabel="Account settings"
-          @alignment="right"
-          class="logged-in-user"
-        >
+          @buttonLabel="Account settings" @alignment="right" class="logged-in-user">
           <AuLink @route="auth.switch" @icon="switch" role="menuitem">
             Wissel van organisatie
           </AuLink>
@@ -38,7 +26,7 @@
           </AuLink>
         </AuDropdown>
         {{! template-lint-enable require-context-role }}
-      {{else}}
+        {{else}}
         <LoginButton @isCompact={{true}} />
         {{/if}}
       </li>
@@ -46,35 +34,47 @@
   </AuMainHeader>
 
   {{#if this.session.isAuthenticated}}
-    <AuMainContainer as |main|>
-      <main.content>
-        <AuBodyContainer>
-          {{#unless this.isIndexOrLoading}}
-            <AuToolbar class="au-u-hide-on-print" @size="medium" @skin="tint" @border="bottom" as |Group|>
-              <Group>
-                <nav aria-label="Breadcrumb">
-                  <ol
-                    class="au-c-list-horizontal au-c-list-horizontal--small"
-                  >
-                    <li class="au-c-list-horizontal__item">
-                      <AuLink @route="subsidy.applications" @icon="arrow-left">
-                        Terug naar overzicht
-                      </AuLink>
-                    </li>
-                    <BreadCrumb />
-                  </ol>
-                </nav>
-              </Group>
-            </AuToolbar>
-          {{/unless}}
-          <AuBodyContainer id="content">
-            {{outlet}}
-          </AuBodyContainer>
+  <AuMainContainer as |main|>
+    <main.content>
+      <AuBodyContainer>
+        {{#if (is-old-fusie-account this.session.data.authenticated.relationships.group.data.id)}}
+        <AuAlert @size='tiny' @skin='warning' class='au-u-margin-small'>
+          <div>
+            <p>
+              Let op: Dit account is alleen-lezen vanaf 1 januari 2025. Aanvragen van nieuwe subsidies (met
+              uitzondering van <span class='au-u-medium'>e-inclusie</span>) is hier niet langer toegestaan. Voor meer
+              informatie of het indienen van
+              een nieuwe aanvraag, gebruik het nieuwe account. Toegang tot dit account blijft mogelijk tot 1 juli
+              2025.
+            </p>
+          </div>
+        </AuAlert>
+        {{/if}}
+
+        {{#unless this.isIndexOrLoading}}
+        <AuToolbar class="au-u-hide-on-print" @size="medium" @skin="tint" @border="bottom" as |Group|>
+          <Group>
+            <nav aria-label="Breadcrumb">
+              <ol class="au-c-list-horizontal au-c-list-horizontal--small">
+                <li class="au-c-list-horizontal__item">
+                  <AuLink @route="subsidy.applications" @icon="arrow-left">
+                    Terug naar overzicht
+                  </AuLink>
+                </li>
+                <BreadCrumb />
+              </ol>
+            </nav>
+          </Group>
+        </AuToolbar>
+        {{/unless}}
+        <AuBodyContainer id="content">
+          {{outlet}}
         </AuBodyContainer>
-      </main.content>
-    </AuMainContainer>
+      </AuBodyContainer>
+    </main.content>
+  </AuMainContainer>
   {{else}}
-    {{outlet}}
+  {{outlet}}
   {{/if}}
 </AuApp>
 
