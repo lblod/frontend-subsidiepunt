@@ -11,11 +11,13 @@ import {
   NEW_STATUS,
   CONCEPT_STATUS,
 } from '../../../../../models/submission-document-status';
+import isOldFusieAccount from 'frontend-subsidiepunt/helpers/is-old-fusie-account';
 
 export default class SubsidyApplicationsEditStepEditController extends Controller {
   // To mimic user testing as much as possible
   // we introduce testMode queryparam, which skips some of the (blocking) frontend business logic.
   queryParams = ['testMode'];
+  @service session;
 
   @service currentSession;
   @service store;
@@ -79,6 +81,16 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
       this.consumption.belongsTo('activeSubsidyApplicationFlowStep').value()
         .order
     );
+  }
+
+  // for old fusie accounts; they can only submit e-inclusie subsidies
+  get oldFusieAccountsCheck() {
+    return isOldFusieAccount(
+      this.session.data.authenticated.relationships.group.data.id
+    )
+      ? this.consumption.subsidyMeasureOffer.get('id') ===
+          '0b5cae58-97fb-4982-9fb7-4cf660f003df'
+      : true;
   }
 
   get canSubmit() {
