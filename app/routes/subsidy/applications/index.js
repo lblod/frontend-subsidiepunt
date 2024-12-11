@@ -2,11 +2,11 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
-import { ROLES } from 'frontend-subsidiepunt/models/participation';
 
 export default class SubsidyApplicationsIndexRoute extends Route.extend(
   DataTableRouteMixin
 ) {
+  @service session;
   @service currentSession;
   @service store;
 
@@ -22,7 +22,7 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
         'active-subsidy-application-flow-step.subsidy-procedural-step.period',
         'participations',
         'last-modifier',
-      ].join(',')
+      ].join(','),
     };
   }
 }
