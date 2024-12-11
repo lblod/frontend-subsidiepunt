@@ -38,14 +38,21 @@
     <main.content>
       <AuBodyContainer>
         {{#if (is-old-fusie-account this.session.data.authenticated.relationships.group.data.id)}}
-        <AuAlert @size='tiny' @skin='warning' class='au-u-margin-small'>
+        <AuAlert
+          @title="Dit account is uitsluitend raadpleegbaar. (uitzondering e-inclusie)"
+          @skin="warning"
+          @icon="alert-triangle"
+          @size="small"
+          class='au-u-margin-small au-u-max-width-medium'
+          @closable={{true}}
+        >
           <div>
             <p>
-              Let op: Dit account is alleen-lezen vanaf 1 januari 2025. Aanvragen van nieuwe subsidies (met
-              uitzondering van <span class='au-u-medium'>e-inclusie</span>) is hier niet langer toegestaan. Voor meer
-              informatie of het indienen van
-              een nieuwe aanvraag, gebruik het nieuwe account. Toegang tot dit account blijft mogelijk tot 1 juli
-              2025.
+              Het indienen van nieuwe subsidiedossiers is niet langer mogelijk (met uitzondering van aanvragen voor <span class='au-u-medium'>e-inclusie</span>).
+
+Voor meer informatie of om een nieuwe aanvraag in te dienen, dient u gebruik te maken van het nieuwe account dat beschikbaar is gesteld na de fusie van de gemeenten.
+
+Toegang tot dit account blijft behouden tot 1 juli 2025, waarna het volledig afgesloten zal worden.
             </p>
           </div>
         </AuAlert>
