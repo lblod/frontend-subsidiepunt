@@ -34,6 +34,8 @@ Router.map(function () {
           this.route('edit', { path: '/forms/:form_id' });
         });
       });
+      this.route('edit-error');
+      this.route('new-error');
     });
   });
 
