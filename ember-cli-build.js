@@ -15,6 +15,9 @@ module.exports = function (defaults) {
       dutchDatePickerLocalization: true,
       disableWormholeElement: true,
     },
+    '@lblod/ember-submission-form-fields': {
+      helpTextBelowLabel: true,
+    },
     '@embroider/macros': {
       setOwnConfig: {
         controle: process.env.CONTROLE === 'true',
