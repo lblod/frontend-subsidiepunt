@@ -8,9 +8,10 @@ export default class ApplicationController extends Controller {
 
   appTitle = 'SubsidiePunt';
 
-  get isIndexOrLoading() {
+  get isExcludedOrLoading() {
     return (
       this.router.currentRouteName === 'subsidy.applications.index' ||
+      this.router.currentRouteName === 'geen-toegang' ||
       this.router.currentRouteName === 'subsidy.applications.index_loading'
     );
   }

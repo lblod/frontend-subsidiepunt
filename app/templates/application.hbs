@@ -58,7 +58,7 @@ Toegang tot dit account blijft behouden tot 1 juli 2025, waarna het volledig afg
         </AuAlert>
         {{/if}}
 
-        {{#unless this.isIndexOrLoading}}
+        {{#unless this.isExcludedOrLoading}}
         <AuToolbar class="au-u-hide-on-print" @size="medium" @skin="tint" @border="bottom" as |Group|>
           <Group>
             <nav aria-label="Breadcrumb">
