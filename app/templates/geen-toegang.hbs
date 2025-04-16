@@ -1,0 +1,101 @@
+{{page-title "GeenToegang"}}
+
+<div class="au-c-main-container" itemprop="mainContentOfPage">
+  <div class="au-c-main-container__content au-c-main-container__content--scroll">
+   <main id="content">
+      <section class="au-o-region-large">
+        <div class="au-o-layout">
+          <AuAlert @title="Je hebt geen toegang tot de subsidiepunt" @skin="error" @icon="lock-closed">
+            <p>
+              Je hebt momenteel geen toegang omdat je niet de juiste rechten hebt. 
+              Hieronder vind je stappen om toegang te verkrijgen.
+            </p>
+          </AuAlert>
+
+          <AuContent>
+            <h1>Toegang aanvragen</h1>
+            <p>
+              Subsidiepunt is bedoeld voor <strong>Lokale Besturen</strong> en <strong>Organisaties met een KBO-nummer</strong> 
+              die subsidies willen aanvragen via het Agentschap Binnenlands Bestuur.
+            </p>
+
+            <h2>Voor Lokale Besturen</h2>
+            <ul>
+              <li>
+                <strong>Controleer jouw toegang:</strong> 
+                <a href="https://mijnprofiel-gebruikersbeheer.vlaanderen.be/user/" target="_blank" rel="noopener noreferrer">
+                  Bekijk hier tot welke organisaties je toegang hebt.
+                </a>
+              </li>
+              <li>
+                <strong>Rechten aanvragen:</strong> 
+                <a href="https://zelfregistratie-gebruikersbeheer.vlaanderen.be/user/aanvraag?&an=999&dg=LB&ec=ABB_Subsidiepunt_LB_CompEnt_Gebruiker" target="_blank" rel="noopener noreferrer">
+                  Dien een aanvraag in via zelfregistratie.
+                </a>
+              </li>
+              <li>
+                <strong>Toekenning:</strong> Je lokale beheerder behandelt de aanvraag.
+              </li>
+              <li>
+                <strong>Gebruik via Loket voor Lokale Besturen:</strong> 
+                Alleen wie toegang heeft tot één of meerdere ‘contexten’ van het Loket, kan de subsidiemodule gebruiken. 
+                Er wordt gewerkt aan bredere toegang.
+              </li>
+            </ul>
+
+            <h2>Voor Organisaties met een KBO-nummer</h2>
+            <ul>
+              <li>
+                <strong>Automatische toegang:</strong> 
+                Wettelijke vertegenwoordigers hebben automatisch toegang tot Subsidiepunt.
+              </li>
+              <li>
+                <strong>Toegang voor medewerkers:</strong> 
+                De wettelijke vertegenwoordiger kan via 
+                <a href="https://gebruikersbeheer.vlaanderen.be" target="_blank" rel="noopener noreferrer">
+                  Gebruikersbeheer Vlaanderen
+                </a> medewerkers toevoegen.
+              </li>
+              <li>
+                <strong>Benodigde gegevens:</strong> Rijksregisternummer, e-mailadres, telefoonnummer.
+              </li>
+              <li>
+                <strong>Rechten toekennen:</strong> Koppel de rol ‘ABB Subsidiepunt’ aan de medewerker. 
+                De toegang is direct actief.
+              </li>
+              <li>
+                <strong>Handleiding:</strong> 
+                <a href="https://assets.vlaanderen.be/image/upload/v1673882644/Handleiding_Gebruikersbeheer_Vlaamse_Overheid_MOPRO_xqkhpx.pdf" target="_blank" rel="noopener noreferrer">
+                  Bekijk hier het stappenplan voor Gebruikersbeheer.
+                </a>
+              </li>
+            </ul>
+          </AuContent>
+        </div>
+      </section>
+    </main>
+
+    <AuMainFooter>
+      <FooterHeading />
+      <AuContent @skin="small">
+        <p>Uitgegeven door
+          <a class="au-c-link"
+            href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap
+            Binnenlands Bestuur</a>
+        </p>
+        <ul class="au-c-list-horizontal">
+          <li class="au-c-list-horizontal__item">
+            <AuLink @route="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
+          </li>
+          <li class="au-c-list-horizontal__item">
+            <AuLink @route="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
+          </li>
+          <li class="au-c-list-horizontal__item">
+            <AuLink @route="legaal.toegankelijkheidsverklaring" @skin="secondary">Toegankelijkheid</AuLink>
+          </li>
+        </ul>
+      </AuContent>
+    </AuMainFooter>
+
+  </div>
+</div>
