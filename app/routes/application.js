@@ -22,7 +22,17 @@ export default class ApplicationRoute extends Route {
 
     this.startAnalytics();
 
-    return this._loadCurrentSession();
+    await this._loadCurrentSession();
+
+    // Check if user has required role
+    if (this.session.isAuthenticated) {
+      const hasRequiredRole = this.currentSession.roles.includes("SubsidiepuntGebruiker");
+
+      if (!hasRequiredRole) {
+        this.router.transitionTo('geen-toegang');
+        return;
+      }
+    }
   }
 
   startAnalytics() {
