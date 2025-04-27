@@ -42,4 +42,5 @@ Router.map(function () {
   this.route('route-not-found', {
     path: '/*wildcard',
   });
+  this.route('geen-toegang');
 });

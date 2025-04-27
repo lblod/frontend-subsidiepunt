@@ -22,7 +22,7 @@ export default class ApplicationRoute extends Route {
 
     this.startAnalytics();
 
-    return this._loadCurrentSession();
+    await this._loadCurrentSession();
   }
 
   startAnalytics() {
