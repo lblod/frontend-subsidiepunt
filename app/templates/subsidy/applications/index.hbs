@@ -31,7 +31,7 @@
     <c.header>
       <AuDataTableThSortable @field="subsidyMeasureOffer.title" @currentSorting={{this.sort}}
                              @label="Subsidiemaatregel"/>
-      <AuDataTableThSortable @field="subsidyApplicationFlow.subsidyMeasureOfferSeries.title"
+      <AuDataTableThSortable @field="subsidyApplicationFlow.subsidyMeasureOfferSeries.title,subsidyApplicationFlow.subsidyMeasureOfferSeries.description"
                              @currentSorting={{this.sort}} @label="Periode"/>
       <AuDataTableThSortable
               @class="au-u-visible-small-up"
