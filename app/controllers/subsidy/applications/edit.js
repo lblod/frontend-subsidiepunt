@@ -33,7 +33,7 @@ export default class SubsidyApplicationsEditController extends Controller {
   }
 
   get organization() {
-    return this.participations.firstObject.participatingOrganization;
+    return this.participations?.firstObject?.participatingOrganization;
   }
 
   get canDelete() {
