@@ -282,7 +282,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
 
   async updateModified(model) {
     model.modified = new Date();
-    model.lastModified = this.currentSession.user;
+    model.lastModifier = this.currentSession.user;
     await model.save();
   }
 
