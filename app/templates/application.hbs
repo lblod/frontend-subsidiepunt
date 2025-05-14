@@ -4,19 +4,25 @@
   <GlobalSystemNotification />
   <AuMainHeader @brandLink={{unless this.session.isAuthenticated "https://www.vlaanderen.be/nl" }} @homeRoute="index"
     @appTitle={{this.appTitle}}>
-    <ul class="au-c-list-horizontal">
       <li class="au-c-list-horizontal__item au-u-hide-on-print">
         <AuLinkExternal href="https://abb-vlaanderen.gitbook.io/handleiding-loket/veelgestelde-vragen" @skin="secondary"
           @icon="question-circle">
           Help
         </AuLinkExternal>
       </li>
+    {{#if this.currentSession.isAdmin}}
       <li class="au-c-list-horizontal__item">
-        {{#if this.session.isAuthenticated}}
-        {{! template-lint-disable require-context-role }}
+        <ImpersonationMenu />
+      </li>
+    {{/if}}
+    <li class="au-c-list-horizontal__item">
+      {{#if this.session.isAuthenticated}}
         <AuDropdown
-          @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.groupClassification.label}} {{this.currentSession.group.naam}}"
-          @buttonLabel="Account settings" @alignment="right" class="logged-in-user">
+          @title={{this.userInfo}}
+          @buttonLabel="Account settings"
+          @alignment="right"
+          role="menu"
+        >
           <AuLink @route="auth.switch" @icon="switch" role="menuitem">
             Wissel van organisatie
           </AuLink>
@@ -25,12 +31,10 @@
             Afmelden
           </AuLink>
         </AuDropdown>
-        {{! template-lint-enable require-context-role }}
-        {{else}}
+      {{else}}
         <LoginButton @isCompact={{true}} />
-        {{/if}}
-      </li>
-    </ul>
+      {{/if}}
+    </li>
   </AuMainHeader>
 
   {{#if this.session.isAuthenticated}}

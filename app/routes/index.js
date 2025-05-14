@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default class IndexRoute extends Route {
   @service router;
+  @service currentSession;
 
   beforeModel() {
     this.router.transitionTo('subsidy.applications');

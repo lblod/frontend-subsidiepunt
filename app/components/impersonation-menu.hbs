@@ -1,0 +1,34 @@
+ <div class="au-u-flex au-u-flex--vertical-center">
+  {{#if this.isImpersonating}}
+    <AuPill @icon="user" @skin="error">{{this.adminLabel}}</AuPill>
+  {{else}}
+    <AuPill @icon="user">{{this.adminLabel}}</AuPill>
+  {{/if}}
+  <AuDropdown
+    @title="Simulatie opties"
+    @hideText={{true}}
+    @alignment="right"
+    @icon="circle-three-dots"
+    class="au-u-margin-left-tiny"
+    role="menu"
+  >
+    {{#if this.isImpersonating}}
+      <AuLink @route="impersonate" role="menuitem">
+        Simuleer een andere organisatie
+      </AuLink>
+
+      <AuButton
+        @skin="link"
+      
+        role="menuitem"
+        {{on "click" this.stopImpersonation}}
+      >
+        Simulatie stopzetten
+      </AuButton>
+    {{else}}
+      <AuLink @route="impersonate" role="menuitem">
+        Simuleer een organisatie
+      </AuLink>
+    {{/if}}
+  </AuDropdown>
+</div>
