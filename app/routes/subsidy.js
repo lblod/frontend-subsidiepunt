@@ -11,7 +11,6 @@ export default class SubsidyRoute extends Route {
 
     // Check if user has required role
     if (this.session.isAuthenticated) {
-      const hasRequiredRole = this.currentSession.roles.includes("SubsidiepuntGebruiker");
       const hasRequiredRole = this.currentSession.roles.includes(
         'SubsidiepuntGebruiker',
       ) || this.currentSession.roles.includes(
