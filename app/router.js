@@ -43,4 +43,5 @@ Router.map(function () {
     path: '/*wildcard',
   });
   this.route('geen-toegang');
+  this.route('impersonate');
 });
