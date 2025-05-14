@@ -1,11 +1,14 @@
  <div class="au-u-flex au-u-flex--vertical-center">
-  <AuPill @icon="user">{{this.adminLabel}}</AuPill>
-
+  {{#if this.isImpersonating}}
+    <AuPill @icon="user" @skin="error">{{this.adminLabel}}</AuPill>
+  {{else}}
+    <AuPill @icon="user">{{this.adminLabel}}</AuPill>
+  {{/if}}
   <AuDropdown
     @title="Simulatie opties"
     @hideText={{true}}
     @alignment="right"
-    @icon={{this.icon}}
+    @icon="circle-three-dots"
     class="au-u-margin-left-tiny"
     role="menu"
   >

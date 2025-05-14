@@ -9,10 +9,6 @@ export default class ImpersonationMenu extends Component {
     return this.impersonation.isImpersonating;
   }
 
-  get icon() {
-    return this.isImpersonating ? "circle-pause" : "user";
-  }
-
   get user() {
     if (!this.isImpersonating) {
       return null;
