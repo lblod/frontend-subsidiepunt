@@ -8,7 +8,9 @@ export default class GeenToegangRoute extends Route {
 
   beforeModel(transition) {
     this.session.requireAuthentication(transition, 'login');
-    const hasSubsidiepuntGebruikerRole = this.currentSession.roles.includes("SubsidiepuntGebruiker");
+    const hasSubsidiepuntGebruikerRole = this.currentSession.roles.includes(
+      'SubsidiepuntGebruiker'
+    );
 
     if (hasSubsidiepuntGebruikerRole) {
       this.router.transitionTo('subsidy.applications');

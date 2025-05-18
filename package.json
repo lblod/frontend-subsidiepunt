@@ -23,6 +23,8 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "lint:format": "prettier --check --cache \"./**/*.js\"",
+    "lint:format:fix": "prettier --write --cache \"./**/*.js\"",
     "lint:dependencies": "npx ember dependency-lint",
     "release": "release-it",
     "start": "ember serve",
