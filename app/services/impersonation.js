@@ -15,11 +15,9 @@ export default class ImpersonationService extends Service {
   async load() {
     try {
       const response = await fetch('/impersonations/current');
-      console.log('Load response:', response);
 
       if (response.ok) {
         const result = await response.json();
-        console.log('Load result:', result);
 
         const originalAccountId =
           result.data.relationships['original-account'].data.id;
@@ -33,9 +31,6 @@ export default class ImpersonationService extends Service {
             reload: true,
           }),
         ]);
-
-        console.log('Original Account:', originalAccount);
-        console.log('Original Group:', originalGroup);
 
         this.originalAccount = originalAccount;
         this.originalGroup = originalGroup;
@@ -71,8 +66,6 @@ export default class ImpersonationService extends Service {
         }),
       });
 
-      console.log('Impersonate response:', response);
-
       if (!response.ok) {
         const result = await response.json();
         console.error('Impersonate error:', result.errors);
@@ -92,8 +85,6 @@ export default class ImpersonationService extends Service {
         const response = await fetch('/impersonations/current', {
           method: 'DELETE',
         });
-
-        console.log('Stop impersonation response:', response);
 
         if (response.ok) {
           this.originalAccount = null;
