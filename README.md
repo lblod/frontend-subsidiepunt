@@ -6,13 +6,18 @@ Frontend of the subsidiepunt application
 
 The [ember-proxy-service](https://github.com/mu-semtech/ember-proxy-service#configure-environment-variables-in-the-frontends-container) docker image (which we use to host the frontend) supports configuring environment variables. The following options are available.
 
-### General
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/) (with npm)
+- [Ember CLI](https://cli.emberjs.com/release/)
+- [Google Chrome](https://google.com/chrome/)
 
 | Name                                       | Description                                                                             |
 | ------------------------------------------ | --------------------------------------------------------------------------------------- |
 | `EMBER_GLOBAL_SYSTEM_NOTIFICATION`         | This can be used to display a message at the top of the application. HTML is supported. |
 
-### ACM/IDM
+- `git clone <repository-url>` this repository
+- `cd frontend-subsidiepunt`
+- `npm install`
 
 | Name                               | Description                                                                                                                                              |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -22,7 +27,9 @@ The [ember-proxy-service](https://github.com/mu-semtech/ember-proxy-service#conf
 | `EMBER_ACMIDM_LOGOUT_URL`          | The URL where users will be redirected to when they want to log out                                                                                      |
 | `EMBER_ACMIDM_SWITCH_REDIRECT_URL` | The URL that will be used when "switching users" is enabled in ACM/IDM. After logout, users can select one of their other accounts to simplify the flow. |
 
-> When ACM/IDM is not configured, the frontend will default to the "mock login" setup instead.
+- `npm run start`
+- Visit your app at [http://localhost:4200](http://localhost:4200).
+- Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
 ### Feature flags
 
@@ -30,21 +37,21 @@ Feature flags are new / experimental features that can be enabled by setting the
 
 > There are no feature flags available right now.
 
-### Plausible
+- `npm run test`
+- `npm run test:ember -- --server`
 
 | Name                         | Description                                                                      |
 | ---------------------------- | -------------------------------------------------------------------------------- |
 | `EMBER_ANALYTICS_API_HOST`   | The URL of the Plausible host to which all events will be sent                   |
 | `EMBER_ANALYTICS_APP_DOMAIN` | The app domain which will be used to group the events in the Plausible dashboard |
 
-> Analytics will only be enabled when both variables are configured.
+- `npm run lint`
+- `npm run lint:fix`
 
 ### Sentry
 
-| Name                       | Description                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `EMBER_SENTRY_DSN`         | Sentry DSN. Setting this activates the sentry integration.                                      |
-| `EMBER_SENTRY_ENVIRONMENT` | The name of the environment under which the errors should be reported. Defaults to 'production' |
+- `npm exec ember build` (development)
+- `npm run build` (production)
 
 ## Releasing a new version
 
@@ -53,7 +60,11 @@ We use [`release-it`](https://github.com/release-it/release-it) to handle our re
 ### Generating the changelog (optional)
 At the moment the changelog is updated manually. To make this a bit easier you can generate a basic changelog based on the merged PRs with [`lerna-changelog`](https://github.com/lerna/lerna-changelog) by  adding the correct labels and updating the PR titles.
 
-> `lerna-changelog` requires a Github [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to work properly.
+- [ember.js](https://emberjs.com/)
+- [ember-cli](https://cli.emberjs.com/release/)
+- Development Browser Extensions
+  - [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
+  - [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
 
 The following command can  be used to generate the changelog:
 
