@@ -36,7 +36,10 @@ export default class ImpersonationService extends Service {
         this.originalGroup = originalGroup;
         this.originalRoles = result.data.attributes['original-session-roles'];
       } else {
-        console.error('Failed to load impersonation data:', response.statusText);
+        console.error(
+          'Failed to load impersonation data:',
+          response.statusText
+        );
       }
     } catch (error) {
       console.error('Error loading impersonation data:', error);

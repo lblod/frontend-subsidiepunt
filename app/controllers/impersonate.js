@@ -44,6 +44,5 @@ export default class ImpersonateController extends Controller {
   impersonateAccount = task(async (accountId) => {
     await this.impersonation.impersonate(accountId);
     window.location.replace(this.router.urlFor('subsidy.applications'));
-
   });
 }
