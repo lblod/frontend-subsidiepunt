@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 import { keepLatestTask, timeout } from 'ember-concurrency';
 import { literal, NamedNode } from 'rdflib';
 import { XSD } from 'frontend-subsidiepunt/rdf/namespaces';
+/* eslint-disable ember/no-runloop */
 import { scheduleOnce } from '@ember/runloop';
 
 const subsidyBaseUri = 'http://lblod.data.gift/vocabularies/subsidie/ukraine/';
@@ -15,7 +16,7 @@ const sharedInvoicePredicate = new NamedNode(`${subsidyBaseUri}sharedInvoice`);
 const filesPredicate = new NamedNode(`${subsidyBaseUri}hasFiles`);
 
 const hasInvalidRowPredicate = new NamedNode(
-  `${subsidyBaseUri}hasInvalidAccountabilityTableEntry`
+  `${subsidyBaseUri}hasInvalidAccountabilityTableEntry`,
 );
 
 class FileField {
@@ -83,26 +84,26 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
       this.tableEntrySubject,
       undefined,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     const fileEntryProperties = this.storeOptions.store.match(
       this.tableEntrySubject,
       filesPredicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.address = this.findEntry(entryProperties, addressPredicate, '');
     this.bedroomCount = this.findEntry(
       entryProperties,
       bedroomCountPredicate,
-      0
+      0,
     );
     this.sharedInvoice = this.findEntry(
       entryProperties,
       sharedInvoicePredicate,
-      ''
+      '',
     );
     this.files = await this.parseFileEntry(fileEntryProperties);
   }
@@ -139,7 +140,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
         });
     } catch (error) {
       console.log(
-        `Failed to retrieve file with URI ${uri}: ${JSON.stringify(error)}`
+        `Failed to retrieve file with URI ${uri}: ${JSON.stringify(error)}`,
       );
       return new FileField({
         record: null,
@@ -160,7 +161,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
       subject,
       predicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.storeOptions.store.removeStatements([...triples]);
@@ -196,7 +197,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
         new FileField({
           record: null,
           errors: ['Geen bestand gevonden'],
-        })
+        }),
       );
     }
   }
@@ -221,7 +222,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
       this.tableEntrySubject,
       undefined,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.storeOptions.store.removeStatements(propertyTriples);
@@ -281,7 +282,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
     this.updateTripleObject(
       this.tableEntrySubject,
       addressPredicate,
-      literal(this.address, XSD('string'))
+      literal(this.address, XSD('string')),
     );
   }
 
@@ -303,7 +304,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
     this.updateTripleObject(
       this.tableEntrySubject,
       bedroomCountPredicate,
-      literal(this.bedroomCount, XSD('integer'))
+      literal(this.bedroomCount, XSD('integer')),
     );
   }
 
@@ -318,7 +319,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
     this.updateTripleObject(
       this.tableEntrySubject,
       sharedInvoicePredicate,
-      literal(this.sharedInvoice, XSD('string'))
+      literal(this.sharedInvoice, XSD('string')),
     );
   }
 

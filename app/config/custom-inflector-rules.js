@@ -35,20 +35,20 @@ inflector.irregular('remote-url', 'remote-urls');
 inflector.irregular('subsidy-application-form', 'subsidy-application-forms');
 inflector.irregular(
   'submission-document-status',
-  'submission-document-statuses'
+  'submission-document-statuses',
 );
 inflector.irregular('participation', 'participations');
 inflector.irregular('organization', 'organizations');
 inflector.irregular('period-of-time', 'periods-of-time');
 inflector.irregular(
   'subsidy-measure-consumption',
-  'subsidy-measure-consumptions'
+  'subsidy-measure-consumptions',
 );
 inflector.irregular(
   'subsidy-application-flow-step',
-  'subsidy-application-flow-steps'
+  'subsidy-application-flow-steps',
 );
 inflector.irregular(
   'subsidy-measure-consumption-status',
-  'subsidy-measure-consumption-statuses'
+  'subsidy-measure-consumption-statuses',
 );

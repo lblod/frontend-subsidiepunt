@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+/* eslint-disable ember/no-runloop */
 import { schedule } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -12,30 +13,30 @@ const bicycleInfrastructureUri =
 const resourceInstanceBaseUri =
   'http://lblod.data.gift/id/subsidie/bicycle-infrastructure';
 const objectiveEntryPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}objectiveEntry`
+  `${bicycleInfrastructureUri}objectiveEntry`,
 );
 const ObjectiveEntryType = new NamedNode(
-  `${bicycleInfrastructureUri}ObjectiveEntry`
+  `${bicycleInfrastructureUri}ObjectiveEntry`,
 );
 
 const objectiveTablePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}objectiveTable`
+  `${bicycleInfrastructureUri}objectiveTable`,
 );
 const approachTypePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}approachType`
+  `${bicycleInfrastructureUri}approachType`,
 );
 const directionTypePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}directionType`
+  `${bicycleInfrastructureUri}directionType`,
 );
 const bikeLaneTypePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}bikeLaneType`
+  `${bicycleInfrastructureUri}bikeLaneType`,
 );
 const kilometersPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}kilometers`
+  `${bicycleInfrastructureUri}kilometers`,
 );
 
 const hasInvalidCellPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}/hasInvalidObjectiveTableEntry`
+  `${bicycleInfrastructureUri}/hasInvalidObjectiveTableEntry`,
 );
 
 export default class RdfFormFieldsObjectiveTableTableCellComponent extends Component {
@@ -52,7 +53,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.storeOptions.sourceNode,
       objectiveTablePredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     return new NamedNode(triple[0].object.value);
   }
@@ -96,7 +97,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.objectiveTableSubject,
       objectiveEntryPredicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     const entriesWithDetails = [];
 
@@ -106,7 +107,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
         element.object,
         undefined,
         undefined,
-        this.storeOptions.sourceGraph
+        this.storeOptions.sourceGraph,
       );
       if (result.length > 0) {
         entriesWithDetails.push(result);
@@ -152,7 +153,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.tableEntryUri,
       kilometersPredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     this.kilometers = kilometersTriple[0].object.value;
   }
@@ -220,7 +221,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.tableEntryUri,
       kilometersPredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     )[0].object.value;
   }
 
@@ -229,7 +230,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       subject,
       predicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     this.storeOptions.store.removeStatements([...triples]);
 
@@ -257,13 +258,13 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.updateTripleObject(
         this.objectiveTableSubject,
         hasInvalidCellPredicate,
-        true
+        true,
       );
     } else {
       this.updateTripleObject(
         this.objectiveTableSubject,
         hasInvalidCellPredicate,
-        null
+        null,
       );
     }
 
@@ -273,7 +274,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.updateTripleObject(
         this.tableEntryUri,
         kilometersPredicate,
-        literal(parsedAmount)
+        literal(parsedAmount),
       );
     }
 

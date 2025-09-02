@@ -31,7 +31,7 @@
         <AuButton @skin="link" role="menuitem" {{on "click" this.exportSubsidyAsPDF}}>
           Download huidige stap (PDF)
         </AuButton>
-        <AuButton @skin="link" role="menuitem" @disabled={{(lt this.downloadLinks.length  1)}} {{on "click" this.downloadBijlagen}}>
+        <AuButton @skin="link" role="menuitem" @disabled={{lt this.downloadLinks.length 1}} {{on "click" this.downloadBijlagen}}>
           Alle bijlagen downloaden in .zip
         </AuButton>
       </AuDropdown>

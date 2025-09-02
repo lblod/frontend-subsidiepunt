@@ -94,7 +94,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
   // for old fusie accounts; they can only submit e-inclusie subsidies
   get oldFusieAccountsCheck() {
     return isOldFusieAccount(
-      this.session.data.authenticated.relationships.group.data.id
+      this.session.data.authenticated.relationships.group.data.id,
     )
       ? this.consumption.subsidyMeasureOffer.get('id') ===
           '0b5cae58-97fb-4982-9fb7-4cf660f003df'
@@ -209,10 +209,10 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
         body: JSON.stringify({
           ...this.formStore.serializeDataWithAddAndDelGraph(
             this.graphs.sourceGraph,
-            'application/n-triples'
+            'application/n-triples',
           ),
         }),
-      }
+      },
     );
     // Since the sources of the application form will be set/updated by the backend
     // and not via ember-data, we need to manually reload the application form record
@@ -237,7 +237,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/vnd.api+json' },
-      }
+      },
     );
     // Since the sent date and sent status of the application form will be set by the backend
     // and not via ember-data, we need to manually reload the application form record
@@ -254,7 +254,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     if (active && this.step.id !== active.get('id')) {
       this.router.transitionTo(
         'subsidy.applications.edit',
-        this.consumption.id
+        this.consumption.id,
       );
     }
   }

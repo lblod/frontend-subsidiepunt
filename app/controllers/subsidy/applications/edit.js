@@ -16,10 +16,10 @@ export default class SubsidyApplicationsEditController extends Controller {
   get reeksHasStartOrEnd() {
     return (
       this.consumption.get(
-        'subsidyApplicationFlow.subsidyMeasureOfferSeries.period.begin'
+        'subsidyApplicationFlow.subsidyMeasureOfferSeries.period.begin',
       ) ||
       this.consumption.get(
-        'subsidyApplicationFlow.subsidyMeasureOfferSeries.period.end'
+        'subsidyApplicationFlow.subsidyMeasureOfferSeries.period.end',
       )
     );
   }
@@ -54,7 +54,7 @@ export default class SubsidyApplicationsEditController extends Controller {
       () => {
         document.title = previousDocumentTitle;
       },
-      { once: true }
+      { once: true },
     );
     window.print();
   }
@@ -62,7 +62,7 @@ export default class SubsidyApplicationsEditController extends Controller {
   async prepareTextareasForPrinting() {
     // Remove any previously created print divs
     const existingPrintDivs = document.querySelectorAll(
-      '.textarea.display-on-print'
+      '.textarea.display-on-print',
     );
     existingPrintDivs.forEach((div) => div.remove());
 
@@ -88,7 +88,7 @@ export default class SubsidyApplicationsEditController extends Controller {
   async collectDownloadLinks() {
     // Get all attachments based on the data-test-file-card-download attribute
     let elements = document.querySelectorAll(
-      '[data-test-file-card-download=""]'
+      '[data-test-file-card-download=""]',
     );
     this.downloadLinks = Array.from(elements).map((link) => ({
       url: link.href,
@@ -107,12 +107,12 @@ export default class SubsidyApplicationsEditController extends Controller {
       currentStepID,
       {
         include: 'subsidy-procedural-step',
-      }
+      },
     );
 
     // Check if the current step has been submitted
-    const activeSubsidyStep = await this.consumption
-      .activeSubsidyApplicationFlowStep;
+    const activeSubsidyStep =
+      await this.consumption.activeSubsidyApplicationFlowStep;
     const activeSubsidyStepOrder = activeSubsidyStep?.order;
     const currentStepOrder = currentStep.order;
 
@@ -146,7 +146,7 @@ export default class SubsidyApplicationsEditController extends Controller {
           name: link.name,
           input: await response.blob(),
         };
-      })
+      }),
     );
 
     const filename = `${await this.createFilename()}.zip`;
@@ -175,7 +175,7 @@ export default class SubsidyApplicationsEditController extends Controller {
 
       const participations = yield this.consumption.participations;
       yield Promise.all(
-        participations.map((participation) => participation.destroyRecord())
+        participations.map((participation) => participation.destroyRecord()),
       );
 
       // We intentionally don't use 'destroyRecord` here since that calls unloadRecord before the
