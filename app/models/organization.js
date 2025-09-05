@@ -17,6 +17,7 @@ export default class OrganizationModel extends Model {
   classificatie;
 
   @hasMany('participation', {
+    as: 'organization',
     async: true,
     polymorphic: true,
     inverse: 'participatingOrganization',
