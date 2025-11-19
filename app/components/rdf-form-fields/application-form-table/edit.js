@@ -1,4 +1,5 @@
 import InputFieldComponent from '@lblod/ember-submission-form-fields/components/rdf-input-fields/input-field';
+import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { triplesForPath } from '@lblod/submission-form-helpers';
@@ -60,13 +61,12 @@ const inputFieldNames = [
 class EntryProperties {
   @tracked value;
   @tracked oldValue;
-  @tracked errors = [];
+  @tracked errors = A();
 
   constructor(value, predicate) {
     this.value = value;
     this.oldValue = value;
     this.predicate = predicate;
-    this.errors = [];
   }
 }
 
@@ -114,7 +114,7 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
 
   @tracked usedParentalContribution;
   @tracked applicationFormTableSubject = null;
-  @tracked entries = [];
+  @tracked entries = A();
   @tracked totalAmount = 0;
 
   constructor() {
@@ -486,7 +486,7 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
       entry.actorName.value = event.target.value;
     }
 
-    entry.actorName.errors = [];
+    entry.actorName.errors = A();
     this.updateFieldValueTriple(entry, 'actorName');
     if (this.isEmpty(entry.actorName.value)) {
       entry.actorName.errors.pushObject({
@@ -503,7 +503,7 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
       entry.numberChildrenForFullDay.value = event.target.value;
     }
 
-    entry.numberChildrenForFullDay.errors = [];
+    entry.numberChildrenForFullDay.errors = A();
     const parsedValue = parseInt(entry.numberChildrenForFullDay.value);
     entry.numberChildrenForFullDay.value = !isNaN(parsedValue)
       ? parsedValue
@@ -532,7 +532,7 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
       entry.numberChildrenForHalfDay.value = event.target.value;
     }
 
-    entry.numberChildrenForHalfDay.errors = [];
+    entry.numberChildrenForHalfDay.errors = A();
     const parsedValue = parseInt(entry.numberChildrenForHalfDay.value);
     entry.numberChildrenForHalfDay.value = !isNaN(parsedValue)
       ? parsedValue
@@ -561,7 +561,7 @@ export default class RdfFormFieldsApplicationFormTableEditComponent extends Inpu
       entry.numberChildrenPerInfrastructure.value = event.target.value;
     }
 
-    entry.numberChildrenPerInfrastructure.errors = [];
+    entry.numberChildrenPerInfrastructure.errors = A();
     const parsedValue = parseInt(entry.numberChildrenPerInfrastructure.value);
     entry.numberChildrenPerInfrastructure.value = !isNaN(parsedValue)
       ? parsedValue

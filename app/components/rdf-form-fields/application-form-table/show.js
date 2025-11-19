@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { triplesForPath } from '@lblod/submission-form-helpers';
 import { NamedNode } from 'rdflib';
 import { LBLOD_SUBSIDIE } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 const extBaseUri = 'http://mu.semte.ch/vocabularies/ext/';
 
@@ -101,7 +102,7 @@ export default class RdfFormFieldsApplicationFormTableShowComponent extends Inpu
   loadProvidedValue() {
     const matches = triplesForPath(this.storeOptions);
     const triples = matches.triples;
-    const entries = [];
+    const entries = A();
 
     if (triples.length) {
       this.applicationFormTableSubject = triples[0].object; // assuming only one per form

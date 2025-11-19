@@ -4,6 +4,7 @@ import { triplesForPath } from '@lblod/submission-form-helpers';
 /* eslint-disable ember/no-runloop */
 import { next } from '@ember/runloop';
 import { NamedNode } from 'rdflib';
+import { A } from '@ember/array';
 
 const extBaseUri = 'http://mu.semte.ch/vocabularies/ext/';
 const engagementEntryPredicate = new NamedNode(`${extBaseUri}engagementEntry`);
@@ -50,7 +51,7 @@ class EngagementEntry {
 
 export default class RdfFormFieldsEngagementTableShowComponent extends InputFieldComponent {
   @tracked engagementTableSubject = null;
-  @tracked entries = [];
+  @tracked entries = A();
 
   constructor() {
     super(...arguments);

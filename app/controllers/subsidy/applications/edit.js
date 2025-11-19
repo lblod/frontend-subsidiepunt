@@ -29,11 +29,14 @@ export default class SubsidyApplicationsEditController extends Controller {
   }
 
   get participations() {
-    return this.model.consumption.participations;
+    return this.model.consumption.hasMany('participations').value();
   }
 
   get organization() {
-    return this.participations?.firstObject?.participatingOrganization;
+    return this.participations
+      ?.at?.(0)
+      ?.belongsTo('participatingOrganization')
+      .value();
   }
 
   get canDelete() {

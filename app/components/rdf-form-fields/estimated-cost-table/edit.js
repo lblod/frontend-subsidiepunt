@@ -19,6 +19,7 @@ import {
   validEstimatedCostTable,
 } from './base-table';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 import commasToDecimalPointsFix from 'frontend-subsidiepunt/utils/subsidies-decimal-point';
 
@@ -59,7 +60,7 @@ const aanvraagRows = [
 ];
 
 export default class RdfFormFieldsEstimatedCostTableEditComponent extends BaseTable {
-  @tracked errors = [];
+  @tracked errors = A();
 
   constructor() {
     super(...arguments);
@@ -126,7 +127,7 @@ export default class RdfFormFieldsEstimatedCostTableEditComponent extends BaseTa
   }
 
   createEntries() {
-    let entries = [];
+    let entries = A();
     const estimatedCostEntriesDetails = this.createEstimatedCostEntries();
     estimatedCostEntriesDetails.forEach((detail) => {
       const newEntry = new EstimatedCostEntry({
@@ -249,7 +250,7 @@ export default class RdfFormFieldsEstimatedCostTableEditComponent extends BaseTa
   }
 
   validate() {
-    this.errors = [];
+    this.errors = A();
     const entries = this.storeOptions.store.match(
       undefined,
       costPredicate,
@@ -301,7 +302,7 @@ export default class RdfFormFieldsEstimatedCostTableEditComponent extends BaseTa
       entry.cost.value = event.target.value;
     }
 
-    entry.cost.errors = [];
+    entry.cost.errors = A();
 
     if (!this.isPositiveInteger(entry.cost.value)) {
       entry.cost.errors.pushObject({
@@ -351,7 +352,7 @@ export default class RdfFormFieldsEstimatedCostTableEditComponent extends BaseTa
       entry.share.value = event.target.value;
     }
 
-    entry.share.errors = [];
+    entry.share.errors = A();
     entry['share'].value = commasToDecimalPointsFix(entry['share'].value);
     if (this.isEmpty(entry.share.value)) {
       entry.share.errors.pushObject({

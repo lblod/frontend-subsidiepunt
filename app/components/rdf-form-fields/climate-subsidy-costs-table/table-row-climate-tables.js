@@ -212,7 +212,7 @@ export default class RdfFormFieldsClimateSubsidyCostsTableTableRowClimateTablesC
   }
 
   validateToRealiseUnits(toRealiseUnits) {
-    this.toRealiseUnitsErrors = [];
+    this.toRealiseUnitsErrors = A();
 
     if (!this.isPositiveInteger(toRealiseUnits)) {
       this.toRealiseUnitsErrors.pushObject({

@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 /* eslint-disable ember/no-runloop */
 import { scheduleOnce } from '@ember/runloop';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 const bicycleInfrastructureUri =
   'http://lblod.data.gift/vocabularies/subsidie/bicycle-infrastructure#';
@@ -31,7 +32,7 @@ const validObjectiveTable = new NamedNode(
 
 export default class RdfFormFieldsObjectiveTableEditComponent extends InputFieldComponent {
   @tracked objectiveTableSubject = null;
-  @tracked errors = [];
+  @tracked errors = A();
 
   get hasObjectiveTable() {
     return (
@@ -131,7 +132,7 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
 
   @action
   validate() {
-    this.errors = [];
+    this.errors = A();
 
     const invalidRow = this.storeOptions.store.any(
       this.objectiveTableSubject,

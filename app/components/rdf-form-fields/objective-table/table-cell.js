@@ -7,6 +7,7 @@ import { literal, NamedNode } from 'rdflib';
 import { v4 as uuidv4 } from 'uuid';
 import commasToDecimalPointsFix from 'frontend-subsidiepunt/utils/subsidies-decimal-point';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 const bicycleInfrastructureUri =
   'http://lblod.data.gift/vocabularies/subsidie/bicycle-infrastructure#';
@@ -41,7 +42,7 @@ const hasInvalidCellPredicate = new NamedNode(
 
 export default class RdfFormFieldsObjectiveTableTableCellComponent extends Component {
   @tracked tableEntryUri = null;
-  @tracked errors = [];
+  @tracked errors = A();
   @tracked kilometers = null;
 
   get storeOptions() {
@@ -248,7 +249,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
 
   @action
   update(e) {
-    this.errors = [];
+    this.errors = A();
     if (e && typeof e.preventDefault === 'function') e.preventDefault();
 
     if (!this.isPositiveInteger(this.kilometers)) {

@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 /* eslint-disable ember/no-runloop */
 import { next } from '@ember/runloop';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 const engagementTableBaseUri = 'http://data.lblod.info/engagement-tables';
 const engagementEntryBaseUri = 'http://data.lblod.info/engagement-entries';
@@ -38,7 +39,7 @@ class EntryProperties {
   constructor(value, predicate) {
     this.value = value;
     this.predicate = predicate;
-    this.errors = [];
+    this.errors = A();
   }
 }
 
@@ -66,7 +67,7 @@ class EngagementEntry {
 
 export default class RdfFormFieldsEngagementTableEditComponent extends InputFieldComponent {
   @tracked engagementTableSubject = null;
-  @tracked entries = [];
+  @tracked entries = A();
 
   constructor() {
     super(...arguments);
@@ -200,7 +201,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
   }
 
   createEntries() {
-    let entries = [];
+    let entries = A();
     const engagementEntrySubject = this.createEngagementEntry();
 
     const newEntry = new EngagementEntry({
@@ -276,7 +277,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
       entry.existingStaff.value = event.target.value;
     }
 
-    entry.existingStaff.errors = [];
+    entry.existingStaff.errors = A();
     const parsedValue = Number(entry.existingStaff.value);
     entry.existingStaff.value = !isNaN(parsedValue)
       ? parsedValue
@@ -302,7 +303,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
       entry.additionalStaff.value = event.target.value;
     }
 
-    entry.additionalStaff.errors = [];
+    entry.additionalStaff.errors = A();
     const parsedValue = Number(entry.additionalStaff.value);
     entry.additionalStaff.value = !isNaN(parsedValue)
       ? parsedValue
@@ -329,7 +330,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
       entry.volunteers.value = event.target.value;
     }
 
-    entry.volunteers.errors = [];
+    entry.volunteers.errors = A();
     const parsedValue = Number(entry.volunteers.value);
     entry.volunteers.value = !isNaN(parsedValue)
       ? parsedValue

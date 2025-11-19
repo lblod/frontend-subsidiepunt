@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import InputFieldComponent from '@lblod/ember-submission-form-fields/components/rdf-input-fields/input-field';
 import { triplesForPath } from '@lblod/submission-form-helpers';
 import { NamedNode } from 'rdflib';
+import { A } from '@ember/array';
 
 export const estimatedCostTableBaseUri =
   'http://lblod.data.gift/id/subsidie/bicycle-infrastructure/table';
@@ -39,12 +40,11 @@ export const optionsPredicate = new NamedNode(
 
 export class EntryProperties {
   @tracked value;
-  @tracked errors = [];
+  @tracked errors = A();
 
   constructor(value, predicate) {
     this.value = value;
     this.predicate = predicate;
-    this.errors = [];
   }
 }
 
@@ -62,10 +62,10 @@ export class EstimatedCostEntry {
 
 export default class RdfFormFieldsEstimatedCostTableBaseTableComponent extends InputFieldComponent {
   @tracked estimatedCostTableSubject = null;
-  @tracked entries = [];
+  @tracked entries = A();
 
   loadEstimatedCostEntries() {
-    const estimatedCostEntries = [];
+    const estimatedCostEntries = A();
     const matches = triplesForPath(this.storeOptions);
     const triples = matches.triples;
 

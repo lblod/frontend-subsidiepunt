@@ -223,7 +223,7 @@ export default class RdfFormFieldsClimateSubsidyCostsTableTableRowBurgemeestersC
   }
 
   validateToRealiseUnits(toRealiseUnits) {
-    this.toRealiseUnitsErrors = [];
+    this.toRealiseUnitsErrors = A();
 
     if (!this.isPositiveInteger(toRealiseUnits)) {
       this.toRealiseUnitsErrors.pushObject({
@@ -267,7 +267,7 @@ export default class RdfFormFieldsClimateSubsidyCostsTableTableRowBurgemeestersC
   }
 
   validateCostPerUnit(valuePerItem) {
-    this.costPerUnitErrors = [];
+    this.costPerUnitErrors = A();
 
     if (!this.isPositiveInteger(valuePerItem)) {
       this.costPerUnitErrors.pushObject({

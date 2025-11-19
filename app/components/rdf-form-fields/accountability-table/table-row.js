@@ -7,6 +7,7 @@ import { literal, NamedNode } from 'rdflib';
 import { XSD } from 'frontend-subsidiepunt/rdf/namespaces';
 /* eslint-disable ember/no-runloop */
 import { scheduleOnce } from '@ember/runloop';
+import { A } from '@ember/array';
 
 const subsidyBaseUri = 'http://lblod.data.gift/vocabularies/subsidie/ukraine/';
 
@@ -20,7 +21,7 @@ const hasInvalidRowPredicate = new NamedNode(
 );
 
 class FileField {
-  @tracked errors = [];
+  @tracked errors = A();
 
   constructor({ record, errors }) {
     this.record = record;
@@ -235,8 +236,13 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
 
     const addresses = await this.addressregister.findAll(addressSuggestion);
     if (addresses.length == 1) return;
-    const sortedBusNumbers = addresses.sortBy('busnumber');
-    this.addressesWithBus = sortedBusNumbers;
+
+    // `.sortBy` is no longer there after disabling the prototype extensions, so this code no longer works and we just disable sorting for now.
+    // It's also no longer possible to create a new form that uses this form field, so it shouldn't affect real users.
+
+    this.addressesWithBus = addresses;
+    // const sortedBusNumbers = addresses.sortBy('busnumber');
+    // this.addressesWithBus = sortedBusNumbers;
   }
 
   @action
@@ -264,8 +270,8 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
   }
 
   validateAddress() {
-    this.addressErrors = [];
-    this.addressesWithBusErrors = [];
+    this.addressErrors = A();
+    this.addressesWithBusErrors = A();
 
     if (!this.address) {
       return this.addressErrors.pushObject({
@@ -287,7 +293,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
   }
 
   validateBedroomCount() {
-    this.bedroomCountErrors = [];
+    this.bedroomCountErrors = A();
 
     if (parseInt(this.bedroomCount) <= 0) {
       return this.bedroomCountErrors.pushObject({
@@ -309,7 +315,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
   }
 
   validateSharedInvoice() {
-    this.sharedInvoiceErrors = [];
+    this.sharedInvoiceErrors = A();
     if (!this.sharedInvoice) {
       return this.sharedInvoiceErrors.pushObject({
         message: 'Dit veld is verplicht.',
