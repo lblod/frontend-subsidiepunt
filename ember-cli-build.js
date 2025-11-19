@@ -26,7 +26,6 @@ module.exports = async function (defaults) {
     },
   });
 
-
   setConfig(app, __dirname, {
     deprecations: {
       DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false,
@@ -42,9 +41,7 @@ module.exports = async function (defaults) {
     staticModifiers: true,
     staticComponents: true,
     staticEmberSource: true,
-    splitAtRoutes: [
-      'mock-login',
-    ],
+    splitAtRoutes: ['mock-login'],
     skipBabel: [
       {
         package: 'qunit',
