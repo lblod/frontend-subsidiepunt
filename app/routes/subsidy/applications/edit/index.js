@@ -21,15 +21,14 @@ export default class SubsidyApplicationsEditIndexRoute extends Route {
     }
 
     await consumption.subsidyApplicationFlow.get('definedSteps');
-    const steps = await consumption.subsidyApplicationFlow.get(
-      'sortedDefinedSteps'
-    );
+    const steps =
+      await consumption.subsidyApplicationFlow.get('sortedDefinedSteps');
     if (!steps || steps.length === 0) throw 'corrupt flow: no steps defined';
     /**
      * NOTE: if no active-step was found and the consumption has been sent we transition to the last step.
      */
     if (consumption.get('status.isSent')) {
-      const last = steps.lastObject;
+      const last = steps.at(-1);
       return this.redirectToStep(consumption, last);
     }
 
@@ -44,7 +43,7 @@ export default class SubsidyApplicationsEditIndexRoute extends Route {
     return this.router.transitionTo(
       'subsidy.applications.edit.step',
       consumption.id,
-      step.id
+      step.id,
     );
   }
 }

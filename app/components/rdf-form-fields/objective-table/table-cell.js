@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+/* eslint-disable ember/no-runloop */
 import { schedule } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -6,41 +7,42 @@ import { literal, NamedNode } from 'rdflib';
 import { v4 as uuidv4 } from 'uuid';
 import commasToDecimalPointsFix from 'frontend-subsidiepunt/utils/subsidies-decimal-point';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 const bicycleInfrastructureUri =
   'http://lblod.data.gift/vocabularies/subsidie/bicycle-infrastructure#';
 const resourceInstanceBaseUri =
   'http://lblod.data.gift/id/subsidie/bicycle-infrastructure';
 const objectiveEntryPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}objectiveEntry`
+  `${bicycleInfrastructureUri}objectiveEntry`,
 );
 const ObjectiveEntryType = new NamedNode(
-  `${bicycleInfrastructureUri}ObjectiveEntry`
+  `${bicycleInfrastructureUri}ObjectiveEntry`,
 );
 
 const objectiveTablePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}objectiveTable`
+  `${bicycleInfrastructureUri}objectiveTable`,
 );
 const approachTypePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}approachType`
+  `${bicycleInfrastructureUri}approachType`,
 );
 const directionTypePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}directionType`
+  `${bicycleInfrastructureUri}directionType`,
 );
 const bikeLaneTypePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}bikeLaneType`
+  `${bicycleInfrastructureUri}bikeLaneType`,
 );
 const kilometersPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}kilometers`
+  `${bicycleInfrastructureUri}kilometers`,
 );
 
 const hasInvalidCellPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}/hasInvalidObjectiveTableEntry`
+  `${bicycleInfrastructureUri}/hasInvalidObjectiveTableEntry`,
 );
 
 export default class RdfFormFieldsObjectiveTableTableCellComponent extends Component {
   @tracked tableEntryUri = null;
-  @tracked errors = [];
+  @tracked errors = A();
   @tracked kilometers = null;
 
   get storeOptions() {
@@ -52,7 +54,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.storeOptions.sourceNode,
       objectiveTablePredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     return new NamedNode(triple[0].object.value);
   }
@@ -96,7 +98,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.objectiveTableSubject,
       objectiveEntryPredicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     const entriesWithDetails = [];
 
@@ -106,7 +108,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
         element.object,
         undefined,
         undefined,
-        this.storeOptions.sourceGraph
+        this.storeOptions.sourceGraph,
       );
       if (result.length > 0) {
         entriesWithDetails.push(result);
@@ -152,7 +154,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.tableEntryUri,
       kilometersPredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     this.kilometers = kilometersTriple[0].object.value;
   }
@@ -220,7 +222,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.tableEntryUri,
       kilometersPredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     )[0].object.value;
   }
 
@@ -229,7 +231,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       subject,
       predicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     this.storeOptions.store.removeStatements([...triples]);
 
@@ -247,7 +249,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
 
   @action
   update(e) {
-    this.errors = [];
+    this.errors = A();
     if (e && typeof e.preventDefault === 'function') e.preventDefault();
 
     if (!this.isPositiveInteger(this.kilometers)) {
@@ -257,13 +259,13 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.updateTripleObject(
         this.objectiveTableSubject,
         hasInvalidCellPredicate,
-        true
+        true,
       );
     } else {
       this.updateTripleObject(
         this.objectiveTableSubject,
         hasInvalidCellPredicate,
-        null
+        null,
       );
     }
 
@@ -273,7 +275,7 @@ export default class RdfFormFieldsObjectiveTableTableCellComponent extends Compo
       this.updateTripleObject(
         this.tableEntryUri,
         kilometersPredicate,
-        literal(parsedAmount)
+        literal(parsedAmount),
       );
     }
 

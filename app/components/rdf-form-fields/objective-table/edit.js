@@ -4,33 +4,35 @@ import { action } from '@ember/object';
 import { triplesForPath } from '@lblod/submission-form-helpers';
 import { NamedNode } from 'rdflib';
 import { v4 as uuidv4 } from 'uuid';
+/* eslint-disable ember/no-runloop */
 import { scheduleOnce } from '@ember/runloop';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 const bicycleInfrastructureUri =
   'http://lblod.data.gift/vocabularies/subsidie/bicycle-infrastructure#';
 const resourceInstanceBaseUri =
   'http://lblod.data.gift/id/subsidie/bicycle-infrastructure';
 const ObjectiveTableType = new NamedNode(
-  `${bicycleInfrastructureUri}ObjectiveTable`
+  `${bicycleInfrastructureUri}ObjectiveTable`,
 );
 const objectiveTablePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}objectiveTable`
+  `${bicycleInfrastructureUri}objectiveTable`,
 );
 const kilometersPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}kilometers`
+  `${bicycleInfrastructureUri}kilometers`,
 );
 
 const hasInvalidCellPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}/hasInvalidObjectiveTableEntry`
+  `${bicycleInfrastructureUri}/hasInvalidObjectiveTableEntry`,
 );
 const validObjectiveTable = new NamedNode(
-  `${bicycleInfrastructureUri}validObjectiveTable`
+  `${bicycleInfrastructureUri}validObjectiveTable`,
 );
 
 export default class RdfFormFieldsObjectiveTableEditComponent extends InputFieldComponent {
   @tracked objectiveTableSubject = null;
-  @tracked errors = [];
+  @tracked errors = A();
 
   get hasObjectiveTable() {
     return (
@@ -38,7 +40,7 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
         this.sourceNode,
         objectiveTablePredicate,
         this.objectiveTableSubject,
-        this.storeOptions.sourceGraph
+        this.storeOptions.sourceGraph,
       ).length > 0
     );
   }
@@ -70,7 +72,7 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
   createObjectiveTable() {
     const uuid = uuidv4();
     this.objectiveTableSubject = new NamedNode(
-      `${resourceInstanceBaseUri}/${uuid}`
+      `${resourceInstanceBaseUri}/${uuid}`,
     );
     const triples = [
       {
@@ -100,7 +102,7 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
       subject,
       predicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.storeOptions.store.removeStatements([...triples]);
@@ -122,7 +124,7 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
       null,
       kilometersPredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     const cellsWithValue = cells.filter((item) => item.object.value > 0);
     return cellsWithValue.length > 0;
@@ -130,13 +132,13 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
 
   @action
   validate() {
-    this.errors = [];
+    this.errors = A();
 
     const invalidRow = this.storeOptions.store.any(
       this.objectiveTableSubject,
       hasInvalidCellPredicate,
       null,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     if (!this.cellHasValue()) {
@@ -146,7 +148,7 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
       this.updateTripleObject(
         this.objectiveTableSubject,
         validObjectiveTable,
-        null
+        null,
       );
     } else if (invalidRow) {
       this.errors.pushObject({
@@ -155,13 +157,13 @@ export default class RdfFormFieldsObjectiveTableEditComponent extends InputField
       this.updateTripleObject(
         this.objectiveTableSubject,
         validObjectiveTable,
-        null
+        null,
       );
     } else {
       this.updateTripleObject(
         this.objectiveTableSubject,
         validObjectiveTable,
-        true
+        true,
       );
     }
   }

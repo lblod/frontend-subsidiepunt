@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import InputFieldComponent from '@lblod/ember-submission-form-fields/components/rdf-input-fields/input-field';
 import { triplesForPath } from '@lblod/submission-form-helpers';
 import { NamedNode } from 'rdflib';
+import { A } from '@ember/array';
 
 export const estimatedCostTableBaseUri =
   'http://lblod.data.gift/id/subsidie/bicycle-infrastructure/table';
@@ -12,39 +13,38 @@ export const extBaseUri = 'http://mu.semte.ch/vocabularies/ext/';
 export const subsidyRulesUri = 'http://data.lblod.info/id/subsidies/rules/';
 
 export const EstimatedCostTableType = new NamedNode(
-  `${bicycleInfrastructureUri}EstimatedCostTable`
+  `${bicycleInfrastructureUri}EstimatedCostTable`,
 );
 export const EstimatedCostEntryType = new NamedNode(
-  `${bicycleInfrastructureUri}EstimatedCostEntry`
+  `${bicycleInfrastructureUri}EstimatedCostEntry`,
 );
 export const estimatedCostTablePredicate = new NamedNode(
-  `${bicycleInfrastructureUri}estimatedCostTable`
+  `${bicycleInfrastructureUri}estimatedCostTable`,
 );
 export const estimatedCostEntryPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}estimatedCostEntry`
+  `${bicycleInfrastructureUri}estimatedCostEntry`,
 );
 
 export const descriptionPredicate = new NamedNode(
-  `${bicycleInfrastructureUri}costEstimationType`
+  `${bicycleInfrastructureUri}costEstimationType`,
 );
 export const costPredicate = new NamedNode(`${bicycleInfrastructureUri}cost`);
 export const sharePredicate = new NamedNode(`${bicycleInfrastructureUri}share`);
 export const indexPredicate = new NamedNode(`${extBaseUri}index`);
 export const validEstimatedCostTable = new NamedNode(
-  `${bicycleInfrastructureUri}validEstimatedCostTable`
+  `${bicycleInfrastructureUri}validEstimatedCostTable`,
 );
 export const optionsPredicate = new NamedNode(
-  'http://lblod.data.gift/vocabularies/forms/options'
+  'http://lblod.data.gift/vocabularies/forms/options',
 );
 
 export class EntryProperties {
   @tracked value;
-  @tracked errors = [];
+  @tracked errors = A();
 
   constructor(value, predicate) {
     this.value = value;
     this.predicate = predicate;
-    this.errors = [];
   }
 }
 
@@ -62,10 +62,10 @@ export class EstimatedCostEntry {
 
 export default class RdfFormFieldsEstimatedCostTableBaseTableComponent extends InputFieldComponent {
   @tracked estimatedCostTableSubject = null;
-  @tracked entries = [];
+  @tracked entries = A();
 
   loadEstimatedCostEntries() {
-    const estimatedCostEntries = [];
+    const estimatedCostEntries = A();
     const matches = triplesForPath(this.storeOptions);
     const triples = matches.triples;
 
@@ -87,7 +87,7 @@ export default class RdfFormFieldsEstimatedCostTableBaseTableComponent extends I
             entry.object,
             undefined,
             undefined,
-            this.storeOptions.sourceGraph
+            this.storeOptions.sourceGraph,
           );
 
           const parsedEntry = this.parseEntryProperties(entryProperties);
@@ -101,7 +101,7 @@ export default class RdfFormFieldsEstimatedCostTableBaseTableComponent extends I
                 ? 100
                 : parsedEntry.share,
               index: parsedEntry.index,
-            })
+            }),
           );
 
           estimatedCostEntries.sort((a, b) => a.index.value - b.index.value);
@@ -115,35 +115,35 @@ export default class RdfFormFieldsEstimatedCostTableBaseTableComponent extends I
     let entry = {};
     if (
       entryProperties.find(
-        (entry) => entry.predicate.value == descriptionPredicate.value
+        (entry) => entry.predicate.value == descriptionPredicate.value,
       )
     )
       entry.description = entryProperties.find(
-        (entry) => entry.predicate.value == descriptionPredicate.value
+        (entry) => entry.predicate.value == descriptionPredicate.value,
       ).object.value;
     if (
       entryProperties.find(
-        (entry) => entry.predicate.value == costPredicate.value
+        (entry) => entry.predicate.value == costPredicate.value,
       )
     )
       entry.cost = entryProperties.find(
-        (entry) => entry.predicate.value == costPredicate.value
+        (entry) => entry.predicate.value == costPredicate.value,
       ).object.value;
     if (
       entryProperties.find(
-        (entry) => entry.predicate.value == sharePredicate.value
+        (entry) => entry.predicate.value == sharePredicate.value,
       )
     )
       entry.share = entryProperties.find(
-        (entry) => entry.predicate.value == sharePredicate.value
+        (entry) => entry.predicate.value == sharePredicate.value,
       ).object.value;
     if (
       entryProperties.find(
-        (entry) => entry.predicate.value == indexPredicate.value
+        (entry) => entry.predicate.value == indexPredicate.value,
       )
     )
       entry.index = entryProperties.find(
-        (entry) => entry.predicate.value == indexPredicate.value
+        (entry) => entry.predicate.value == indexPredicate.value,
       ).object.value;
     return entry;
   }

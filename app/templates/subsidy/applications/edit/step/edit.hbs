@@ -79,6 +79,7 @@
               "true"
             }}
             @loading={{if this.submit.isRunning "true"}}
+            @loadingMessage="Verstuur naar de Vlaamse overheid"
             {{on "click" (perform this.submit)}}
           >Verstuur naar de Vlaamse overheid
           </AuButton>
@@ -92,7 +93,8 @@
               "true"
             }}
             @loading={{if this.saveConcept.isRunning "true"}}
-            @skin={{"secondary"}}
+            @loadingMessage="Bewaar als concept"
+            @skin="secondary"
             {{on "click" (perform this.saveConcept)}}
           >
             Bewaar als concept
@@ -165,7 +167,8 @@
                   "true"
                 }}
                 @loading={{if this.saveConcept.isRunning "true"}}
-                @skin={{"secondary"}}
+                @loadingMessage="Bewaar als concept"
+                @skin="secondary"
                 {{on "click" (perform this.saveConcept)}}
               >
                 Bewaar als concept

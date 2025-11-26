@@ -38,7 +38,7 @@ export default class ImpersonationService extends Service {
       } else {
         console.error(
           'Failed to load impersonation data:',
-          response.statusText
+          response.statusText,
         );
       }
     } catch (error) {
@@ -74,7 +74,7 @@ export default class ImpersonationService extends Service {
         console.error('Impersonate error:', result.errors);
         throw new Error(
           'An exception occurred while trying to impersonate someone: ' +
-            JSON.stringify(result.errors)
+            JSON.stringify(result.errors),
         );
       }
     } catch (error) {

@@ -4,8 +4,10 @@ import { tracked } from '@glimmer/tracking';
 import { triplesForPath } from '@lblod/submission-form-helpers';
 import { NamedNode } from 'rdflib';
 import { v4 as uuidv4 } from 'uuid';
+/* eslint-disable ember/no-runloop */
 import { next } from '@ember/runloop';
 import { MU, RDF } from 'frontend-subsidiepunt/rdf/namespaces';
+import { A } from '@ember/array';
 
 const engagementTableBaseUri = 'http://data.lblod.info/engagement-tables';
 const engagementEntryBaseUri = 'http://data.lblod.info/engagement-entries';
@@ -13,21 +15,21 @@ const lblodSubsidieBaseUri = 'http://lblod.data.gift/vocabularies/subsidie/';
 const extBaseUri = 'http://mu.semte.ch/vocabularies/ext/';
 
 const EngagementTableType = new NamedNode(
-  `${lblodSubsidieBaseUri}EngagementTable`
+  `${lblodSubsidieBaseUri}EngagementTable`,
 );
 const EngagementEntryType = new NamedNode(`${extBaseUri}EngagementEntry`);
 const engagementTablePredicate = new NamedNode(
-  `${lblodSubsidieBaseUri}engagementTable`
+  `${lblodSubsidieBaseUri}engagementTable`,
 );
 const engagementEntryPredicate = new NamedNode(`${extBaseUri}engagementEntry`);
 const existingStaffPredicate = new NamedNode(
-  'http://mu.semte.ch/vocabularies/ext/existingStaff'
+  'http://mu.semte.ch/vocabularies/ext/existingStaff',
 );
 const additionalStaffPredicate = new NamedNode(
-  'http://mu.semte.ch/vocabularies/ext/additionalStaff'
+  'http://mu.semte.ch/vocabularies/ext/additionalStaff',
 );
 const volunteersPredicate = new NamedNode(
-  'http://mu.semte.ch/vocabularies/ext/volunteers'
+  'http://mu.semte.ch/vocabularies/ext/volunteers',
 );
 
 class EntryProperties {
@@ -37,7 +39,7 @@ class EntryProperties {
   constructor(value, predicate) {
     this.value = value;
     this.predicate = predicate;
-    this.errors = [];
+    this.errors = A();
   }
 }
 
@@ -53,11 +55,11 @@ class EngagementEntry {
     this.engagementEntrySubject = engagementEntrySubject;
     this.existingStaff = new EntryProperties(
       existingStaff,
-      existingStaffPredicate
+      existingStaffPredicate,
     );
     this.additionalStaff = new EntryProperties(
       additionalStaff,
-      additionalStaffPredicate
+      additionalStaffPredicate,
     );
     this.volunteers = new EntryProperties(volunteers, volunteersPredicate);
   }
@@ -65,7 +67,7 @@ class EngagementEntry {
 
 export default class RdfFormFieldsEngagementTableEditComponent extends InputFieldComponent {
   @tracked engagementTableSubject = null;
-  @tracked entries = [];
+  @tracked entries = A();
 
   constructor() {
     super(...arguments);
@@ -85,7 +87,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
           this.sourceNode,
           engagementTablePredicate,
           this.engagementTableSubject,
-          this.storeOptions.sourceGraph
+          this.storeOptions.sourceGraph,
         ).length > 0
       );
   }
@@ -112,7 +114,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
             entry.object,
             undefined,
             undefined,
-            this.storeOptions.sourceGraph
+            this.storeOptions.sourceGraph,
           );
 
           const parsedEntry = this.parseEntryProperties(entryProperties);
@@ -123,7 +125,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
               existingStaff: parsedEntry.existingStaff,
               additionalStaff: parsedEntry.additionalStaff,
               volunteers: parsedEntry.volunteers,
-            })
+            }),
           );
         }
       }
@@ -137,27 +139,27 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
     let entry = {};
     if (
       entryProperties.find(
-        (entry) => entry.predicate.value == existingStaffPredicate.value
+        (entry) => entry.predicate.value == existingStaffPredicate.value,
       )
     )
       entry.existingStaff = entryProperties.find(
-        (entry) => entry.predicate.value == existingStaffPredicate.value
+        (entry) => entry.predicate.value == existingStaffPredicate.value,
       ).object.value;
     if (
       entryProperties.find(
-        (entry) => entry.predicate.value == additionalStaffPredicate.value
+        (entry) => entry.predicate.value == additionalStaffPredicate.value,
       )
     )
       entry.additionalStaff = entryProperties.find(
-        (entry) => entry.predicate.value == additionalStaffPredicate.value
+        (entry) => entry.predicate.value == additionalStaffPredicate.value,
       ).object.value;
     if (
       entryProperties.find(
-        (entry) => entry.predicate.value == volunteersPredicate.value
+        (entry) => entry.predicate.value == volunteersPredicate.value,
       )
     )
       entry.volunteers = entryProperties.find(
-        (entry) => entry.predicate.value == volunteersPredicate.value
+        (entry) => entry.predicate.value == volunteersPredicate.value,
       ).object.value;
     return entry;
   }
@@ -173,7 +175,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
   createEngagementTable() {
     const uuid = uuidv4();
     this.engagementTableSubject = new NamedNode(
-      `${engagementTableBaseUri}/${uuid}`
+      `${engagementTableBaseUri}/${uuid}`,
     );
     const triples = [
       {
@@ -199,7 +201,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
   }
 
   createEntries() {
-    let entries = [];
+    let entries = A();
     const engagementEntrySubject = this.createEngagementEntry();
 
     const newEntry = new EngagementEntry({
@@ -219,7 +221,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
 
     const uuid = uuidv4();
     const engagementEntrySubject = new NamedNode(
-      `${engagementEntryBaseUri}/${uuid}`
+      `${engagementEntryBaseUri}/${uuid}`,
     );
 
     triples.push(
@@ -240,7 +242,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
         predicate: engagementEntryPredicate,
         object: engagementEntrySubject,
         graph: this.storeOptions.sourceGraph,
-      }
+      },
     );
 
     this.storeOptions.store.addAll(triples);
@@ -252,7 +254,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
       entry.engagementEntrySubject,
       entry[field].predicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
     const triples = [...fieldValueTriples];
     this.storeOptions.store.removeStatements(triples);
@@ -275,7 +277,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
       entry.existingStaff.value = event.target.value;
     }
 
-    entry.existingStaff.errors = [];
+    entry.existingStaff.errors = A();
     const parsedValue = Number(entry.existingStaff.value);
     entry.existingStaff.value = !isNaN(parsedValue)
       ? parsedValue
@@ -301,7 +303,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
       entry.additionalStaff.value = event.target.value;
     }
 
-    entry.additionalStaff.errors = [];
+    entry.additionalStaff.errors = A();
     const parsedValue = Number(entry.additionalStaff.value);
     entry.additionalStaff.value = !isNaN(parsedValue)
       ? parsedValue
@@ -328,7 +330,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
       entry.volunteers.value = event.target.value;
     }
 
-    entry.volunteers.errors = [];
+    entry.volunteers.errors = A();
     const parsedValue = Number(entry.volunteers.value);
     entry.volunteers.value = !isNaN(parsedValue)
       ? parsedValue
@@ -369,7 +371,7 @@ export default class RdfFormFieldsEngagementTableEditComponent extends InputFiel
           predicate: entry['volunteers'].predicate,
           object: entry['volunteers'].value,
           graph: this.storeOptions.sourceGraph,
-        }
+        },
       );
     });
     this.storeOptions.store.addAll(triples);

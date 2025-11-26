@@ -33,10 +33,6 @@ export default class SubsidyApplicationsEditStepNewRoute extends Route {
     form.sources.push(spec);
     await form.save();
 
-    const forms = await consumption.subsidyApplicationForms;
-    forms.push(form);
-    await consumption.save();
-
     return { consumption, step, form };
   }
 
@@ -46,7 +42,7 @@ export default class SubsidyApplicationsEditStepNewRoute extends Route {
       'subsidy.applications.edit.step.edit',
       consumption.id,
       step.id,
-      form.id
+      form.id,
     );
   }
 }

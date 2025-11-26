@@ -1,4 +1,3 @@
-/* eslint-disable ember/no-get */
 import Model, { belongsTo, hasMany } from '@ember-data/model';
 
 export default class SubsidyApplicationFlowModel extends Model {

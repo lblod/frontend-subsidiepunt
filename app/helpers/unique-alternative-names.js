@@ -5,7 +5,7 @@ export default function hasUniqueAlternativeNames(account) {
   account.gebruiker.organizations.forEach((organisatie) => {
     const alternativeNames = organisatie.alternatieveNaam || [];
     const uniqueAltNames = alternativeNames.filter(
-      (altName) => altName !== orgName
+      (altName) => altName !== orgName,
     );
     allUniqueAltNames.push(...uniqueAltNames);
   });

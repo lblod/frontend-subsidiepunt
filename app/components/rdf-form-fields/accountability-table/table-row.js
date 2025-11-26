@@ -5,7 +5,9 @@ import { inject as service } from '@ember/service';
 import { keepLatestTask, timeout } from 'ember-concurrency';
 import { literal, NamedNode } from 'rdflib';
 import { XSD } from 'frontend-subsidiepunt/rdf/namespaces';
+/* eslint-disable ember/no-runloop */
 import { scheduleOnce } from '@ember/runloop';
+import { A } from '@ember/array';
 
 const subsidyBaseUri = 'http://lblod.data.gift/vocabularies/subsidie/ukraine/';
 
@@ -15,11 +17,11 @@ const sharedInvoicePredicate = new NamedNode(`${subsidyBaseUri}sharedInvoice`);
 const filesPredicate = new NamedNode(`${subsidyBaseUri}hasFiles`);
 
 const hasInvalidRowPredicate = new NamedNode(
-  `${subsidyBaseUri}hasInvalidAccountabilityTableEntry`
+  `${subsidyBaseUri}hasInvalidAccountabilityTableEntry`,
 );
 
 class FileField {
-  @tracked errors = [];
+  @tracked errors = A();
 
   constructor({ record, errors }) {
     this.record = record;
@@ -83,26 +85,26 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
       this.tableEntrySubject,
       undefined,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     const fileEntryProperties = this.storeOptions.store.match(
       this.tableEntrySubject,
       filesPredicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.address = this.findEntry(entryProperties, addressPredicate, '');
     this.bedroomCount = this.findEntry(
       entryProperties,
       bedroomCountPredicate,
-      0
+      0,
     );
     this.sharedInvoice = this.findEntry(
       entryProperties,
       sharedInvoicePredicate,
-      ''
+      '',
     );
     this.files = await this.parseFileEntry(fileEntryProperties);
   }
@@ -139,7 +141,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
         });
     } catch (error) {
       console.log(
-        `Failed to retrieve file with URI ${uri}: ${JSON.stringify(error)}`
+        `Failed to retrieve file with URI ${uri}: ${JSON.stringify(error)}`,
       );
       return new FileField({
         record: null,
@@ -160,7 +162,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
       subject,
       predicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.storeOptions.store.removeStatements([...triples]);
@@ -196,7 +198,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
         new FileField({
           record: null,
           errors: ['Geen bestand gevonden'],
-        })
+        }),
       );
     }
   }
@@ -221,7 +223,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
       this.tableEntrySubject,
       undefined,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.storeOptions.store.removeStatements(propertyTriples);
@@ -234,8 +236,13 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
 
     const addresses = await this.addressregister.findAll(addressSuggestion);
     if (addresses.length == 1) return;
-    const sortedBusNumbers = addresses.sortBy('busnumber');
-    this.addressesWithBus = sortedBusNumbers;
+
+    // `.sortBy` is no longer there after disabling the prototype extensions, so this code no longer works and we just disable sorting for now.
+    // It's also no longer possible to create a new form that uses this form field, so it shouldn't affect real users.
+
+    this.addressesWithBus = addresses;
+    // const sortedBusNumbers = addresses.sortBy('busnumber');
+    // this.addressesWithBus = sortedBusNumbers;
   }
 
   @action
@@ -263,8 +270,8 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
   }
 
   validateAddress() {
-    this.addressErrors = [];
-    this.addressesWithBusErrors = [];
+    this.addressErrors = A();
+    this.addressesWithBusErrors = A();
 
     if (!this.address) {
       return this.addressErrors.pushObject({
@@ -281,12 +288,12 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
     this.updateTripleObject(
       this.tableEntrySubject,
       addressPredicate,
-      literal(this.address, XSD('string'))
+      literal(this.address, XSD('string')),
     );
   }
 
   validateBedroomCount() {
-    this.bedroomCountErrors = [];
+    this.bedroomCountErrors = A();
 
     if (parseInt(this.bedroomCount) <= 0) {
       return this.bedroomCountErrors.pushObject({
@@ -303,12 +310,12 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
     this.updateTripleObject(
       this.tableEntrySubject,
       bedroomCountPredicate,
-      literal(this.bedroomCount, XSD('integer'))
+      literal(this.bedroomCount, XSD('integer')),
     );
   }
 
   validateSharedInvoice() {
-    this.sharedInvoiceErrors = [];
+    this.sharedInvoiceErrors = A();
     if (!this.sharedInvoice) {
       return this.sharedInvoiceErrors.pushObject({
         message: 'Dit veld is verplicht.',
@@ -318,7 +325,7 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
     this.updateTripleObject(
       this.tableEntrySubject,
       sharedInvoicePredicate,
-      literal(this.sharedInvoice, XSD('string'))
+      literal(this.sharedInvoice, XSD('string')),
     );
   }
 

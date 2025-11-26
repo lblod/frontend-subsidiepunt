@@ -4,13 +4,14 @@ import { tracked } from '@glimmer/tracking';
 import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { NamedNode } from 'rdflib';
+/* eslint-disable ember/no-runloop */
 import { scheduleOnce } from '@ember/runloop';
 import { LBLOD_SUBSIDIE } from 'frontend-subsidiepunt/rdf/namespaces';
 
 const lblodSubsidieBaseUri = 'http://lblod.data.gift/vocabularies/subsidie/';
 const amountPredicate = new NamedNode(`${lblodSubsidieBaseUri}amount`);
 const validAmountPredicate = new NamedNode(
-  `${lblodSubsidieBaseUri}validatedAmount`
+  `${lblodSubsidieBaseUri}validatedAmount`,
 );
 
 export default class RdfFormFieldsEInclusionMaxValidatorComponent extends SimpleInputFieldComponent {
@@ -28,7 +29,7 @@ export default class RdfFormFieldsEInclusionMaxValidatorComponent extends Simple
       undefined,
       LBLOD_SUBSIDIE('drawingRightEInclusion'),
       undefined,
-      this.args.graphs.metaGraph
+      this.args.graphs.metaGraph,
     )[0].object.value;
 
     this.maximumvalue = maxValue;
@@ -40,7 +41,7 @@ export default class RdfFormFieldsEInclusionMaxValidatorComponent extends Simple
       subject,
       predicate,
       undefined,
-      this.storeOptions.sourceGraph
+      this.storeOptions.sourceGraph,
     );
 
     this.storeOptions.store.removeStatements([...triples]);

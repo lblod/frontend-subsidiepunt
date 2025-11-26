@@ -5,7 +5,7 @@ import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import isOldFusieAccount from 'frontend-subsidiepunt/helpers/is-old-fusie-account';
 
 export default class SubsidyApplicationsAvailableSubsidiesRoute extends Route.extend(
-  DataTableRouteMixin
+  DataTableRouteMixin,
 ) {
   @service session;
   @service currentSession;
@@ -28,7 +28,7 @@ export default class SubsidyApplicationsAvailableSubsidiesRoute extends Route.ex
   beforeModel() {
     if (
       isOldFusieAccount(
-        this.session.data.authenticated.relationships.group.data.id
+        this.session.data.authenticated.relationships.group.data.id,
       )
     ) {
       this.router.replaceWith('subsidy.applications');

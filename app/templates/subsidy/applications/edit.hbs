@@ -31,7 +31,7 @@
         <AuButton @skin="link" role="menuitem" {{on "click" this.exportSubsidyAsPDF}}>
           Download huidige stap (PDF)
         </AuButton>
-        <AuButton @skin="link" role="menuitem" @disabled={{(lt this.downloadLinks.length  1)}} {{on "click" this.downloadBijlagen}}>
+        <AuButton @skin="link" role="menuitem" @disabled={{lt this.downloadLinks.length 1}} {{on "click" this.downloadBijlagen}}>
           Alle bijlagen downloaden in .zip
         </AuButton>
       </AuDropdown>
@@ -40,6 +40,7 @@
         <AuButton
           @disabled={{not this.consumption.isStable}}
           @loading={{this.delete.isRunning}}
+          @loadingMessage="Aanvraag verwijderen"
           @skin="secondary"
           @alert="true"
           @icon="bin"
@@ -55,6 +56,7 @@
         <AuButton
           @disabled={{not this.consumption.isStable}}
           @loading={{this.delete.isRunning}}
+          @loadingMessage="Archiveer verlopen aanvraag"
           @skin="link"
           @icon="archive"
           @iconAlignment="left"
