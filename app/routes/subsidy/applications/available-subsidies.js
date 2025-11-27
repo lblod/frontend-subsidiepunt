@@ -1,7 +1,7 @@
 /* eslint-disable ember/no-mixins */
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import DataTableRouteMixin from 'ember-data-table/mixins/route';
+import DataTableRouteMixin from 'frontend-subsidiepunt/mixins/ember-data-table/route';
 import isOldFusieAccount from 'frontend-subsidiepunt/helpers/is-old-fusie-account';
 
 export default class SubsidyApplicationsAvailableSubsidiesRoute extends Route.extend(
