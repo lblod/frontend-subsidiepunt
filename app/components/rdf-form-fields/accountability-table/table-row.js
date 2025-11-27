@@ -150,12 +150,11 @@ export default class RdfFormFieldsAccountabilityTableTableRowComponent extends C
     }
   }
 
-  @keepLatestTask
-  *search(searchData) {
-    yield timeout(400);
-    const addressSuggestions = yield this.addressregister.suggest(searchData);
+  search = keepLatestTask(async (searchData) => {
+    await timeout(400);
+    const addressSuggestions = await this.addressregister.suggest(searchData);
     return addressSuggestions;
-  }
+  });
 
   updateTripleObject(subject, predicate, newObject = null) {
     const triples = this.storeOptions.store.match(

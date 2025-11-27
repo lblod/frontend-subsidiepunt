@@ -158,8 +158,7 @@ export default class SubsidyApplicationsEditController extends Controller {
     triggerZipDownload(blob, filename);
   }
 
-  @task
-  *delete() {
+  delete = task(async () => {
     if (!this.canDelete || !this.consumption.isStable) {
       return;
     }
@@ -169,22 +168,22 @@ export default class SubsidyApplicationsEditController extends Controller {
       /**
        * NOTE: this endpoint prevents the removal of submitted forms, preventing the removal of a consumption all together.
        */
-      const forms = yield this.consumption.subsidyApplicationForms;
+      const forms = await this.consumption.subsidyApplicationForms;
       for (const form of forms) {
-        yield fetch(`/management-application-forms/${form.id}`, {
+        await fetch(`/management-application-forms/${form.id}`, {
           method: 'DELETE',
         });
       }
 
-      const participations = yield this.consumption.participations;
-      yield Promise.all(
+      const participations = await this.consumption.participations;
+      await Promise.all(
         participations.map((participation) => participation.destroyRecord()),
       );
 
       // We intentionally don't use 'destroyRecord` here since that calls unloadRecord before the
       // transition which causes issues in the ConsumptionStatusPill component
       this.consumption.deleteRecord();
-      yield this.consumption.save();
+      await this.consumption.save();
       this.router.transitionTo('subsidy.applications');
       this.consumption.unloadRecord();
     } catch (error) {
@@ -194,5 +193,5 @@ export default class SubsidyApplicationsEditController extends Controller {
     } finally {
       this.consumption.isStable = true;
     }
-  }
+  });
 }
