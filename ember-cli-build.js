@@ -20,9 +20,10 @@ module.exports = async function (defaults) {
     '@lblod/ember-submission-form-fields': {
       helpTextBelowLabel: true,
     },
-    '@appuniversum/ember-appuniversum': {
-      dutchDatePickerLocalization: true,
-      disableWormholeElement: true,
+    babel: {
+      plugins: [
+        require.resolve('ember-concurrency/async-arrow-task-transform'),
+      ],
     },
   });
 
