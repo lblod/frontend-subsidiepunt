@@ -35,9 +35,6 @@ module.exports = function (environment) {
     features: {
       // 'feature-name': '{{FEATURE_ENV_VAR_NAME}}',
     },
-    'ember-plausible': {
-      enabled: false,
-    },
     plausible: {
       domain: '{{ANALYTICS_APP_DOMAIN}}',
       apiHost: '{{ANALYTICS_API_HOST}}',
