@@ -146,11 +146,10 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     });
   }
 
-  @dropTask
-  *saveConcept() {
+  saveConcept = dropTask(async () => {
     try {
       this.preventConsumptionDeletion();
-      yield this.saveSemanticForm.perform();
+      await this.saveSemanticForm.perform();
     } catch (exception) {
       console.log(exception);
       this.error = {
@@ -160,14 +159,13 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     } finally {
       this.enableConsumptionDeletion();
     }
-  }
+  });
 
-  @dropTask
-  *submit() {
+  submit = dropTask(async () => {
     try {
       if (this.canSubmit && this.consumption.isStable) {
         this.preventConsumptionDeletion();
-        yield this.saveSemanticForm.perform();
+        await this.saveSemanticForm.perform();
         const options = {
           ...this.graphs,
           sourceNode: this.sourceNode,
@@ -177,13 +175,13 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
         if (!this.isValidForm) {
           this.forceShowErrors = true;
         } else {
-          yield this.submitSemanticForm.perform();
+          await this.submitSemanticForm.perform();
 
           // NOTE update modified for the form and the consumption
-          yield this.updateModified(this.semanticForm);
-          yield this.updateModified(this.consumption);
+          await this.updateModified(this.semanticForm);
+          await this.updateModified(this.consumption);
 
-          yield this.next.perform();
+          await this.next.perform();
         }
       } else {
         throw Error('Deze is niet meer beschikbaar.');
@@ -197,11 +195,10 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     } finally {
       this.enableConsumptionDeletion();
     }
-  }
+  });
 
-  @task
-  *saveSemanticForm() {
-    yield this.fetch(
+  saveSemanticForm = task(async () => {
+    await this.fetch(
       `/management-application-forms/${this.model.semanticForm.id}`,
       {
         method: 'PUT',
@@ -217,22 +214,21 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     // Since the sources of the application form will be set/updated by the backend
     // and not via ember-data, we need to manually reload the application form record
     // to keep the form up-to-date
-    yield this.model.semanticForm.reload();
-    yield this.model.semanticForm.hasMany('sources').reload();
+    await this.model.semanticForm.reload();
+    await this.model.semanticForm.hasMany('sources').reload();
 
     // NOTE update modified for the form and the consumption
-    yield this.updateModified(this.semanticForm);
-    yield this.updateModified(this.consumption);
+    await this.updateModified(this.semanticForm);
+    await this.updateModified(this.consumption);
 
-    if ((yield this.semanticForm.status.get('uri')) == NEW_STATUS)
-      yield this.updateStatus(this.semanticForm, CONCEPT_STATUS);
+    if ((await this.semanticForm.status.get('uri')) == NEW_STATUS)
+      await this.updateStatus(this.semanticForm, CONCEPT_STATUS);
 
     this.updateRecentlySaved(); // TODO can this be done on a more "data" driven way
-  }
+  });
 
-  @task
-  *submitSemanticForm() {
-    yield this.fetch(
+  submitSemanticForm = task(async () => {
+    await this.fetch(
       `/management-application-forms/${this.model.semanticForm.id}/submit`,
       {
         method: 'POST',
@@ -242,37 +238,35 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     // Since the sent date and sent status of the application form will be set by the backend
     // and not via ember-data, we need to manually reload the application form record
     // to keep the index page up-to-date
-    const semanticForm = yield this.model.semanticForm.reload();
-    yield semanticForm.belongsTo('status').reload();
-  }
+    const semanticForm = await this.model.semanticForm.reload();
+    await semanticForm.belongsTo('status').reload();
+  });
 
-  @task
-  *next() {
+  next = task(async () => {
     // NOTE: move to next step if all was successfully
-    yield this.evaluateNextStep.perform();
-    const active = yield this.consumption.activeSubsidyApplicationFlowStep;
+    await this.evaluateNextStep.perform();
+    const active = await this.consumption.activeSubsidyApplicationFlowStep;
     if (active && this.step.id !== active.get('id')) {
       this.router.transitionTo(
         'subsidy.applications.edit',
         this.consumption.id,
       );
     }
-  }
+  });
 
-  @task
-  *evaluateNextStep() {
+  evaluateNextStep = task(async () => {
     // Since the active step of the consumption will be set by the backend
     // and not via ember-data, we need to manually reload the consumption record
     // to keep the everything up-to-date
-    yield this.fetch(`/flow-management/next-step/${this.consumption.id}`, {
+    await this.fetch(`/flow-management/next-step/${this.consumption.id}`, {
       method: 'PATCH',
     });
-    yield this.consumption.reload();
-    yield this.consumption
+    await this.consumption.reload();
+    await this.consumption
       .belongsTo('activeSubsidyApplicationFlowStep')
       .reload();
-    yield this.consumption.belongsTo('status').reload();
-  }
+    await this.consumption.belongsTo('status').reload();
+  });
 
   async updateRecentlySaved() {
     this.recentlySaved = true;
