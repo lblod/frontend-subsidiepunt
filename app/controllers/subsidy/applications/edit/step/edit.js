@@ -171,7 +171,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
           sourceNode: this.sourceNode,
           store: this.formStore,
         };
-        this.isValidForm = validateForm(this.form, options);
+        this.isValidForm = await validateForm(this.form, options);
         if (!this.isValidForm) {
           this.forceShowErrors = true;
         } else {
