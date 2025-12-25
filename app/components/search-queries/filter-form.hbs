@@ -1,0 +1,41 @@
+<div class="au-c-sidebar">
+  <div class="au-c-sidebar__content">
+    <div class="au-c-sidebar__header">
+      {{#if this.init.isRunning}}
+        <span>Aan het laden...</span>
+      {{else if this.resetFilters.isRunning}}
+        {{!
+            We render two different RdfForm component instances to work around the issue that graph changes don't affect local component state.
+            This forces Ember to destroy all field components and recreate them when the reset task is done.
+
+            TODO: This should be replaced by a better system.
+        }}
+        <RdfForm
+          @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@small"
+          @form={{this.form}}
+          @graphs={{this.graphs}}
+          @sourceNode={{this.sourceNode}}
+          @formStore={{this.formStore}}
+          @forceShowErrors={{false}} />
+      {{else}}
+        <RdfForm
+          @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@small"
+          @form={{this.form}}
+          @graphs={{this.graphs}}
+          @sourceNode={{this.sourceNode}}
+          @formStore={{this.formStore}}
+          @forceShowErrors={{false}} />
+      {{/if}}
+    </div>
+  </div>
+  <div class="au-c-sidebar__footer au-c-sidebar__footer--border-top au-u-padding-none">
+    <AuToolbar @size="normal" style="min-height: 48.5px;" {{! template-lint-disable no-inline-styles }} as |Group|>
+      <Group>
+        <AuButton @skin="link" @alert="true" {{ on "click" (perform this.resetFilters) }}>
+          <AuIcon @icon="redo" @alignment="left"/>
+          Reset Filter
+        </AuButton>
+      </Group>
+    </AuToolbar>
+  </div>
+</div>
