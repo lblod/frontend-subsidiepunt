@@ -225,6 +225,19 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
       await this.updateStatus(this.semanticForm, CONCEPT_STATUS);
 
     this.updateRecentlySaved(); // TODO can this be done on a more "data" driven way
+
+    //TODO: this is a workaround, which needs fixing in the semantic-form-helpers or forking store
+    // The following flow is broken:
+    // - add data to a field
+    // - save
+    // - update the same field
+    // - save
+    // In the second save, we would expect a deletion from the previous state, but this doesn't happen.
+    // This results in duplicate triples
+    // When reloading, the state is correct again.
+    // See also: DGS-624
+    this.router.refresh();
+
   });
 
   submitSemanticForm = task(async () => {
