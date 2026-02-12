@@ -226,7 +226,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
 
     this.updateRecentlySaved(); // TODO can this be done on a more "data" driven way
 
-    //TODO: this is a workaround,
+    // TODO: this is a workaround,
     // which needs fixing in the semantic-form-helpers or forking store
     // The following flow is broken:
     // - add data to a field
