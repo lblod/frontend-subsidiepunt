@@ -236,7 +236,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     // This results in duplicate triples
     // When reloading, the state is correct again.
     // See also: DGS-624
-    this.router.refresh();
+    this.router.refresh('subsidy.applications.edit.step.edit');
 
   });
 
