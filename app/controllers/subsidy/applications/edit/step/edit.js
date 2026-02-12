@@ -239,7 +239,6 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     // When reloading, the state is correct again.
     // See also: DGS-624
     this.router.refresh('subsidy.applications.edit.step.edit');
-
   });
 
   submitSemanticForm = task(async () => {
