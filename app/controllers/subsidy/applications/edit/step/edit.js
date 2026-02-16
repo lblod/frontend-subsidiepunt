@@ -150,6 +150,19 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     try {
       this.preventConsumptionDeletion();
       await this.saveSemanticForm.perform();
+      // TODO: this is a workaround,
+      // which needs fixing in the semantic-form-helpers or forking store
+      // The following flow is broken:
+      // - add data to a field
+      // - save
+      // - update the same field
+      // - save
+      // In the second save, we would expect a deletion from the previous state,
+      // but this doesn't happen.
+      // This results in duplicate triples
+      // When reloading, the state is correct again.
+      // See also: DGS-624
+      this.router.refresh('subsidy.applications.edit.step.edit');
     } catch (exception) {
       console.log(exception);
       this.error = {
@@ -174,6 +187,19 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
         this.isValidForm = await validateForm(this.form, options);
         if (!this.isValidForm) {
           this.forceShowErrors = true;
+          // TODO: this is a workaround,
+          // which needs fixing in the semantic-form-helpers or forking store
+          // The following flow is broken:
+          // - add data to a field
+          // - save
+          // - update the same field
+          // - save
+          // In the second save, we would expect a deletion from the previous state,
+          // but this doesn't happen.
+          // This results in duplicate triples
+          // When reloading, the state is correct again.
+          // See also: DGS-624
+          this.router.refresh('subsidy.applications.edit.step.edit');
         } else {
           await this.submitSemanticForm.perform();
 
@@ -225,35 +251,37 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
       await this.updateStatus(this.semanticForm, CONCEPT_STATUS);
 
     this.updateRecentlySaved(); // TODO can this be done on a more "data" driven way
-
-    // TODO: this is a workaround,
-    // which needs fixing in the semantic-form-helpers or forking store
-    // The following flow is broken:
-    // - add data to a field
-    // - save
-    // - update the same field
-    // - save
-    // In the second save, we would expect a deletion from the previous state,
-    // but this doesn't happen.
-    // This results in duplicate triples
-    // When reloading, the state is correct again.
-    // See also: DGS-624
-    this.router.refresh('subsidy.applications.edit.step.edit');
   });
 
   submitSemanticForm = task(async () => {
-    await this.fetch(
-      `/management-application-forms/${this.model.semanticForm.id}/submit`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/vnd.api+json' },
-      },
-    );
-    // Since the sent date and sent status of the application form will be set by the backend
-    // and not via ember-data, we need to manually reload the application form record
-    // to keep the index page up-to-date
-    const semanticForm = await this.model.semanticForm.reload();
-    await semanticForm.belongsTo('status').reload();
+    try {
+      await this.fetch(
+        `/management-application-forms/${this.model.semanticForm.id}/submit`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/vnd.api+json' },
+        },
+      );
+      // Since the sent date and sent status of the application form will be set by the backend
+      // and not via ember-data, we need to manually reload the application form record
+      // to keep the index page up-to-date
+      const semanticForm = await this.model.semanticForm.reload();
+      await semanticForm.belongsTo('status').reload();
+    } catch {
+      // TODO: this is a workaround,
+      // which needs fixing in the semantic-form-helpers or forking store
+      // The following flow is broken:
+      // - add data to a field
+      // - save
+      // - update the same field
+      // - save
+      // In the second save, we would expect a deletion from the previous state,
+      // but this doesn't happen.
+      // This results in duplicate triples
+      // When reloading, the state is correct again.
+      // See also: DGS-624
+      this.router.refresh('subsidy.applications.edit.step.edit');
+    }
   });
 
   next = task(async () => {
