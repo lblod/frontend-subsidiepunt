@@ -267,7 +267,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
       // to keep the index page up-to-date
       const semanticForm = await this.model.semanticForm.reload();
       await semanticForm.belongsTo('status').reload();
-    } catch (error) {
+    } catch {
       // TODO: this is a workaround,
       // which needs fixing in the semantic-form-helpers or forking store
       // The following flow is broken:
