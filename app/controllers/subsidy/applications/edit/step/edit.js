@@ -178,7 +178,6 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     try {
       if (this.canSubmit && this.consumption.isStable) {
         this.preventConsumptionDeletion();
-        await this.saveSemanticForm.perform();
         const options = {
           ...this.graphs,
           sourceNode: this.sourceNode,
@@ -187,20 +186,8 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
         this.isValidForm = await validateForm(this.form, options);
         if (!this.isValidForm) {
           this.forceShowErrors = true;
-          // TODO: this is a workaround,
-          // which needs fixing in the semantic-form-helpers or forking store
-          // The following flow is broken:
-          // - add data to a field
-          // - save
-          // - update the same field
-          // - save
-          // In the second save, we would expect a deletion from the previous state,
-          // but this doesn't happen.
-          // This results in duplicate triples
-          // When reloading, the state is correct again.
-          // See also: DGS-624
-          this.router.refresh('subsidy.applications.edit.step.edit');
         } else {
+          await this.saveSemanticForm.perform();
           await this.submitSemanticForm.perform();
 
           // NOTE update modified for the form and the consumption
