@@ -126,7 +126,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
 
   get submittablePeriodExpired() {
     const today = new Date();
-    const end = this.deadline.end;
+    const end = this.effectiveDeadline;
     if (!end) {
       return false;
     } else {
@@ -136,6 +136,10 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
 
   get deadline() {
     return this.model.step.get('deadline').content;
+  }
+
+  get effectiveDeadline() {
+    return this.model.step.get('effectiveDeadline');
   }
 
   // TODO what is this?
