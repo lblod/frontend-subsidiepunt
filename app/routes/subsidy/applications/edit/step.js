@@ -14,7 +14,7 @@ export default class SubsidyApplicationsEditStepRoute extends Route {
           'subsidy-procedural-step.period',
           'subsidy-procedural-step.deadline-extensions.audience',
         ].join(','),
-      }
+      },
     );
     return {
       consumption,
