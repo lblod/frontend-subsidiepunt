@@ -1,0 +1,29 @@
+<AuTable>
+  <:title>Controle subsidiebedrag</:title>
+  <:header>
+    <tr>
+      <th>Omschrijving</th>
+      <th>Bedrag</th>
+    </tr>
+  </:header>
+  <:body>
+    <tr>
+      <th>Subsidiebedrag aanvraag</th>
+      <td>{{this.formatAmount this.totals.requestedAmount}}</td>
+    </tr>
+    <tr>
+      <th>Totaal besteding subsidiebedrag</th>
+      <td>{{this.formatAmount this.totals.spendingAmount}}</td>
+    </tr>
+    <tr>
+      <th>Verschil</th>
+      <td class={{if this.hasErrors "au-u-error"}}>
+        {{this.formatAmount this.totals.difference}}
+      </td>
+    </tr>
+  </:body>
+</AuTable>
+
+{{#if this.hasErrors}}
+  <AuHelpText @error={{true}}>{{this.errorMessage}}</AuHelpText>
+{{/if}}
