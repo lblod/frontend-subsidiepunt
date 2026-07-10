@@ -17,6 +17,8 @@ import PlanLivingTogetherTableShowComponent from 'frontend-subsidiepunt/componen
 import AccountabilityTableEditComponent from 'frontend-subsidiepunt/components/rdf-form-fields/accountability-table/edit';
 import AccountabilityTableShowComponent from 'frontend-subsidiepunt/components/rdf-form-fields/accountability-table/show';
 import FinancingTotalsComponent from 'frontend-subsidiepunt/components/rdf-form-fields/urban-renewal/financing-totals';
+import KetenaanpakFinancingTotalsComponent from 'frontend-subsidiepunt/components/rdf-form-fields/ketenaanpak/financing-totals';
+import KetenaanpakCompareTotalsComponent from 'frontend-subsidiepunt/components/rdf-form-fields/ketenaanpak/compare-totals';
 
 export default class SubsidyApplicationsEditRoute extends Route {
   @service store;
@@ -100,6 +102,16 @@ export default class SubsidyApplicationsEditRoute extends Route {
         displayType:
           'http://lblod.data.gift/display-types/urbanRenewalFinancingTotals',
         edit: FinancingTotalsComponent,
+      },
+      {
+        displayType:
+          'http://lblod.data.gift/display-types/ketenaanpakFinancingTotals',
+        edit: KetenaanpakFinancingTotalsComponent,
+      },
+      {
+        displayType:
+          'http://lblod.data.gift/display-types/ketenaanpakCompareTotals',
+        edit: KetenaanpakCompareTotalsComponent,
       },
     ]);
   }
