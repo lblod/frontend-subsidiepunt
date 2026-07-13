@@ -7,7 +7,9 @@ import { LBLOD_SUBSIDIE, XSD } from 'frontend-subsidiepunt/rdf/namespaces';
 
 const EXT = new Namespace('http://mu.semte.ch/vocabularies/ext/');
 
-const spendingAmountPredicate = LBLOD_SUBSIDIE('subsidieBedragListingUnitBedrag');
+const spendingAmountPredicate = LBLOD_SUBSIDIE(
+  'subsidieBedragListingUnitBedrag',
+);
 const requestedAmountPredicate = LBLOD_SUBSIDIE('subsidieBedragAanvraag');
 const validCompareTotalsPredicate = LBLOD_SUBSIDIE(
   'validKetenaanpakCompareTotals',
