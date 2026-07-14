@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
-import { A } from '@ember/array';
 import { literal, Literal, Namespace } from 'rdflib';
 import { LBLOD_SUBSIDIE, XSD } from 'frontend-subsidiepunt/rdf/namespaces';
 
@@ -17,7 +16,7 @@ const validCompareTotalsPredicate = LBLOD_SUBSIDIE(
 
 export default class RdfFormFieldsKetenaanpakCompareTotals extends Component {
   @tracked totals = new Totals();
-  @tracked errors = A();
+  @tracked errors = [];
 
   id = guidFor(this);
 
@@ -52,7 +51,7 @@ export default class RdfFormFieldsKetenaanpakCompareTotals extends Component {
 
   calculateTotals() {
     const { formStore, graphs, sourceNode } = this.args;
-    const errors = A();
+    const errors = [];
 
     const spendingAmountLiterals = formStore.match(
       undefined,
