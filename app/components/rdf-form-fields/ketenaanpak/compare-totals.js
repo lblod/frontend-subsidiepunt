@@ -69,7 +69,7 @@ export default class RdfFormFieldsKetenaanpakCompareTotals extends Component {
         const amount = this.literalToCents(triple.object);
 
         if (amount === null) {
-          errors.pushObject({
+          errors.push({
             message:
               'Een van de besteding subsidiebedragen is geen geldig bedrag.',
           });
@@ -83,7 +83,7 @@ export default class RdfFormFieldsKetenaanpakCompareTotals extends Component {
     const requestedAmountCents = this.literalToCents(requestedAmountLiteral);
 
     if (requestedAmountCents === null) {
-      errors.pushObject({
+      errors.push({
         message: 'Het subsidiebedrag aanvraag is geen geldig bedrag.',
       });
     }
@@ -94,7 +94,7 @@ export default class RdfFormFieldsKetenaanpakCompareTotals extends Component {
     });
 
     if (errors.length === 0 && totals.differenceCents !== 0) {
-      errors.pushObject({
+      errors.push({
         message: this.differenceMessage(totals.differenceCents),
       });
     }
