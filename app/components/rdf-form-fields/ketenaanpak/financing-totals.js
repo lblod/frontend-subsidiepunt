@@ -19,21 +19,6 @@ export default class FinancingTotals extends Component {
     }).format(amount);
   };
 
-  formatPercentage = (percentage) => {
-    return new Intl.NumberFormat('nl-BE', {
-      style: 'percent',
-      maximumFractionDigits: 2,
-    }).format(percentage);
-  };
-
-  calculatePercentage = (amount, total) => {
-    if (total === 0) {
-      return 0;
-    }
-
-    return amount / total;
-  };
-
   constructor() {
     super(...arguments);
 
