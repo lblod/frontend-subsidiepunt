@@ -4,7 +4,14 @@ import { inject as service } from '@ember/service';
 
 export default class SubsidyApplicationsIndexController extends Controller {
   @service() session;
-  queryParams = ['subsidieType', 'subsidieStatus', 'aanvraagDatum', 'page', 'size', 'sort'];
+  queryParams = [
+    'subsidieType',
+    'subsidieStatus',
+    'aanvraagDatum',
+    'page',
+    'size',
+    'sort',
+  ];
   page = 0;
   size = 20;
   sort = '-modified';

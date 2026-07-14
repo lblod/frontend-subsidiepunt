@@ -1,0 +1,29 @@
+<AuTable>
+  <:title>Totaal</:title>
+  <:header>
+    <tr>
+      <th aria-hidden="true"></th>
+      <th>Bedrag</th>
+    </tr>
+  </:header>
+  <:body>
+    <tr>
+      <th>Eigen aandeel stad</th>
+      <td>{{this.formatAmount this.totals.own}}</td>
+    </tr>
+    <tr>
+      <th>Andere actoren</th>
+      <td>{{this.formatAmount this.totals.actoren}}</td>
+    </tr>
+    <tr>
+      <th>Publieke partners</th>
+      <td>{{this.formatAmount this.totals.public}}</td>
+    </tr>
+  </:body>
+  <:footer>
+    <tr>
+      <th>Totaal cofinanciering</th>
+      <td>{{this.formatAmount this.totals.total}}</td>
+    </tr>
+  </:footer>
+</AuTable>
