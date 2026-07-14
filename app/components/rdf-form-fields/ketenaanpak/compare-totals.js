@@ -120,10 +120,6 @@ export default class RdfFormFieldsKetenaanpakCompareTotals extends Component {
       parsedAmount = Number(amount);
     }
 
-    if (!Number.isFinite(parsedAmount)) {
-      return null;
-    }
-
     return Math.round(parsedAmount * 100);
   }
 
