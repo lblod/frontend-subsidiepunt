@@ -1,10 +1,8 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
-import { literal, Literal, Namespace } from 'rdflib';
+import { literal, Literal } from 'rdflib';
 import { LBLOD_SUBSIDIE, XSD } from 'frontend-subsidiepunt/rdf/namespaces';
-
-const EXT = new Namespace('http://mu.semte.ch/vocabularies/ext/');
 
 const spendingAmountPredicate = LBLOD_SUBSIDIE(
   'subsidieBedragListingUnitBedrag',
