@@ -10,7 +10,10 @@ export default class SubsidyApplicationsEditStepRoute extends Route {
       'subsidy-application-flow-step',
       stepId,
       {
-        include: ['subsidy-procedural-step.period'].join(','),
+        include: [
+          'subsidy-procedural-step.period',
+          'subsidy-procedural-step.deadline-extensions.audience',
+        ].join(','),
       },
     );
     return {
