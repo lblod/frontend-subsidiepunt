@@ -69,12 +69,10 @@ export default class FinancingTotals extends Component {
     const totals = new Totals();
 
     financingPartners.forEach((partner) => {
-      if (partner.type.equals(PARTNER_TYPE('EigenAandeel'))) {
+      if (partner.type.equals(PARTNER_TYPE('LokaalBestuur'))) {
         totals.own += partner.amount;
-      } else if (partner.type.equals(PARTNER_TYPE('Actoren'))) {
+      } else if (partner.type.equals(PARTNER_TYPE('Andere'))) {
         totals.actoren += partner.amount;
-      } else if (partner.type.equals(PARTNER_TYPE('Publiek'))) {
-        totals.public += partner.amount;
       }
     });
 
