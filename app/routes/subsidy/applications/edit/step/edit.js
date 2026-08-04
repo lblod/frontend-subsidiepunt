@@ -18,6 +18,9 @@ export default class SubsidyApplicationsEditStepEditRoute extends Route {
     let semanticForm = await this.store.findRecord(
       'subsidy-application-form',
       semanticFormID,
+      {
+        include: 'submitted-by',
+      },
     );
     await semanticForm.belongsTo('status').reload();
 
