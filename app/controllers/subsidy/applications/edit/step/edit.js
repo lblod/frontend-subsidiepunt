@@ -188,10 +188,14 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
           this.forceShowErrors = true;
         } else {
           await this.saveSemanticForm.perform();
+          const submittedAt = new Date();
           await this.submitSemanticForm.perform();
 
           // NOTE update modified for the form and the consumption
-          await this.updateModified(this.semanticForm);
+          await this.updateModified(this.semanticForm, {
+            submittedAt,
+            submittedBy: this.currentSession.user,
+          });
           await this.updateModified(this.consumption);
 
           await this.next.perform();
@@ -303,9 +307,11 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     this.recentlySaved = false;
   }
 
-  async updateModified(model) {
+  async updateModified(model, { submittedAt, submittedBy } = {}) {
     model.modified = new Date();
     model.lastModifier = this.currentSession.user;
+    if (submittedAt) model.submittedAt = submittedAt;
+    if (submittedBy) model.submittedBy = submittedBy;
     await model.save();
   }
 
