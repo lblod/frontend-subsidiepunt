@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ApplicationFlowStepLinkComponent extends Component {
   @service store;
-  @tracked isFormSubmitted = false;
+  @tracked form;
 
   constructor() {
     super(...arguments);
@@ -25,9 +25,13 @@ export default class ApplicationFlowStepLinkComponent extends Component {
 
     const form = forms.at(0);
     if (form) {
-      const status = await form.status;
-      this.isFormSubmitted = status?.isSent ?? false;
+      await form.status;
+      this.form = form;
     }
+  }
+
+  get isFormSubmitted() {
+    return this.form?.get('status')?.get('isSent') ?? false;
   }
 
   get isSubmitted() {
