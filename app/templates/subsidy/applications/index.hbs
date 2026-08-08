@@ -84,8 +84,8 @@
                   </AuHelpText>
                 </td>
                 <td>
-                  {{#if consumption.deadline}}
-                    {{moment-format consumption.deadline.end "DD MMMM YYYY"}}
+                  {{#if consumption.effectiveDeadline}}
+                    {{moment-format consumption.effectiveDeadline "DD MMMM YYYY"}}
                   {{else}}
                     N.V.T.
                   {{/if}}
