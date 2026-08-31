@@ -20,6 +20,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
   @service session;
 
   @service currentSession;
+  @service moment;
   @service store;
   @service router;
 
@@ -38,6 +39,16 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
 
   get submitted() {
     return this.semanticForm.get('status').get('isSent');
+  }
+
+  get submissionTitle() {
+    const submittedAt = this.semanticForm.submittedAt;
+
+    if (!submittedAt) return 'De subsidiestap werd verstuurd.';
+
+    return `De subsidiestap werd verstuurd op ${this.moment
+      .moment(submittedAt)
+      .format('D MMMM YYYY [om] HH[u]mm')}`;
   }
 
   get formStore() {
