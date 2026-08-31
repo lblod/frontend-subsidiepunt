@@ -38,6 +38,10 @@
 //   }
 // }
 
+.ember-power-select-dropdown, .ember-power-select-trigger {
+  min-width: 150px !important;
+}
+
 // Toolbar group rows
 .au-c-toolbar__group--row {
   display: block;

@@ -20,6 +20,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
   @service session;
 
   @service currentSession;
+  @service moment;
   @service store;
   @service router;
 
@@ -38,6 +39,16 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
 
   get submitted() {
     return this.semanticForm.get('status').get('isSent');
+  }
+
+  get submissionTitle() {
+    const submittedAt = this.semanticForm.submittedAt;
+
+    if (!submittedAt) return 'De subsidiestap werd verstuurd.';
+
+    return `De subsidiestap werd verstuurd op ${this.moment
+      .moment(submittedAt)
+      .format('D MMMM YYYY [om] HH[u]mm')}`;
   }
 
   get formStore() {
@@ -192,10 +203,14 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
           this.forceShowErrors = true;
         } else {
           await this.saveSemanticForm.perform();
+          const submittedAt = new Date();
           await this.submitSemanticForm.perform();
 
           // NOTE update modified for the form and the consumption
-          await this.updateModified(this.semanticForm);
+          await this.updateModified(this.semanticForm, {
+            submittedAt,
+            submittedBy: this.currentSession.user,
+          });
           await this.updateModified(this.consumption);
 
           await this.next.perform();
@@ -307,9 +322,11 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
     this.recentlySaved = false;
   }
 
-  async updateModified(model) {
+  async updateModified(model, { submittedAt, submittedBy } = {}) {
     model.modified = new Date();
     model.lastModifier = this.currentSession.user;
+    if (submittedAt) model.submittedAt = submittedAt;
+    if (submittedBy) model.submittedBy = submittedBy;
     await model.save();
   }
 

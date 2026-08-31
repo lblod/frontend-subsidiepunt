@@ -1,0 +1,25 @@
+<AuTable>
+  <:title>Totaal</:title>
+  <:header>
+    <tr>
+      <th aria-hidden="true"></th>
+      <th>Bedrag</th>
+    </tr>
+  </:header>
+  <:body>
+    <tr>
+      <th>Lokaal bestuur</th>
+      <td>{{this.formatAmount this.totals.own}}</td>
+    </tr>
+    <tr>
+      <th>Andere</th>
+      <td>{{this.formatAmount this.totals.actoren}}</td>
+    </tr>
+  </:body>
+  <:footer>
+    <tr>
+      <th>Totaal cofinanciering</th>
+      <td>{{this.formatAmount this.totals.total}}</td>
+    </tr>
+  </:footer>
+</AuTable>

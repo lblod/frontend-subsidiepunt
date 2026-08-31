@@ -1,33 +1,20 @@
 import Component from '@glimmer/component';
-import { service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 
 export default class ApplicationFlowStepLinkComponent extends Component {
-  @service store;
-  @tracked isFormSubmitted = false;
+  get form() {
+    const forms = this.args.consumption
+      .hasMany('subsidyApplicationForms')
+      .value();
 
-  constructor() {
-    super(...arguments);
-    this.loadFormStatus();
+    return forms?.find(
+      (form) =>
+        form.belongsTo('subsidyApplicationFlowStep').id() ===
+        this.args.currentStep.id,
+    );
   }
 
-  async loadFormStatus() {
-    let forms = await this.store.query('subsidy-application-form', {
-      filter: {
-        'subsidy-application-flow-step': {
-          ':id:': this.args.currentStep.id,
-        },
-        'subsidy-measure-consumption': {
-          ':id:': this.args.consumption.id,
-        },
-      },
-    });
-
-    const form = forms.at(0);
-    if (form) {
-      const status = await form.status;
-      this.isFormSubmitted = status?.isSent ?? false;
-    }
+  get isFormSubmitted() {
+    return this.form?.get('status')?.get('isSent') ?? false;
   }
 
   get isSubmitted() {

@@ -17,6 +17,8 @@ export default class SubsidyApplicationForm extends Model {
   })
   modified;
 
+  @attr('datetime') submittedAt;
+
   @attr projectName;
 
   @belongsTo('subsidy-application-flow-step', {
@@ -42,6 +44,12 @@ export default class SubsidyApplicationForm extends Model {
     inverse: null,
   })
   lastModifier;
+
+  @belongsTo('gebruiker', {
+    async: true,
+    inverse: null,
+  })
+  submittedBy;
 
   // TODO could this be defined as a concept
   @belongsTo('submission-document-status', {
