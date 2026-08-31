@@ -39,7 +39,7 @@ export default class SubsidyApplicationsEditRoute extends Route {
           'active-subsidy-application-flow-step',
           'status',
           'subsidy-measure-offer',
-          'subsidy-application-forms',
+          'subsidy-application-forms.status',
           'subsidy-application-flow.defined-steps.subsidy-procedural-step',
           'subsidy-application-flow.subsidy-measure-offer-series.period',
           'participations.participating-organization',
