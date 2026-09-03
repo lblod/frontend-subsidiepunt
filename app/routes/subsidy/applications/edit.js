@@ -41,7 +41,7 @@ export default class SubsidyApplicationsEditRoute extends Route {
           'subsidy-measure-offer',
           'subsidy-application-forms.status',
           'subsidy-application-flow.defined-steps.subsidy-procedural-step.period',
-          'subsidy-application-flow.defined-steps.subsidy-procedural-step.deadline-extensions',
+          'subsidy-application-flow.defined-steps.subsidy-procedural-step.deadline-extensions.audience',
           'subsidy-application-flow.subsidy-measure-offer-series.period',
           'participations.participating-organization',
           'last-modifier',
