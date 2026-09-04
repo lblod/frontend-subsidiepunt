@@ -49,7 +49,8 @@ export default class SubsidyApplicationsIndexRoute extends Route.extend(
       'subsidy-application-forms',
       'subsidy-application-flow.subsidy-measure-offer-series.period',
       'active-subsidy-application-flow-step.subsidy-procedural-step.period',
-      'participations',
+      'active-subsidy-application-flow-step.subsidy-procedural-step.deadline-extensions.audience',
+      'participations.participating-organization',
       'last-modifier',
     ].join(',');
 

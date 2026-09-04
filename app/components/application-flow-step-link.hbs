@@ -18,8 +18,7 @@
     {{!template-lint-disable no-inline-styles}}
   >Instuurbaar tot
     {{moment-format
-      @currentStep.subsidyProceduralStep.period.end
+      (effective-deadline @consumption @currentStep)
       "DD MMMM YYYY"
     }}</AuHelpText>
 </AuLink>
-
