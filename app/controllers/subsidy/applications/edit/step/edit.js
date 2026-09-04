@@ -12,6 +12,7 @@ import {
   CONCEPT_STATUS,
 } from '../../../../../models/submission-document-status';
 import isOldFusieAccount from 'frontend-subsidiepunt/helpers/is-old-fusie-account';
+import { getEffectiveDeadline } from 'frontend-subsidiepunt/helpers/effective-deadline';
 
 export default class SubsidyApplicationsEditStepEditController extends Controller {
   // To mimic user testing as much as possible
@@ -150,7 +151,7 @@ export default class SubsidyApplicationsEditStepEditController extends Controlle
   }
 
   get effectiveDeadline() {
-    return this.model.step.get('effectiveDeadline');
+    return getEffectiveDeadline([this.consumption, this.step]);
   }
 
   // TODO what is this?
