@@ -39,8 +39,4 @@ export default class SubsidyApplicationFlowStepModel extends Model {
   get deadline() {
     return this.subsidyProceduralStep.get('period');
   }
-
-  get effectiveDeadline() {
-    return this.subsidyProceduralStep.get('effectiveDeadline');
-  }
 }

@@ -67,10 +67,4 @@ export default class SubsidyMeasureConsumptionModel extends Model {
       );
     return undefined;
   }
-
-  get effectiveDeadline() {
-    if (this.activeSubsidyApplicationFlowStep)
-      return this.activeSubsidyApplicationFlowStep.get('effectiveDeadline');
-    return undefined;
-  }
 }
