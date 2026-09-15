@@ -5,6 +5,7 @@ import fetch from 'fetch';
 import { action } from '@ember/object';
 import { downloadZip } from 'client-zip';
 import { triggerZipDownload } from 'frontend-subsidiepunt/utils/download';
+import { getEffectiveDeadline } from 'frontend-subsidiepunt/helpers/effective-deadline';
 import { tracked } from '@glimmer/tracking';
 
 export default class SubsidyApplicationsEditController extends Controller {
@@ -26,6 +27,18 @@ export default class SubsidyApplicationsEditController extends Controller {
 
   get consumption() {
     return this.model.consumption;
+  }
+
+  get activeStep() {
+    return this.consumption
+      ?.belongsTo('activeSubsidyApplicationFlowStep')
+      .value();
+  }
+
+  get effectiveDeadline() {
+    if (!this.activeStep) return undefined;
+
+    return getEffectiveDeadline([this.consumption, this.activeStep]);
   }
 
   get participations() {
