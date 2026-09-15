@@ -59,12 +59,4 @@ export default class SubsidyMeasureConsumptionModel extends Model {
     inverse: 'subsidyMeasureConsumption',
   })
   subsidyApplicationForms;
-
-  get deadline() {
-    if (this.activeSubsidyApplicationFlowStep)
-      return this.activeSubsidyApplicationFlowStep.get(
-        'subsidyProceduralStep.period',
-      );
-    return undefined;
-  }
 }
